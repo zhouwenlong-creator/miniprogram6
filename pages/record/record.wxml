@@ -1,0 +1,13 @@
+<!--pages/record/record.wxml-->
+<view class="panel1">
+  <view class="package">
+    <text decode="{{true}}">全部 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}">未消费 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}">已消费 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}">已取消 &nbsp;&nbsp;&nbsp;</text>
+  </view>
+
+</view>
+
+
+

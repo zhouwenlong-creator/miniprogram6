@@ -1,0 +1,57 @@
+<!--pages/vip/vip.wxml-->
+<view class="panel1">
+  <view class="package">
+    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{0}}">期限卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{1}}">计次卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{2}}">小时卡 &nbsp;&nbsp;&nbsp;</text>
+  </view>
+
+  <!-- 默认加载期限卡 -->
+  <view>
+    <!-- 第一个卡片 -->
+    <view class="box">
+      <view class="box1">
+        <view wx:if="{{choose==0}}">
+        <image class="bg-image" mode="scaleToFill" src="http://47.99.33.173:8080/vip-imgs/1.jpg"></image>
+      </view>
+      
+        <view wx:if="{{choose==1}}">
+        <image class="bg-image" mode="scaleToFill" src="http://47.99.33.173:8080/vip-imgs/2.jpg"></image>
+      </view>
+      <view wx:if="{{choose==2}}">
+        <image class="bg-image" mode="scaleToFill" src="http://47.99.33.173:8080/vip-imgs/3.jpg"></image>
+      </view>
+        <!-- 卡的名称 -->
+        <view class="box1_1">
+          <view> </view>
+          <view class="name" space="emsp">期限卡</view>
+        </view>
+        <!-- 天数 -->
+        <view class="box1_2">
+        <span class="box1_2_1">7</span>
+        <span class="box1_2_2">天</span>
+        </view>
+        <!-- 套餐名称 -->
+        <view class="box1_3">
+          <view class="box1_3_1">核桃周卡</view>
+        </view>
+        <!-- 使用规则 -->
+        <view class="box1_4">
+          <view class="box1_4_1">使用规则</view>
+        </view>
+      </view>
+
+      <view class="box2">
+        <view class="box2_1">
+          <text class="box2_1_1"> 有效期：使用后7天 </text>
+          <text decode="true">&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</text>
+          <!-- 原价 -->
+          <text class="box2_1_2">￥399</text>
+          <text decode="true">&ensp;</text>
+          <!-- 现价 -->
+          <text class="box2_1_3">￥199</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

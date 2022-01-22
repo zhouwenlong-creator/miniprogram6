@@ -1,0 +1,51 @@
+<view class="mianban">
+		<view class="biaoti">
+			<!-- 行内选择器 -->
+			<span>
+				<text class="biaoti1">核桃自习室</text>
+			</span>
+			<span>
+				<text class="weizhi">距您198.93km</text>
+			</span>
+			<span>
+				<text class="fenxiang">分享</text>
+			</span>
+		</view>
+
+    <view>
+      <swiper class="swiper"
+			 autoplay="true" 
+			 interval="3000" 
+			 duration="1000" 
+			 indicator-dots
+			 indicator-color="white"
+			 indicator-active-color="#f88c6b"
+			 circular>
+        <swiper-item wx:for="{{swipers}}">
+        <image class="img1" src="/static/swiper/{{item}}"></image>
+        </swiper-item>
+      </swiper>
+    </view>
+
+<!-- 联系 -->
+			<view class="lianxi">
+				<span>
+					<text>营业时间 00:00-24:00 \n</text>
+				</span>
+				<span>
+					<text>联系电话 15272551132 \n</text>
+				</span>
+				<span>
+					<text>店铺地址 湖北省襄阳市襄州区石桥镇周洼村一组</text>
+				</span>
+
+		</view>
+		<!-- 预约座位 会员卡 -->
+		<view class="bespeak">
+			<span style="margin-left: 80rpx;">预约座位</span>
+			<span style="margin-left: 260rpx;">会员卡</span>
+		</view>
+		<view>
+		<text bindtap="logins">登录:{{result}}</text>
+		</view>
+	</view>

@@ -1,0 +1,57 @@
+<!--pages/user/user.wxml-->
+<view class="panel1">
+  <text>\n\n\n\n</text>
+  
+  <view class="outer">
+    <text>\n</text>
+    <view class="inner1">
+        <!-- 获取头像  --><!-- 获取名字 -->
+      <view class="box1_1">头像</view>
+      <view class="box1_2">
+        <view class="box1_2_1">我的资产</view>
+        <view class="box1_2_2">
+                <!-- 第一个 -->
+          <view class="box1_2_2_1">会员卡</view>
+          <!-- 第二个 -->
+          <view class="box1_2_2_1">优惠劵</view>
+          <!-- 第三个 -->
+          <view class="box1_2_2_1">积分</view>
+        
+        </view>
+      </view>
+
+    </view>
+
+    <view class="inner2">
+      <view class="box2_1">我的功能</view>
+      <view class="box1_2_2">
+        <view class="box1_2_2_1">订单记录</view>
+        <view class="box1_2_2_1">门店公告</view>
+        <view class="box1_2_2_1">使用帮助</view>
+        <view class="box1_2_2_1">联系商家</view>
+      </view>
+    </view>
+
+    <view class="inner3">
+      <view class="box2_1">我的应用</view>
+      <!-- 我的应用 -->
+      <view class="box1_2_2">
+        <view class="box1_2_2_1">会员卡</view>
+        <view class="box1_2_2_1">储物柜</view>
+        <view class="box1_2_2_1">小卖铺</view>
+        <view class="box1_2_2_1">排行榜</view>
+
+      
+      </view>
+    
+    </view>
+  </view>
+
+
+
+
+
+
+
+
+</view>

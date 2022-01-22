@@ -1,0 +1,56 @@
+{
+  "pages": [
+    "pages/vip/vip",
+    "pages/user/user",
+
+      "pages/index/index",
+      
+      "pages/record/record"
+     
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#f97e40",
+    "navigationBarTitleText": "核桃自习室",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#000",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "position":"bottom",
+    "custom": false,
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "/static/icons/icon-home.png",
+        "selectedIconPath": "/static/icons/icon-select-home.png",
+        "text": "场馆首页"
+
+      },
+      {
+        "pagePath": "pages/vip/vip",
+        "iconPath": "/static/icons/icon-vip.png",
+        "selectedIconPath": "/static/icons/icon-select-vip.png",
+        "text": "加入会员"
+      },
+      {
+        "pagePath": "pages/record/record",
+        "iconPath": "/static/icons/icon-record.png",
+        "selectedIconPath": "/static/icons/icon-select-record.png",
+        "text": "使用记录"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "/static/icons/icon-user.png",
+        "selectedIconPath": "/static/icons/icon-select-user.png",
+        "text": "个人中心"
+      }
+    ]
+  }
+}
