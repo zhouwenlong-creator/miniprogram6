@@ -6,7 +6,10 @@ Page({
     },
 
 
-    onLoad(){
+    onLoad(options){
+    },
+    onShow( ){
+
     },
     
     // 登录
