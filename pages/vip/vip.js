@@ -5,8 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    choose:'0',
-    src:"http://47.99.33.173:8080/vip-imgs/1.jpg"
+    choose:"http://47.99.33.173:8080/vip-imgs/1.jpg"
 
   },
 
@@ -69,18 +68,10 @@ Page({
   // 点击选项的方法
   getChoose(e){
     var that = this;
-    // console.log(e.currentTarget.dataset.choose);
     that.setData({
       choose:e.currentTarget.dataset.choose,
     })
-    // if(that.data.choose=0){
-    //   console.log(that.data.choose)
-    //   that.setData({
-    //     src:"http://47.99.33.173:8080/vip-imgs/2.jpg"
-    //   })
-    // }
-    console.log(that.data.src);
-    console.log(that.data.choose)
+    console.log(that.data.choose);
   }
 
 

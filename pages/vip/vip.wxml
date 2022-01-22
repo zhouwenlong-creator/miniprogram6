@@ -1,9 +1,9 @@
 <!--pages/vip/vip.wxml-->
 <view class="panel1">
   <view class="package">
-    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{0}}">期限卡 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{1}}">计次卡 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{2}}">小时卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{'http://47.99.33.173:8080/vip-imgs/1.jpg'}}">期限卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{'http://47.99.33.173:8080/vip-imgs/2.jpg'}}">计次卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{'http://47.99.33.173:8080/vip-imgs/3.jpg'}}">小时卡 &nbsp;&nbsp;&nbsp;</text>
   </view>
 
   <!-- 默认加载期限卡 -->
@@ -11,16 +11,8 @@
     <!-- 第一个卡片 -->
     <view class="box">
       <view class="box1">
-        <view wx:if="{{choose==0}}">
-        <image class="bg-image" mode="scaleToFill" src="http://47.99.33.173:8080/vip-imgs/1.jpg"></image>
-      </view>
+        <image class="bg-image" mode="scaleToFill" src="{{choose}}"></image>
       
-        <view wx:if="{{choose==1}}">
-        <image class="bg-image" mode="scaleToFill" src="http://47.99.33.173:8080/vip-imgs/2.jpg"></image>
-      </view>
-      <view wx:if="{{choose==2}}">
-        <image class="bg-image" mode="scaleToFill" src="http://47.99.33.173:8080/vip-imgs/3.jpg"></image>
-      </view>
         <!-- 卡的名称 -->
         <view class="box1_1">
           <view> </view>
