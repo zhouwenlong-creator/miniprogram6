@@ -13,10 +13,10 @@
    color:#a5a4a4;
 }
 
-.choose:hover{
+.active{
   color:black;
-  font-size:20px;
 }
+
 
 
 .box{

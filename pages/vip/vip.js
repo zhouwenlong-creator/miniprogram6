@@ -5,8 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-    choose:"http://47.99.33.173:8080/vip-imgs/1.jpg"
-
+    // 定义图片的默认地址
+    choose:"http://47.99.33.173:8080/vip-imgs/1.jpg",
+    // 默认所选择的导航栏
+    tagId:'1'
   },
 
   /**
@@ -68,10 +70,12 @@ Page({
   // 点击选项的方法
   getChoose(e){
     var that = this;
+    console.log(e);
     that.setData({
       choose:e.currentTarget.dataset.choose,
+      // 微信小程序前端传的参数只能是全部小写
+      tagId:e.currentTarget.dataset.tagids
     })
-    console.log(that.data.choose);
   }
 
 

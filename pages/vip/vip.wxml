@@ -1,9 +1,10 @@
 <!--pages/vip/vip.wxml-->
 <view class="panel1">
   <view class="package">
-    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{'http://47.99.33.173:8080/vip-imgs/1.jpg'}}">期限卡 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{'http://47.99.33.173:8080/vip-imgs/2.jpg'}}">计次卡 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}" class="choose" bindtap="getChoose" data-choose="{{'http://47.99.33.173:8080/vip-imgs/3.jpg'}}">小时卡 &nbsp;&nbsp;&nbsp;</text>
+  <!-- 传了两个参数 -->
+    <text decode="{{true}}" class="{{tagId==1 ? 'active':'noactive'}}" bindtap="getChoose" data-tagIds="1" data-choose="{{'http://47.99.33.173:8080/vip-imgs/1.jpg'}}">期限卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="{{tagId==2 ? 'active':'noactive'}}" bindtap="getChoose" data-tagids="2" data-choose="{{'http://47.99.33.173:8080/vip-imgs/2.jpg'}}">计次卡 &nbsp;&nbsp;&nbsp;</text>
+    <text decode="{{true}}" class="{{tagId==3 ? 'active':'noactive'}}" bindtap="getChoose" data-tagIds="3" data-choose="{{'http://47.99.33.173:8080/vip-imgs/3.jpg'}}">小时卡 &nbsp;&nbsp;&nbsp;</text>
   </view>
 
   <!-- 默认加载期限卡 -->
