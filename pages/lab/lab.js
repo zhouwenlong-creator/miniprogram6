@@ -1,14 +1,11 @@
-// pages/vip/vip.js
+// pages/lab/lab.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // 定义图片的默认地址
-    choose:"http://47.99.33.173:8080/vip-imgs/1.jpg",
-    // 默认所选择的导航栏
-    tagId:'1'
+
   },
 
   /**
@@ -28,7 +25,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function (e) {
+  onShow: function () {
 
   },
 
@@ -50,6 +47,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+
   },
 
   /**
@@ -64,16 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  // 点击选项的方法
-  getChoose(e){
-    var that = this;
-    console.log(e);
-    that.setData({
-      choose:e.currentTarget.dataset.choose,
-      // 微信小程序前端传的参数只能是全部小写
-      tagId:e.currentTarget.dataset.tagids
-    })
   }
 })

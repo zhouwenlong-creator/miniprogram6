@@ -9,9 +9,11 @@ Page({
     onLoad(options){
     },
     onShow( ){
-
+      // 重新加载页面
+      var that = this;
+      that.onLoad();
     },
-    
+
     // 登录
   getUserInfo() {
     let self = this
@@ -63,5 +65,4 @@ Page({
       }
     })
   }
-
 })

@@ -24,26 +24,57 @@
 
     <view class="inner2">
       <view class="box2_1">我的功能</view>
-      <view class="box1_2_2">
-        <view class="box1_2_2_1">订单记录</view>
-        <view class="box1_2_2_1">门店公告</view>
-        <view class="box1_2_2_1">使用帮助</view>
-        <view class="box1_2_2_1">联系商家</view>
+      <!-- 我的功能 -->
+      <view>
+        <view class="box1_2_2">
+          <view class="box1_2_2_1">
+            <image src="/static/func/func-record.png"></image>
+          </view>
+          <view class="box1_2_2_1">
+            <image src="/static/func/func-notice.png"></image>
+          </view>
+          <view class="box1_2_2_1">
+            <image src="/static/func/func-assistance.png"></image>
+          </view>
+          <view class="box1_2_2_1">
+            <image src="/static/func/func-connect.png"></image>
+          </view>
+        
+        </view>
+        <view class="box1_2_2">
+          <view class="box1_2_2_1">订单记录</view>
+          <view class="box1_2_2_1">门店公告</view>
+          <view class="box1_2_2_1">使用帮助</view>
+          <view class="box1_2_2_1">联系商家</view>
+        </view>
       </view>
     </view>
 
     <view class="inner3">
       <view class="box2_1">我的应用</view>
-      <!-- 我的应用 -->
-      <view class="box1_2_2">
-        <view class="box1_2_2_1">会员卡</view>
-        <view class="box1_2_2_1">储物柜</view>
-        <view class="box1_2_2_1">小卖铺</view>
-        <view class="box1_2_2_1">排行榜</view>
-
-      
+      <view>
+        <view class="box1_2_2">
+          <view class="box1_2_2_1">
+            <image src="/static/applications/applications-vip.png"></image>
+          </view>
+          <view class="box1_2_2_1">
+            <image src="/static/applications/applications-box.png"></image>
+          </view>
+          <view class="box1_2_2_1">
+            <image src="/static/applications/applications-shop.png"></image>
+          </view>
+          <view class="box1_2_2_1">
+            <image src="/static/applications/applications-list.png"></image>
+          </view>
+        </view>
+        <!-- 我的应用 -->
+        <view class="box1_2_2">
+          <view class="box1_2_2_1">会员卡</view>
+          <view class="box1_2_2_1">储物柜</view>
+          <view class="box1_2_2_1">小卖铺</view>
+          <view class="box1_2_2_1">排行榜</view>
+        </view>
       </view>
-    
     </view>
   </view>
 

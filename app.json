@@ -1,12 +1,11 @@
 {
   "pages": [
-    "pages/vip/vip",
     "pages/user/user",
-
-      "pages/index/index",
-      
-      "pages/record/record"
-     
+    "pages/lab/lab",
+    "pages/vip/vip",
+    "pages/index/index",
+    "pages/record/record"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -17,13 +16,12 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-
   "tabBar": {
     "color": "#000",
     "selectedColor": "#000",
     "backgroundColor": "#ffffff",
     "borderStyle": "white",
-    "position":"bottom",
+    "position": "bottom",
     "custom": false,
     "list": [
       {
@@ -31,7 +29,6 @@
         "iconPath": "/static/icons/icon-home.png",
         "selectedIconPath": "/static/icons/icon-select-home.png",
         "text": "场馆首页"
-
       },
       {
         "pagePath": "pages/vip/vip",
