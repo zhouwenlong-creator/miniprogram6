@@ -13,6 +13,7 @@
     <view wx:for="{{products}}"
         wx:for-item="item"
         wx:for-index="index"
+        wx:key="id"
         >
     <!-- 第一个卡片 -->
     <view class="box">

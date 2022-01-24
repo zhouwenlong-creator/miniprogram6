@@ -28,9 +28,11 @@ Page({
 
 
   wxRequest(){
-    var that = this
+    // 微信小程序全局变量的使用
+    var app = getApp();
+    var that = this;
     wx.request({
-      url:"http://localhost:8080/ssm2/vip/selectAllVips.do",
+      url:app.globalData.wxRequestBaseUrl+"/vip/selectAllVips.do",
       method:'GET',
       data:{
         choose:that.data.choose

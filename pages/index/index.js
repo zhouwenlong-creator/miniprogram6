@@ -9,9 +9,7 @@ Page({
     onLoad(options){
     },
     onShow( ){
-      // 重新加载页面
-      var that = this;
-      that.onLoad();
+
     },
 
     // 登录
@@ -64,5 +62,30 @@ Page({
         console.log(that)
       }
     })
+  },
+  navigateToOrder(){
+    wx.navigateTo({
+      url: '../order/order',
+      success(res){
+        wx.showToast({
+          title: "进入选座中", // 提示的内容
+          icon: "loading", // 图标，默认success
+          image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+          duration: 200, // 提示的延迟时间，默认1500
+          mask: false, // 是否显示透明蒙层，防止触摸穿透
+      })
+      },
+      fail(res){
+        wx.showToast({
+          title: "系统故障，请稍后再试！", // 提示的内容
+          icon: "error", // 图标，默认success
+          image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+          duration: 200, // 提示的延迟时间，默认1500
+          mask: false, // 是否显示透明蒙层，防止触摸穿透
+      })
+      }
+    })
   }
+
+
 })

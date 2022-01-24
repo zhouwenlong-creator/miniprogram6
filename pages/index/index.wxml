@@ -21,7 +21,7 @@
 			 indicator-color="white"
 			 indicator-active-color="#f88c6b"
 			 circular>
-        <swiper-item wx:for="{{swipers}}">
+        <swiper-item wx:for="{{swipers}}" wx:key="id">
         <image class="img1" src="/static/swiper/{{item}}"></image>
         </swiper-item>
       </swiper>
@@ -36,14 +36,14 @@
 					<text>联系电话 15272551132 \n</text>
 				</span>
 				<span>
-					<text>店铺地址 湖北省襄阳市襄州区石桥镇周洼村一组</text>
+					<text>店铺地址 湖北省荆州市荆州区长江大学东校区</text>
 				</span>
 
 		</view>
 		<!-- 预约座位 会员卡 -->
 		<view class="bespeak">
-			<span style="margin-left: 80rpx;">预约座位</span>
-			<span style="margin-left: 260rpx;">会员卡</span>
+			<text style="margin-left: 80rpx;" bindtap="navigateToOrder">预约座位</text>
+			<text style="margin-left: 260rpx;">会员卡</text>
 		</view>
 		<view>
 		<text bindtap="logins">登录:{{result}}</text>
