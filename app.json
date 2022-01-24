@@ -1,11 +1,10 @@
 {
   "pages": [
-    "pages/user/user",
-    "pages/lab/lab",
     "pages/vip/vip",
     "pages/index/index",
+    "pages/user/user",
+    "pages/lab/lab",
     "pages/record/record"
-    
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -101,6 +101,8 @@
 .box2_1_2{
   color:gray;
   font-size:14px;
+  /* 带删除线文本 */
+  text-decoration:line-through;
 }
 
 .box2_1_3{

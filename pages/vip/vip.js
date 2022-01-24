@@ -8,14 +8,15 @@ Page({
     // 定义图片的默认地址
     choose:"http://47.99.33.173:8080/vip-imgs/1.jpg",
     // 默认所选择的导航栏
-    tagId:'1'
+    tagId:'1',
+    products:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: function (options){
+    
   },
 
   /**
@@ -25,11 +26,35 @@ Page({
 
   },
 
-  /**
+
+  wxRequest(){
+    var that = this
+    wx.request({
+      url:"http://localhost:8080/ssm2/vip/selectAllVips.do",
+      method:'GET',
+      data:{
+        choose:that.data.choose
+      },
+      header:{
+          // 请求头部
+          // 'content-type':'application/x-www-form-urlencoded'
+          'content-type':'application/json'
+      },
+      // 请求成功返回什么
+      success(res){
+        console.log(res);
+        that.setData({
+          products:res.data
+        })
+      console.log(that.data.products)
+      }
+    })
+  },
+    /**
    * 生命周期函数--监听页面显示
    */
   onShow: function (e) {
-
+    this.wxRequest();
   },
 
   /**
@@ -71,9 +96,13 @@ Page({
     var that = this;
     console.log(e);
     that.setData({
+      // 图片
       choose:e.currentTarget.dataset.choose,
       // 微信小程序前端传的参数只能是全部小写
       tagId:e.currentTarget.dataset.tagids
     })
+    this.wxRequest();
   }
+
 })
+
