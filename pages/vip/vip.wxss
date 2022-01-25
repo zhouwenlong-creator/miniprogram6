@@ -87,6 +87,9 @@
 .box2_1{
   padding:5px;
   margin-top:5px;
+  /* 弹性容器 */
+  display: flex;
+  justify-content: space-between;
 } 
 .box2_1_1{
 
@@ -99,15 +102,23 @@
   border-radius: 6px;
 }
 .box2_1_2{
+  /* background-color: greenyellow; */
   color:gray;
   font-size:14px;
+  /* 文本垂直居中对齐 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   /* 带删除线文本 */
   text-decoration:line-through;
 }
 
 .box2_1_3{
+  /* background-color: gray; */
   color:red;
   font-size:25px;
+  text-align: right;
 }
 
 

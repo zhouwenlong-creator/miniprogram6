@@ -15,6 +15,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    wxRequestBaseUrl:"http://localhost:8080/ssm2",
+    wxRequestBaseUrl:"https://www.zwlserver.top",
   }
 })

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     // 定义图片的默认地址
-    choose:"http://47.99.33.173:8080/vip-imgs/1.jpg",
+    choose:"{{wxRequestBaseUrl}}vip-imgs/1.jpg",
     // 默认所选择的导航栏
     tagId:'1',
     products:''
@@ -26,37 +26,12 @@ Page({
 
   },
 
-
-  wxRequest(){
-    // 微信小程序全局变量的使用
-    var app = getApp();
-    var that = this;
-    wx.request({
-      url:app.globalData.wxRequestBaseUrl+"/vip/selectAllVips.do",
-      method:'GET',
-      data:{
-        choose:that.data.choose
-      },
-      header:{
-          // 请求头部
-          // 'content-type':'application/x-www-form-urlencoded'
-          'content-type':'application/json'
-      },
-      // 请求成功返回什么
-      success(res){
-        console.log(res);
-        that.setData({
-          products:res.data
-        })
-      console.log(that.data.products)
-      }
-    })
-  },
     /**
    * 生命周期函数--监听页面显示
    */
   onShow: function (e) {
-    this.wxRequest();
+    console.log("onshow开始了。。。。。。");
+    console.log("onshow结束了。。。。。。");
   },
 
   /**
@@ -95,6 +70,7 @@ Page({
 
   // 点击选项的方法
   getChoose(e){
+    var app = getApp();
     var that = this;
     console.log(e);
     that.setData({
@@ -102,8 +78,27 @@ Page({
       choose:e.currentTarget.dataset.choose,
       // 微信小程序前端传的参数只能是全部小写
       tagId:e.currentTarget.dataset.tagids
+    });
+    wx.request({
+      url:app.globalData.wxRequestBaseUrl+"/vip/selectAllVips.do",
+      method:'GET',
+      data:{
+        tagId:that.data.tagId
+      },
+      header:{
+          // 请求头部
+          // 'content-type':'application/x-www-form-urlencoded'
+          'content-type':'application/json'
+      },
+      // 请求成功返回什么
+      success(res){
+        console.log(res);
+        that.setData({
+          products:res.data
+        })
+      // console.log(that.data.products[0]);
+      }
     })
-    this.wxRequest();
   }
 
 })
