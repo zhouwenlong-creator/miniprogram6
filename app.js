@@ -15,6 +15,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    wxRequestBaseUrl:"https://www.zwlserver.top",
+    // 远程
+    // wxRequestBaseUrl:"https://www.zwlserver.top",
+    // 本地
+    wxRequestBaseUrl:"http://localhost:8080",
   }
 })

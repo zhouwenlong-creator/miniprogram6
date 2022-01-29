@@ -5,8 +5,6 @@ Page({
    * 页面的初始数据
    */
   data: {
-    // 定义图片的默认地址
-    choose:"{{wxRequestBaseUrl}}vip-imgs/1.jpg",
     // 默认所选择的导航栏
     tagId:'1',
     products:''
@@ -30,7 +28,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (e) {
+    var app = getApp();
+    var that = this;
     console.log("onshow开始了。。。。。。");
+    wx.request({
+      url:app.globalData.wxRequestBaseUrl+"/vip/selectAllVips.do",
+      method:'GET',
+      data:{
+        tagId:that.data.tagId
+      },
+      header:{
+          // 请求头部
+          // 'content-type':'application/x-www-form-urlencoded'
+          'content-type':'application/json'
+      },
+      // 请求成功返回什么
+      success(res){
+        console.log(res);
+        that.setData({
+          products:res.data
+        })
+      // console.log(that.data.products[0]);
+      }
+    })
     console.log("onshow结束了。。。。。。");
   },
 
@@ -74,8 +94,6 @@ Page({
     var that = this;
     console.log(e);
     that.setData({
-      // 图片
-      choose:e.currentTarget.dataset.choose,
       // 微信小程序前端传的参数只能是全部小写
       tagId:e.currentTarget.dataset.tagids
     });
