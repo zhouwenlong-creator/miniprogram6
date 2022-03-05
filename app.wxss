@@ -8,3 +8,44 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+/* 未选中 */
+/* 椅子的两部分 */
+#chair_1{
+    text-align: center;
+    /* display: flex; */
+    width:40rpx;
+    height:40rpx;
+    border:1px solid rgb(226, 224, 224);
+    border-radius: 20rpx;
+    background-color: rgb(226, 224, 224);
+}
+#chair_2{
+  text-align: center;
+  /* display: flex; */
+  margin-top:-20rpx;
+  width:40rpx;
+  height:20rpx;
+  border:1px solid rgb(226, 224, 224);
+  background-color: rgb(226, 224, 224);
+}
+
+/* 选中 */
+/* 椅子的两部分 */
+#chair_3{
+  text-align: center;
+  /* display: flex; */
+  width:40rpx;
+  height:40rpx;
+  border:1px solid red;
+  border-radius: 20rpx;
+  background-color: red;
+}
+#chair_4{
+text-align: center;
+/* display: flex; */
+margin-top:-20rpx;
+width:40rpx;
+height:20rpx;
+border:1px solid red;
+background-color: red;
+}

@@ -1,12 +1,16 @@
 {
   "pages": [
-    "pages/index/index",
+    
+    "pages/bespeak/bespeak",
+    "pages/canvas/canvas",
     "pages/order/order",
+    "pages/index/index",
     "pages/vip/vip",
     "pages/user/user",
     "pages/lab/lab",
     "pages/record/record",
-    "pages/canvas/canvas"
+    "pages/canvas1/canvas1"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

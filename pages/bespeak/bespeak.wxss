@@ -1,0 +1,62 @@
+/* pages/bespeak/bespeak.wxss */
+/* 引入app.wxss */
+@import"../../app.wxss";  
+/* 可移动的范围 */
+#movable-area-id{
+  /* border:1px solid black; */
+  /* 设备的宽度高度 */
+  /* width:390px;
+  height:753px; */
+  width:390px;
+  height:1000rpx; 
+  /* position: relative; */
+}
+#movable-view-id{
+  /* border:1px solid red; */
+  width:606rpx;
+  height:826rpx;
+  /* position: relative; */
+}
+
+#c1{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 117px;
+  top: 56px;
+  position: absolute;
+}
+
+#c2{
+  transform: rotate(-90deg);
+  left: 117px;
+  top: 79px;
+  position: absolute;
+}
+
+#c3{
+  transform: rotate(-90deg);
+  left: 117px;
+  top: 102px;
+  position: absolute;
+}
+
+#c4{
+  transform: rotate(90deg);
+  left: 171px;
+  top: 56px;
+  position: absolute;
+}
+
+#c5{
+  transform: rotate(90deg);
+  left: 171px;
+  top: 79px;
+  position: absolute;
+}
+
+#c6{
+  transform: rotate(90deg);
+  left: 171px;
+  top: 102px;
+  position: absolute;
+}
