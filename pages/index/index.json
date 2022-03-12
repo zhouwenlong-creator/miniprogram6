@@ -1,4 +1,10 @@
 {
-  "enablePullDownRefresh": true,
-  "backgroundTextStyle": "dark"
+  "usingComponents": {
+    "custom-components":"/components/custom-component/custom-component"
+  },
+
+  "enablePullDownRefresh": false,
+  "backgroundTextStyle": "dark",
+  "navigationStyle":"custom",
+  "navigationBarTitleText": "QIHANG"
 }

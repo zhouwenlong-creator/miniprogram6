@@ -130,6 +130,7 @@ App({
       // 座位样式
       chair_x:"chair_1",
       chair_y:"chair_2"
+      // "navigationBarBackgroundColor": "#f97e40",
     }
 ]
 

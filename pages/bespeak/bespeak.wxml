@@ -1,58 +1,90 @@
 <!--pages/bespeak/bespeak.wxml-->
 <!-- 预约页面 -->
+<view id="box">
+
+
+  <view id="scorll-view-1" scroll-x="true" bind>
+    <!-- 在线预约 -->
+    <view id="scorll-view-1-1">在线预约</view>
+  <!-- 开始时间 -->
+    <view id="scorll-view-1-1">03月05日 10:20</view>
+  <!-- 座位持续时间 -->
+    <view id="scorll-view-1-1">6小时</view>
+  </view>
+
+  <view id="scorll-view-1" scroll-x="true" bind>
+    <!-- 在线预约 -->
+    <view id="scorll-view-1-1">在线预约</view>
+  <!-- 开始时间 -->
+    <view id="scorll-view-1-1">03月05日 10:20</view>
+  <!-- 座位持续时间 -->
+    <view id="scorll-view-1-1">6小时</view>
+  </view>
+
+  
+
+
+
+
+
+
+  <movable-area scale-area id="movable-area-id">
+
+    <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/seat1.jpg);background-size: cover;">   
+
+      <!-- 引用模板 -->
+      <!-- 第一张椅子 -->
+          <!-- 位置(绝对定位带上) -->
+      <view id="c1">
+          <template is="chair" data="{{...chairInfo[0]}}"></template>
+      </view>
+      <view id="c2">
+          <template is="chair" data="{{...chairInfo[1]}}"></template>
+      </view>
+      <view id="c3">
+          <template is="chair" data="{{...chairInfo[2]}}"></template>
+      </view>
+      <view id="c4">
+          <template is="chair" data="{{...chairInfo[3]}}"></template>
+      </view>
+      <view id="c5">
+          <template is="chair" data="{{...chairInfo[4]}}"></template>
+      </view>
+      <view id="c6">
+          <template is="chair" data="{{...chairInfo[5]}}"></template>
+      </view>
+
+
+    </movable-view>
+  </movable-area>
+</view>
+
+
+
+<!-- <text bindtap="navigateToOrder">预约座位</text> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- 新建一个模板 -->
-<!-- 凳子朝左 -->
-<text bindtap="navigateToOrder">预约座位</text>
-
-<movable-area scale-area id="movable-area-id">
-  <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/seat1.jpg);background-size: cover;">   
-
-    <!-- 引用模板 -->
-    <!-- 第一张椅子 -->
-        <!-- 位置(绝对定位带上) -->
-    <view id="c1">
-        <template is="chair" data="{{...chairInfo[0]}}"></template>
-    </view>
-    <view id="c2">
-        <template is="chair" data="{{...chairInfo[1]}}"></template>
-    </view>
-    <view id="c3">
-        <template is="chair" data="{{...chairInfo[2]}}"></template>
-    </view>
-    <view id="c4">
-        <template is="chair" data="{{...chairInfo[3]}}"></template>
-    </view>
-    <view id="c5">
-        <template is="chair" data="{{...chairInfo[4]}}"></template>
-    </view>
-    <view id="c6">
-        <template is="chair" data="{{...chairInfo[5]}}"></template>
-    </view>
-
-
-  </movable-view>
-</movable-area>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <template name="chair">
             <!-- 椅子的两部分 -->
   <view  bindtap="ontap">

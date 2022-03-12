@@ -1,29 +1,22 @@
-// pages/bespeak/bespeak.js
-var information = getApp().globalData.chairInfo;
-// console.log(information);
+// pages/launch/launch.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    // 设置座位图的初始位置
-    x:20, 
-    y:20,
-    scale:1,
 
-    // 座位信息
-    chairInfo:[]
-   },
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 初始化
-    this.setData({
-      chairInfo:information
-    })
+    var that = this;  
+    var timer = setTimeout(()=>{
+        clearTimeout(timer)
+        that.direct()
+      },1000)
   },
 
   /**
@@ -74,18 +67,12 @@ Page({
   onShareAppMessage: function () {
 
   },
-
-  ontap:function(e){
-    var that = this;
-    console.log(this);
-    var id = e.target.dataset.id;
-    // 更新座位的状态
-    var cha1 = 'chairInfo['+parseInt(parseInt(id)-1)+'].chair_x';
-    var cha2 = 'chairInfo['+parseInt(parseInt(id)-1)+'].chair_y';
-    that.setData({
-      [cha1]:"chair_3",
-      [cha2]:"chair_4"
-
+  // 启动页启动后跳转主页
+  direct:function(){
+    var url = "/pages/index/index";
+    // 跳转到主页面
+    wx.switchTab({
+      url: url
     })
   }
 })

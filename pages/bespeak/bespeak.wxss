@@ -1,6 +1,33 @@
 /* pages/bespeak/bespeak.wxss */
 /* 引入app.wxss */
 @import"../../app.wxss";  
+#box{
+  background-color: gray;
+}
+#scorll-view-1{
+  /* display: 
+        block 块元素
+        inline  行内元素
+        inline-block  行内块元素    保持可以在一行的特性，但还是块
+        none  消失
+  */
+  border:1px solid black;
+  width:390px;
+  height:25px;
+  background-color:white;
+  /* 绝对定位，子元素通过left top 来确定位置 */
+
+}
+#scorll-view-1-1{
+  display: inline-block;
+  padding-left:25px;
+  padding-right: 25px;
+}
+
+
+
+
+
 /* 可移动的范围 */
 #movable-area-id{
   /* border:1px solid black; */

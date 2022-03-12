@@ -1,5 +1,13 @@
 Page({
     data:{
+      // 自定义顶部navigationBar数据
+      custom_components: {
+        // "bg_color": "white",
+        // "color": "#000",
+        // "flag": 1,
+        // "name": "QIHANG"
+        
+      },
       swipers:["swiper-1.jpg","swiper-2.jpg","swiper-3.jpg","swiper-4.jpg","swiper-5.jpg","swiper-6.jpg","swiper-7.jpg"],
       result:'请求后台中.....',
       that:''

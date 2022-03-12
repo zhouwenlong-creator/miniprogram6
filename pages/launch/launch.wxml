@@ -1,0 +1,10 @@
+<!--pages/launch/launch.wxml-->
+<view id="box">
+<image id="logo" src="/images/飞机.svg" mode="aspectFit"></image>
+<!-- <view id="name1">起航自习室</view> -->
+<!-- <view id="name2">QIHANG</view> -->
+<view>
+  <image id="logo_name" src="/images/logo_name.png" mode="aspectFit"></image>
+</view>
+
+</view>

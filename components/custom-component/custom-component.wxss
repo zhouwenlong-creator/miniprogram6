@@ -1,0 +1,14 @@
+/* components/custom-component/custom-component.wxss */
+.title{
+  padding-top: 56px;
+  /* border:1px black solid; */
+  height:40px;
+  text-align:center;
+  border-radius: 20px;
+}
+.paddle{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+}

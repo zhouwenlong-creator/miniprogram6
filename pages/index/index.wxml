@@ -1,7 +1,9 @@
+<!-- 引用的组件模板，，名称  数据 -->
+<custom-components my-property='{{custom_components}}' /> 
 <view class="mianban">
-		<view class="biaoti">
+		<!-- <view class="biaoti"> -->
 			<!-- 行内选择器 -->
-			<span>
+			<!-- <span>
 				<text class="biaoti1">核桃自习室</text>
 			</span>
 			<span>
@@ -10,7 +12,7 @@
 			<span>
 				<text class="fenxiang">分享</text>
 			</span>
-		</view>
+		</view> -->
 
     <view>
       <swiper class="swiper"

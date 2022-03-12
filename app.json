@@ -1,6 +1,7 @@
 {
   "pages": [
-    
+
+    "pages/launch/launch",
     "pages/bespeak/bespeak",
     "pages/canvas/canvas",
     "pages/order/order",
@@ -9,15 +10,17 @@
     "pages/user/user",
     "pages/lab/lab",
     "pages/record/record",
-    "pages/canvas1/canvas1"
+    "pages/canvas1/canvas1",
+    "pages/test/test"
 
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#f97e40",
-    "navigationBarTitleText": "核桃自习室",
-    "navigationBarTextStyle": "white",
-    "enablePullDownRefresh": true
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "QIHANG",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true,
+    "navigationStyle": "default"
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

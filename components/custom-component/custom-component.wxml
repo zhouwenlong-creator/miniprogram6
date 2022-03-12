@@ -1,0 +1,19 @@
+<!--components/custom-component/custom-component.wxml-->
+<custom-component>
+  <view class="paddle" style="background-color:{{myProperty.bg_color}};color:{{myProperty.col}};height:{{commonHeadHeight.titleHeight}}px">
+    <!-- 导航栏左边返回，主页按钮 -->
+    <view>
+      <!-- 返回 -->
+      <view wx:if="{{myProperties.flag==1}}" bindtap='left_back'></view>
+      <!-- 主页 -->
+      <!-- <view></view> -->
+    </view>
+    <!-- 标题 -->
+    <view>
+      <view class="title">
+        <image src="/components/custom-component/biaoti.png" mode="widthFix" style="width:100px; height: 10px;margin-top: 10px;"></image>
+        <!-- <text>QIHANG</text> -->
+      </view>
+    </view>
+  </view>
+</custom-component>
