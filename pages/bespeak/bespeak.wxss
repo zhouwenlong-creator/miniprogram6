@@ -2,26 +2,25 @@
 /* 引入app.wxss */
 @import"../../app.wxss";  
 #box{
-  background-color: gray;
+  background-color: #ecf0f8;
+  height: 750px;
+  width: auto;
 }
-#scorll-view-1{
-  /* display: 
-        block 块元素
-        inline  行内元素
-        inline-block  行内块元素    保持可以在一行的特性，但还是块
-        none  消失
-  */
-  border:1px solid black;
-  width:390px;
-  height:25px;
-  background-color:white;
-  /* 绝对定位，子元素通过left top 来确定位置 */
 
+.classify_list{
+  background-color: white;
+  display: flex;
+  font-size: 15px;
+  width: 100%;
+  overflow-y: scroll;
+  white-space: nowrap; 
 }
-#scorll-view-1-1{
-  display: inline-block;
-  padding-left:25px;
-  padding-right: 25px;
+.classify{
+  padding-bottom: 10rpx;
+  padding-left:20rpx;
+  padding-right: 20rpx;
+  height: 100%;
+  width: 100rpx;
 }
 
 

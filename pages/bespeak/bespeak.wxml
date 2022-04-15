@@ -2,24 +2,21 @@
 <!-- 预约页面 -->
 <view id="box">
 
-
-  <view id="scorll-view-1" scroll-x="true" bind>
-    <!-- 在线预约 -->
-    <view id="scorll-view-1-1">在线预约</view>
-  <!-- 开始时间 -->
-    <view id="scorll-view-1-1">03月05日 10:20</view>
-  <!-- 座位持续时间 -->
-    <view id="scorll-view-1-1">6小时</view>
+  <!-- 第一层 -->
+  <view class='classify_list'>
+     <view class="classify" style="margin: auto;">分类1</view>
+     <view class="classify" style="margin: auto;">分类1</view>
+     <view class="classify" style="margin: auto;">分类1</view>
+  </view>
+  <!-- 第二层 -->
+  <view class='classify_list'>
+     <view class="classify" style="margin: auto;">公共区</view>
+     <view class="classify" style="margin: auto;">电脑屋</view>
+     <view class="classify" style="margin: auto;">小黑屋</view>
+     <view class="classify" style="margin: auto;">独立屋</view>
+     <view class="classify" style="margin: auto;">小白屋</view>
   </view>
 
-  <view id="scorll-view-1" scroll-x="true" bind>
-    <!-- 在线预约 -->
-    <view id="scorll-view-1-1">在线预约</view>
-  <!-- 开始时间 -->
-    <view id="scorll-view-1-1">03月05日 10:20</view>
-  <!-- 座位持续时间 -->
-    <view id="scorll-view-1-1">6小时</view>
-  </view>
 
   
 
@@ -30,7 +27,7 @@
 
   <movable-area scale-area id="movable-area-id">
 
-    <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/seat1.jpg);background-size: cover;">   
+    <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/seat2.png);background-size: cover;">   
 
       <!-- 引用模板 -->
       <!-- 第一张椅子 -->
