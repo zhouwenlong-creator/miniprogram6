@@ -5,82 +5,176 @@
   <!-- 第一层 -->
   <view class='classify_list'>
      <view class="classify" style="margin: auto;">分类1</view>
-     <view class="classify" style="margin: auto;">分类1</view>
-     <view class="classify" style="margin: auto;">分类1</view>
+     <view class="classify" style="margin: auto;">分类2</view>
+     <view class="classify" style="margin: auto;">分类3</view>
   </view>
   <!-- 第二层 -->
   <view class='classify_list'>
-     <view class="classify" style="margin: auto;">公共区</view>
-     <view class="classify" style="margin: auto;">电脑屋</view>
-     <view class="classify" style="margin: auto;">小黑屋</view>
-     <view class="classify" style="margin: auto;">独立屋</view>
-     <view class="classify" style="margin: auto;">小白屋</view>
+     <view class="classify" style="margin: auto;" bindtap="onRoom" data-roomtype="0">公共区</view>
+     <view class="classify" style="margin: auto;" bindtap="onRoom" data-roomtype="1">电脑屋</view>
+     <view class="classify" style="margin: auto;" bindtap="onRoom" data-roomtype="2">小黑屋</view>
+     <view class="classify" style="margin: auto;" bindtap="onRoom" data-roomtype="3">独立屋</view>
+     <view class="classify" style="margin: auto;" bindtap="onRoom" data-roomtype="4">小白屋</view>
   </view>
+  <!-- 公共区 -->
+  <view wx:if="{{roomtype==0}}">
+    <movable-area scale-area id="movable-area-id">
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room0.png);background-size: cover;">   
+        <!-- 引用模板 -->
+        <!-- 第一张椅子 -->
+            <!-- 位置(绝对定位带上) -->
+        <view id="a1">
+            <template is="chair" data="{{...chairInfo[0]}}"></template>
+        </view>
+        <view id="a2">
+            <template is="chair" data="{{...chairInfo[1]}}"></template>
+        </view>
+        <view id="a3">
+            <template is="chair" data="{{...chairInfo[2]}}"></template>
+        </view>
+        <view id="a4">
+            <template is="chair" data="{{...chairInfo[3]}}"></template>
+        </view>
+        <view id="a5">
+            <template is="chair" data="{{...chairInfo[4]}}"></template>
+        </view>
+        <view id="a6">
+            <template is="chair" data="{{...chairInfo[5]}}"></template>
+        </view>
+
+      </movable-view>
+    </movable-area>
+  </view>
+  <!-- 电脑屋 -->
+  <view wx:if="{{roomtype==1}}">
+    <movable-area scale-area id="movable-area-id">
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room1.png);background-size: cover;">   
+        <!-- 引用模板 -->
+        <!-- 第一张椅子 -->
+            <!-- 位置(绝对定位带上) -->
+        <view id="b1">
+            <template is="chair" data="{{...chairInfo[0]}}"></template>
+        </view>
+        <view id="b2">
+            <template is="chair" data="{{...chairInfo[1]}}"></template>
+        </view>
+        <view id="b3">
+            <template is="chair" data="{{...chairInfo[2]}}"></template>
+        </view>
+        <view id="b4">
+            <template is="chair" data="{{...chairInfo[3]}}"></template>
+        </view>
+        <view id="b5">
+            <template is="chair" data="{{...chairInfo[4]}}"></template>
+        </view>
+        <view id="b6">
+            <template is="chair" data="{{...chairInfo[5]}}"></template>
+        </view>
+        <view id="b7">
+            <template is="chair" data="{{...chairInfo[6]}}"></template>
+        </view>
+        <view id="b8">
+            <template is="chair" data="{{...chairInfo[7]}}"></template>
+        </view>
+        <view id="b9">
+            <template is="chair" data="{{...chairInfo[8]}}"></template>
+        </view>
+        <view id="b10">
+            <template is="chair" data="{{...chairInfo[9]}}"></template>
+        </view>
+        <view id="b11">
+            <template is="chair" data="{{...chairInfo[10]}}"></template>
+        </view>
+        <view id="b12">
+            <template is="chair" data="{{...chairInfo[11]}}"></template>
+        </view>
+        <view id="b13">
+            <template is="chair" data="{{...chairInfo[12]}}"></template>
+        </view>
+
+      </movable-view>
+    </movable-area>
+  </view>
+  <!-- 小黑屋 -->
+  <view wx:if="{{roomtype==2}}">
+    <movable-area scale-area id="movable-area-id">
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room2.png);background-size: cover;">   
+        <!-- 引用模板 -->
+        <!-- 第一张椅子 -->
+            <!-- 位置(绝对定位带上) -->
+        <view id="c1">
+            <template is="chair" data="{{...chairInfo[0]}}"></template>
+        </view>
+        <view id="c2">
+            <template is="chair" data="{{...chairInfo[1]}}"></template>
+        </view>
+        <view id="c3">
+            <template is="chair" data="{{...chairInfo[2]}}"></template>
+        </view>
+        <view id="c4">
+            <template is="chair" data="{{...chairInfo[3]}}"></template>
+        </view>
+        <view id="c5">
+            <template is="chair" data="{{...chairInfo[4]}}"></template>
+        </view>
+        <view id="c6">
+            <template is="chair" data="{{...chairInfo[5]}}"></template>
+        </view>
+        <view id="c7">
+            <template is="chair" data="{{...chairInfo[6]}}"></template>
+        </view>
+        <view id="c8">
+            <template is="chair" data="{{...chairInfo[7]}}"></template>
+        </view>
+        <view id="c9">
+            <template is="chair" data="{{...chairInfo[8]}}"></template>
+        </view>
+        <view id="c10">
+            <template is="chair" data="{{...chairInfo[9]}}"></template>
+        </view>
+        <view id="c11">
+            <template is="chair" data="{{...chairInfo[10]}}"></template>
+        </view>
+        <view id="c12">
+            <template is="chair" data="{{...chairInfo[11]}}"></template>
+        </view>
+      </movable-view>
+    </movable-area>
+  </view>
+  <!-- 独立屋 -->
+  <view wx:if="{{roomtype==3}}">
+    <movable-area scale-area id="movable-area-id">
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room3.png);background-size: cover;">   
+        <!-- 引用模板 -->
+        <!-- 第一张椅子 -->
+            <!-- 位置(绝对定位带上) -->
+        <view id="c1">
+            <template is="chair" data="{{...chairInfo[0]}}"></template>
+        </view>
+
+      </movable-view>
+    </movable-area>
+  </view>
+  <!-- 小白屋 -->
+  <view wx:if="{{roomtype==4}}">
+    <movable-area scale-area id="movable-area-id">
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room4.png);background-size: cover;">   
+        <!-- 引用模板 -->
+        <!-- 第一张椅子 -->
+            <!-- 位置(绝对定位带上) -->
+        <view id="c1">
+            <template is="chair" data="{{...chairInfo[0]}}"></template>
+        </view>
 
 
-  
-
-
-
-
-
-
-  <movable-area scale-area id="movable-area-id">
-
-    <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/seat2.png);background-size: cover;">   
-
-      <!-- 引用模板 -->
-      <!-- 第一张椅子 -->
-          <!-- 位置(绝对定位带上) -->
-      <view id="c1">
-          <template is="chair" data="{{...chairInfo[0]}}"></template>
-      </view>
-      <view id="c2">
-          <template is="chair" data="{{...chairInfo[1]}}"></template>
-      </view>
-      <view id="c3">
-          <template is="chair" data="{{...chairInfo[2]}}"></template>
-      </view>
-      <view id="c4">
-          <template is="chair" data="{{...chairInfo[3]}}"></template>
-      </view>
-      <view id="c5">
-          <template is="chair" data="{{...chairInfo[4]}}"></template>
-      </view>
-      <view id="c6">
-          <template is="chair" data="{{...chairInfo[5]}}"></template>
-      </view>
-
-
-    </movable-view>
-  </movable-area>
+      </movable-view>
+    </movable-area>
+  </view>
 </view>
 
 
 
 <!-- <text bindtap="navigateToOrder">预约座位</text> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- 新建一个模板 -->
 <template name="chair">
             <!-- 椅子的两部分 -->

@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/launch/launch",
+    
     "pages/bespeak/bespeak",
+    "pages/launch/launch",
     "pages/canvas/canvas",
     "pages/order/order",
     "pages/index/index",

@@ -13,7 +13,10 @@ Page({
     scale:1,
 
     // 座位信息
-    chairInfo:[]
+    chairInfo:[],
+
+    //设置房间的编号（那个房间）
+    roomtype:"2"
    },
 
   /**
@@ -75,9 +78,20 @@ Page({
 
   },
 
+  // 选座位界面切换房间
+  onRoom:function(e){
+    var roomtype = e.target.dataset.roomtype;
+    this.setData({
+      roomtype:roomtype
+    })
+    console.log(this.data.roomtype);
+  },
+
+
+//点击座位事件
   ontap:function(e){
     var that = this;
-    console.log(this);
+    console.log("点击座位...");
     var id = e.target.dataset.id;
     // 更新座位的状态
     var cha1 = 'chairInfo['+parseInt(parseInt(id)-1)+'].chair_x';

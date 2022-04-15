@@ -44,45 +44,226 @@
   /* position: relative; */
 }
 
-#c1{
+/* 设置椅子的位置 */
+/* 第一个房间的位置 */
+#a1{
   /* 竖排间距23 横间距： */
   transform: rotate(-90deg);
-  left: 117px;
-  top: 56px;
+  left: 180rpx;
+  top: 198rpx;
+  position: absolute;
+}
+#a2{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 180rpx;
+  top: 298rpx;
+  position: absolute;
+}
+#a3{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 180rpx;
+  top: 399rpx;
+  position: absolute;
+}
+#a4{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 305rpx;
+  top: 198rpx;
+  position: absolute;
+}
+#a5{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 305rpx;
+  top: 298rpx;
+  position: absolute;
+}
+#a6{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 305rpx;
+  top: 399rpx;
   position: absolute;
 }
 
+/* 第二个房间座位的位置 */
+#b1{
+    /* 竖排间距23 横间距： */
+    transform: rotate(90deg);
+    left: 138rpx;
+    top: 97rpx;
+    position: absolute;
+}
+#b2{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 138rpx;
+  top: 213rpx;
+  position: absolute;
+}
+#b3{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 138rpx;
+  top: 324rpx;
+  position: absolute;
+}
+#b4{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 138rpx;
+  top: 429rpx;
+  position: absolute;
+}
+#b5{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 138rpx;
+  top: 540rpx;
+  position: absolute;
+}
+#b6{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 341rpx;
+  top: 95rpx;
+  position: absolute;
+}
+#b7{
+/* 竖排间距23 横间距： */
+transform: rotate(-90deg);
+left: 341rpx;
+top: 208rpx;
+position: absolute;
+}
+#b8{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 341rpx;
+  top: 429rpx;
+  position: absolute;
+}
+#b9{
+/* 竖排间距23 横间距： */
+transform: rotate(-90deg);
+left: 341rpx;
+top: 541rpx;
+position: absolute;
+}
+#b10{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 465rpx;
+  top: 97rpx;
+  position: absolute;
+}
+#b11{
+/* 竖排间距23 横间距： */
+transform: rotate(90deg);
+left: 465rpx;
+top: 208rpx;
+position: absolute;
+}
+#b12{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 470rpx;
+  top: 429rpx;
+  position: absolute;
+}
+#b13{
+/* 竖排间距23 横间距： */
+transform: rotate(90deg);
+left: 470rpx;
+top: 541rpx;
+position: absolute;
+}
+
+/* 第三个房间座位的位置 */
+#c1{
+  /* 竖排间距23 横间距： */
+  transform: rotate(180deg);
+  left: 74rpx;
+  top: 178rpx;
+  position: absolute;
+}
 #c2{
-  transform: rotate(-90deg);
-  left: 117px;
-  top: 79px;
-  position: absolute;
+/* 竖排间距23 横间距： */
+transform: rotate(0deg);
+left:74rpx;
+top:473rpx;
+position: absolute;
 }
-
 #c3{
-  transform: rotate(-90deg);
-  left: 117px;
-  top: 102px;
-  position: absolute;
+/* 竖排间距23 横间距： */
+transform: rotate(180deg);
+left:74rpx;
+top:590rpx;
+position: absolute;
 }
-
 #c4{
-  transform: rotate(90deg);
-  left: 171px;
-  top: 56px;
-  position: absolute;
+/* 竖排间距23 横间距： */
+transform: rotate(180deg);
+left: 186rpx;
+top: 178rpx;
+position: absolute;
 }
-
 #c5{
-  transform: rotate(90deg);
-  left: 171px;
-  top: 79px;
-  position: absolute;
+/* 竖排间距23 横间距： */
+transform: rotate(0deg);
+left: 189rpx;
+top: 473rpx;
+position: absolute;
 }
-
 #c6{
-  transform: rotate(90deg);
-  left: 171px;
-  top: 102px;
-  position: absolute;
+/* 竖排间距23 横间距： */
+transform: rotate(180deg);
+left: 186rpx;
+top:590rpx;
+position: absolute;
+}
+#c7{
+/* 竖排间距23 横间距： */
+transform: rotate(180deg);
+left: 300rpx;
+top: 178rpx;
+position: absolute;
+}
+#c8{
+/* 竖排间距23 横间距： */
+transform: rotate(0deg);
+left: 300rpx;
+top: 473rpx;
+position: absolute;
+}
+#c9{
+/* 竖排间距23 横间距： */
+transform: rotate(180deg);
+left: 300rpx;
+top:590rpx;
+position: absolute;
+}
+#c10{
+/* 竖排间距23 横间距： */
+transform: rotate(-90deg);
+left: 475rpx;
+top: 344rpx;
+position: absolute;
+}
+#c11{
+/* 竖排间距23 横间距： */
+transform: rotate(-90deg);
+left: 475rpx;
+top: 456rpx;
+position: absolute;
+}
+#c12{
+/* 竖排间距23 横间距： */
+transform: rotate(-90deg);
+left: 475rpx;
+top: 570rpx;
+position: absolute;
 }

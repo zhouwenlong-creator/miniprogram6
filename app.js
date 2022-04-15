@@ -131,6 +131,16 @@ App({
       chair_x:"chair_1",
       chair_y:"chair_2"
       // "navigationBarBackgroundColor": "#f97e40",
+    },
+    {
+      // 座位号
+      id:13,
+      // 座位描述
+      txt:"你好",
+      // 座位样式
+      chair_x:"chair_1",
+      chair_y:"chair_2"
+      // "navigationBarBackgroundColor": "#f97e40",
     }
 ]
 
