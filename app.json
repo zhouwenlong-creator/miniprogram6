@@ -1,7 +1,9 @@
 {
   "pages": [
-    
     "pages/bespeak/bespeak",
+    "pages/test/picker/picker",
+    
+    "pages/test/changeList/changeList",
     "pages/launch/launch",
     "pages/canvas/canvas",
     "pages/order/order",
@@ -12,8 +14,7 @@
     "pages/record/record",
     "pages/canvas1/canvas1",
     "pages/test/test"
-
-  ],
+    ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

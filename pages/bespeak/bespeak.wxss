@@ -13,17 +13,75 @@
   font-size: 15px;
   width: 100%;
   overflow-y: scroll;
-  white-space: nowrap; 
+  white-space: nowrap;
+
 }
+/* 这一层 */
 .classify{
-  padding-bottom: 10rpx;
-  padding-left:20rpx;
-  padding-right: 20rpx;
+  padding-bottom: 20rpx;
+  padding-left:30rpx;
+  padding-right: 30rpx;
   height: 100%;
   width: 100rpx;
 }
+/* 下一层 */
+.classify_1{
+  padding-bottom: 20rpx;
+  padding-left:30rpx;
+  padding-right: 30rpx;
+  height: 100%;
+  width: 100rpx;
+  color:gray;
+}
+.isactive{
+  padding-bottom: 20rpx;
+  padding-left:30rpx;
+  padding-right: 30rpx;
+  height: 100%;
+  width: 100rpx;
+  color: black;
+  border-bottom: black 5rpx solid;
+}
 
-
+/* 选择日期需要的css */
+.mask{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  z-index: 9000;
+  opacity: 0.7;
+  }
+  .modalDlg{
+  width: 648rpx;
+  height: 748rpx;
+  position: fixed;
+  top: 35%;
+  left: 0;
+  z-index: 9999;
+  margin: -270rpx 50rpx;
+  background-color: rgb(233, 235, 232);
+  border-radius: 36rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+  .time_text{
+  text-align: center;
+  font-size:60rpx;
+  }
+  .view_picker{
+  margin-top: 20rpx;
+  margin-bottom: 20rpx; 
+  }
+  .view_picker_text{
+  /* padding-left:35rpx; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
 
 
 
@@ -266,4 +324,106 @@ transform: rotate(-90deg);
 left: 475rpx;
 top: 570rpx;
 position: absolute;
+}
+
+/* 第四个房间座位的位置 */
+#d1{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 248rpx;
+  top: 224rpx;
+  position: absolute;
+}
+#d2{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 248rpx;
+  top: 364rpx;
+  position: absolute;
+}
+#d3{
+  /* 竖排间距23 横间距： */
+  transform: rotate(90deg);
+  left: 248rpx;
+  top: 507rpx;
+  position: absolute;
+}
+#d4{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 450rpx;
+  top: 224rpx;
+  position: absolute;
+}
+#d5{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 450rpx;
+  top: 364rpx;
+  position: absolute;
+}
+#d6{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 450rpx;
+  top: 507rpx;
+  position: absolute;
+}
+
+/* 第五个房间座位的位置 */
+#e1{
+  /* 竖排间距23 横间距： */
+  transform: rotate(180deg);
+  left: 216rpx;
+  top: 274rpx;
+  position: absolute;
+}
+#e2{
+  /* 竖排间距23 横间距： */
+  transform: rotate(180deg);
+  left: 312rpx;
+  top: 274rpx;
+  position: absolute;
+}
+#e3{
+  /* 竖排间距23 横间距： */
+  transform: rotate(225deg);
+  left: 414rpx;
+  top: 284rpx;
+  position: absolute;
+}
+#e4{
+  /* 竖排间距23 横间距： */
+  transform: rotate(-90deg);
+  left: 424rpx;
+  top: 386rpx;
+  position: absolute;
+}
+#e5{
+  /* 竖排间距23 横间距： */
+  transform: rotate(315deg);
+  left: 414rpx;
+  top: 478rpx;
+  position: absolute;
+}
+#e6{
+  /* 竖排间距23 横间距： */
+  transform: rotate(0deg);
+  left: 306rpx;
+  top: 488rpx;
+  position: absolute;
+}
+#e7{
+  /* 竖排间距23 横间距： */
+  transform: rotate(0deg);
+  left: 202rpx;
+  top: 488rpx;
+  position: absolute;
+}
+#e8{
+  /* 竖排间距23 横间距： */
+  transform: rotate(45deg);
+  left: 120rpx;
+  top: 476rpx;
+  position: absolute;
 }
