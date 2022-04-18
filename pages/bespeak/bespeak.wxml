@@ -11,8 +11,8 @@
     <view class="modalDlg" wx:if="{{showModal}}">
     <!-- 头部 -->
     <!-- <view style="text-align:center;font-size:50rpx;">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view> -->
-    <view style="text-align:center;font-size:50rpx;padding:15rpx;">预约时间选取</view>
-        <picker-view wx:if="{{years.length>0 && months.length>0 && days.length>0}}" style="width: 100%; height: 500rpx;" indicator-style="height: 50px;" class="view_picker" value="{{value}}" bindchange="bindChange">
+    <view style="text-align:center;padding:20rpx;">预约时间选取</view>
+        <picker-view wx:if="{{years.length>0 && months.length>0 && days.length>0}}" style="width: 100%; height: 500rpx;" indicator-style="height: 50px;" class="view_picker" value="{{value}}" bindchange="bindChange" bindpickend="bindpickend">
             <picker-view-column>
             <view wx:for="{{years}}" wx:key='{{index}}' class="view_picker_text">{{item}}年</view>
             </picker-view-column>
@@ -41,10 +41,10 @@
     <view class="modalDlg" wx:if="{{showModal1}}">
     <!-- 头部 -->
     <!-- <view style="text-align:center;font-size:50rpx;">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view> -->
-    <view style="text-align:center;font-size:50rpx;padding:15rpx;">预约时长</view>
-        <picker-view style="width: 100%; height: 500rpx;" indicator-style="height: 50px;" class="view_picker" value="{{value}}" bindchange="bindChange1">
+    <view style="text-align:center;padding:20rpx;">预约时长</view>
+        <picker-view style="width: 100%; height: 500rpx;" indicator-style="height: 100rpx;" class="view_picker" value="{{value}}" bindchange="bindChange1">
             <picker-view-column>
-                <view wx:for="{{time}}" wx:key="{{index}}">{{item.name}}</view>
+                <view style="text-align: center;" wx:for="{{time}}" wx:key="{{index}}">{{item.name}}</view>
             </picker-view-column>
         </picker-view>
         <button bindtap="go1">确定</button>
@@ -99,43 +99,43 @@
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
         <view id="b1">
-            <template is="chair" data="{{...chairInfo[0]}}"></template>
-        </view>
-        <view id="b2">
-            <template is="chair" data="{{...chairInfo[1]}}"></template>
-        </view>
-        <view id="b3">
-            <template is="chair" data="{{...chairInfo[2]}}"></template>
-        </view>
-        <view id="b4">
-            <template is="chair" data="{{...chairInfo[3]}}"></template>
-        </view>
-        <view id="b5">
-            <template is="chair" data="{{...chairInfo[4]}}"></template>
-        </view>
-        <view id="b6">
-            <template is="chair" data="{{...chairInfo[5]}}"></template>
-        </view>
-        <view id="b7">
             <template is="chair" data="{{...chairInfo[6]}}"></template>
         </view>
-        <view id="b8">
+        <view id="b2">
             <template is="chair" data="{{...chairInfo[7]}}"></template>
         </view>
-        <view id="b9">
+        <view id="b3">
             <template is="chair" data="{{...chairInfo[8]}}"></template>
         </view>
-        <view id="b10">
+        <view id="b4">
             <template is="chair" data="{{...chairInfo[9]}}"></template>
         </view>
-        <view id="b11">
+        <view id="b5">
             <template is="chair" data="{{...chairInfo[10]}}"></template>
         </view>
-        <view id="b12">
+        <view id="b6">
             <template is="chair" data="{{...chairInfo[11]}}"></template>
         </view>
-        <view id="b13">
+        <view id="b7">
             <template is="chair" data="{{...chairInfo[12]}}"></template>
+        </view>
+        <view id="b8">
+            <template is="chair" data="{{...chairInfo[13]}}"></template>
+        </view>
+        <view id="b9">
+            <template is="chair" data="{{...chairInfo[14]}}"></template>
+        </view>
+        <view id="b10">
+            <template is="chair" data="{{...chairInfo[15]}}"></template>
+        </view>
+        <view id="b11">
+            <template is="chair" data="{{...chairInfo[16]}}"></template>
+        </view>
+        <view id="b12">
+            <template is="chair" data="{{...chairInfo[17]}}"></template>
+        </view>
+        <view id="b13">
+            <template is="chair" data="{{...chairInfo[18]}}"></template>
         </view>
 
       </movable-view>
@@ -149,40 +149,40 @@
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
         <view id="c1">
-            <template is="chair" data="{{...chairInfo[0]}}"></template>
+            <template is="chair" data="{{...chairInfo[19]}}"></template>
         </view>
         <view id="c2">
-            <template is="chair" data="{{...chairInfo[1]}}"></template>
+            <template is="chair" data="{{...chairInfo[20]}}"></template>
         </view>
         <view id="c3">
-            <template is="chair" data="{{...chairInfo[2]}}"></template>
+            <template is="chair" data="{{...chairInfo[21]}}"></template>
         </view>
         <view id="c4">
-            <template is="chair" data="{{...chairInfo[3]}}"></template>
+            <template is="chair" data="{{...chairInfo[22]}}"></template>
         </view>
         <view id="c5">
-            <template is="chair" data="{{...chairInfo[4]}}"></template>
+            <template is="chair" data="{{...chairInfo[23]}}"></template>
         </view>
         <view id="c6">
-            <template is="chair" data="{{...chairInfo[5]}}"></template>
+            <template is="chair" data="{{...chairInfo[24]}}"></template>
         </view>
         <view id="c7">
-            <template is="chair" data="{{...chairInfo[6]}}"></template>
+            <template is="chair" data="{{...chairInfo[25]}}"></template>
         </view>
         <view id="c8">
-            <template is="chair" data="{{...chairInfo[7]}}"></template>
+            <template is="chair" data="{{...chairInfo[26]}}"></template>
         </view>
         <view id="c9">
-            <template is="chair" data="{{...chairInfo[8]}}"></template>
+            <template is="chair" data="{{...chairInfo[27]}}"></template>
         </view>
         <view id="c10">
-            <template is="chair" data="{{...chairInfo[9]}}"></template>
+            <template is="chair" data="{{...chairInfo[28]}}"></template>
         </view>
         <view id="c11">
-            <template is="chair" data="{{...chairInfo[10]}}"></template>
+            <template is="chair" data="{{...chairInfo[29]}}"></template>
         </view>
         <view id="c12">
-            <template is="chair" data="{{...chairInfo[11]}}"></template>
+            <template is="chair" data="{{...chairInfo[30]}}"></template>
         </view>
       </movable-view>
     </movable-area>
@@ -195,22 +195,22 @@
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
             <view id="d1">
-            <template is="chair" data="{{...chairInfo[0]}}"></template>
+            <template is="chair" data="{{...chairInfo[31]}}"></template>
             </view>
             <view id="d2">
-                <template is="chair" data="{{...chairInfo[1]}}"></template>
+                <template is="chair" data="{{...chairInfo[32]}}"></template>
             </view>
             <view id="d3">
-                <template is="chair" data="{{...chairInfo[2]}}"></template>
+                <template is="chair" data="{{...chairInfo[33]}}"></template>
             </view>
             <view id="d4">
-                <template is="chair" data="{{...chairInfo[3]}}"></template>
+                <template is="chair" data="{{...chairInfo[34]}}"></template>
             </view>
             <view id="d5">
-                <template is="chair" data="{{...chairInfo[4]}}"></template>
+                <template is="chair" data="{{...chairInfo[35]}}"></template>
             </view>
             <view id="d6">
-                <template is="chair" data="{{...chairInfo[5]}}"></template>
+                <template is="chair" data="{{...chairInfo[36]}}"></template>
             </view>
 
       </movable-view>
@@ -224,35 +224,65 @@
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
             <view id="e1">
-            <template is="chair" data="{{...chairInfo[0]}}"></template>
+            <template is="chair" data="{{...chairInfo[37]}}"></template>
             </view>
             <view id="e2">
-                <template is="chair" data="{{...chairInfo[1]}}"></template>
+                <template is="chair" data="{{...chairInfo[38]}}"></template>
             </view>
             <view id="e3">
-                <template is="chair" data="{{...chairInfo[2]}}"></template>
+                <template is="chair" data="{{...chairInfo[39]}}"></template>
             </view>
             <view id="e4">
-                <template is="chair" data="{{...chairInfo[3]}}"></template>
+                <template is="chair" data="{{...chairInfo[40]}}"></template>
             </view>
             <view id="e5">
-                <template is="chair" data="{{...chairInfo[4]}}"></template>
+                <template is="chair" data="{{...chairInfo[41]}}"></template>
             </view>
             <view id="e6">
-                <template is="chair" data="{{...chairInfo[5]}}"></template>
+                <template is="chair" data="{{...chairInfo[42]}}"></template>
             </view>
             <view id="e7">
-                <template is="chair" data="{{...chairInfo[6]}}"></template>
+                <template is="chair" data="{{...chairInfo[43]}}"></template>
             </view>
             <view id="e8">
-                <template is="chair" data="{{...chairInfo[7]}}"></template>
+                <template is="chair" data="{{...chairInfo[44]}}"></template>
             </view>
 
 
       </movable-view>
     </movable-area>
   </view>
+
+
+  <view class="bottom_bespeak">
+
+    <view class="in_bottom_bespeak_1">
+      <view class="in_in_bottom_bespeak_1">
+        <image src="/static/icon-bespeak/icon_bespeak_1.png" mode="aspectFit" class="img"></image>
+        可用座位
+      </view>
+      <view class="in_in_bottom_bespeak_1">
+        <image src="/static/icon-bespeak/icon_bespeak_2.png" mode="aspectFit" class="img"></image>
+        选中座位
+      </view>
+      <view class="in_in_bottom_bespeak_1">
+        <image src="/static/icon-bespeak/icon_bespeak_3.png" mode="aspectFit" class="img"></image>
+        已被占用
+      </view>
+    </view>
+
+    <!-- 预定座位 -->
+    <view class="in_bottom_bespeak_2">
+     <view class="{{bottombespeak}}" bindtap="submitbespeak">预定座位</view>
+    </view>
+  </view>
 </view>
+
+
+
+
+
+
 
 
 
@@ -261,7 +291,7 @@
 <template name="chair">
             <!-- 椅子的两部分 -->
   <view  bindtap="ontap">
-    <view id="{{chair_x}}" data-id="{{id}}">{{id}}</view>
-    <view id="{{chair_y}}"></view>
+    <view id="{{seatStyle1}}" data-id="{{seatId}}">{{seatId}}</view>
+    <view id="{{seatStyle2}}"></view>
   </view>
 </template>

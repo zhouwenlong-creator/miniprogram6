@@ -1,5 +1,7 @@
 // pages/bespeak/bespeak.js
 var information = getApp().globalData.chairInfo;
+var url=getApp().globalData.wxRequestBaseUrl;
+// console.log(url);
 // console.log(information);
 
 const date = new Date();//获取系统日期
@@ -57,6 +59,18 @@ Page({
 
     //设置房间的编号（那个房间）
     roomtype:"0",
+
+    // 设置平面图底部的预定按钮
+    bottombespeak:"in_in_bottom_bespeak_2",
+
+    //选择预约时间
+    bespeaktime:0,
+
+    // 预定的时长
+    bespeakduration:1,
+
+    //当前选中的座位，默认为0，就表示不能预约
+    seat:0,
 
     // 跟日期时间相关的变量
     years: years,
@@ -127,28 +141,28 @@ Page({
       {
         roomtype:0,
         roomname:"公共区",
-        isactive:true
+        isactive:1
       },
       {
         roomtype:1,
         roomname:"电脑屋",
-        isactive:false
+        isactive:0
       },
       {
         roomtype:2,
         roomname:"小黑屋",
-        isactive:false
+        isactive:0
       },
       {
         roomtype:3,
         roomname:"独立屋",
-        isactive:false
+        isactive:0
 
       },
       {
         roomtype:4,
         roomname:"小白屋",
-        isactive:false
+        isactive:0
       }
     ]
    },
@@ -158,8 +172,27 @@ Page({
    */
   onLoad: function (options) {
     // 初始化
-    this.setData({
-      chairInfo:information
+    // this.setData({
+    //   chairInfo:information
+    // })
+    var that=this;
+    var app=getApp();
+    wx.request({
+      url: app.globalData.wxRequestBaseUrl+"/seat/selectAllSeats.do",
+      method:'GET',
+      header:{
+        // 请求头部
+        // 'content-type':'application/x-www-form-urlencoded'
+        'content-type':'application/json'
+    },
+    // 请求成功返回什么
+    success(res){
+      console.log(res);
+      that.setData({
+        chairInfo:res.data
+      })
+    console.log(that.data.chairInfo[0]);
+    }
     })
   },
 
@@ -220,15 +253,15 @@ Page({
     var roomlength=this.data.room.length;
     var i=0;
     for(i=0;i<roomlength;i++){
-      if(this.data.room[i].isactive==true)
+      if(this.data.room[i].isactive==1)
       //每次只有一个为选中的状态
         this.setData({
           //修改数组中的元素
-          [`room[${i}].isactive`]:false,
+          [`room[${i}].isactive`]:0,
         })
       if(this.data.room[i].roomtype==roomtypes){
         this.setData({
-          [`room[${i}].isactive`]:true,
+          [`room[${i}].isactive`]:1,
         })
       }
     };
@@ -244,14 +277,31 @@ Page({
     var that = this;
     console.log("点击座位...");
     var id = e.target.dataset.id;
+    //座位id是从1开始
+    id=id-1;
     // 更新座位的状态
-    var cha1 = 'chairInfo['+parseInt(parseInt(id)-1)+'].chair_x';
-    var cha2 = 'chairInfo['+parseInt(parseInt(id)-1)+'].chair_y';
-    that.setData({
-      [cha1]:"chair_3",
-      [cha2]:"chair_4"
-
-    })
+    // var cha1 = 'chairInfo['+parseInt(parseInt(id)-1)+'].seatStyle1';
+    // var cha2 = 'chairInfo['+parseInt(parseInt(id)-1)+'].seatStyle2';
+    // console.log(cha1);
+    if(this.data.chairInfo[id].seatStyle1=="chair_1"){
+      that.setData({
+        [`chairInfo[${id}].seatStyle1`]:"chair_3",
+        [`chairInfo[${id}].seatStyle2`]:"chair_4",
+        bottombespeak:"in_in_bottom_bespeak_2_select",
+        //选中就传当前座位的值
+        seat:id+1
+      })
+    }else{
+      that.setData({
+        [`chairInfo[${id}].seatStyle1`]:"chair_1",
+        [`chairInfo[${id}].seatStyle2`]:"chair_2",
+        bottombespeak:"in_in_bottom_bespeak_2",
+        //选中就传当前座位的值
+        seat:0
+       })
+    }
+    console.log(this.data.seat);
+    
   },
   // 选择日期时间
   datesubmit:function(e){
@@ -261,7 +311,9 @@ Page({
       })
   },
   // 在showModel中点击确定
-  go: function () {
+  go: function (e) {
+    var that=this;
+    //显示平面图
     this.setData({
     showModal: false
     })
@@ -275,6 +327,23 @@ Page({
       showModal1: true
       })
   },
+    // 在showModel中点击确定
+    go1: function () {
+      this.setData({
+      showModal1: false
+      })
+      //后续操作
+    },
+    bindChange1:function(e){
+      var that=this;
+      console.log("bindChange1...");
+      var val=e.detail.value;
+      var bespeakdurations = this.data.time[val[0]].id;
+      that.setData({
+        bespeakduration:bespeakdurations
+      })
+      console.log(this.data.bespeakduration);
+    },
   
   //判断元素是否在一个数组
   contains: function (arr, obj) {
@@ -298,6 +367,7 @@ Page({
   },
   //选择滚动器改变触发事件
   bindChange: function (e) {
+    var that = this;
     const val = e.detail.value;
     console.log(e);
     //判断月的天数
@@ -306,7 +376,6 @@ Page({
     const setDay = this.data.days[val[2]];
     const setHour = this.data.hours[val[3]];
     const setMinute = this.data.minutes[val[4]];
-    console.log(setYear + '年' + setMonth + '月' + setDay + '日');
     //闰年
     if (setMonth === 2) {
       if (setYear % 4 === 0 && setYear % 100 !== 0) {
@@ -331,6 +400,24 @@ Page({
     hour: setHour,
     minute: setMinute
     })
+    console.log("打印时间！");
+    const dateTime=setYear+"-"+setMonth+"-"+setDay+"- "+setHour+":"+setMinute;
+    var datatime1 = new Date(dateTime);
+    //将选取的时间
+    that.setData({
+      //将最终的事件给js保存
+      bespeaktime:datatime1
+    })
+  },
+
+  submitbespeak:function(e){
+    console.log("submitbespeak...");
+    var that=this;
+    if(that.data.seat!=0){
+      wx.navigateTo({
+        url: '/pages/order/order',
+      })
+    }
   }
 
 })

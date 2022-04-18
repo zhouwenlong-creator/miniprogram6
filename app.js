@@ -16,9 +16,9 @@ App({
   globalData: {
     userInfo: null,
     // 远程
-    wxRequestBaseUrl:"https://www.zwlserver.top",
+    // wxRequestBaseUrl:"https://www.zwlserver.top",
     // 本地
-    // wxRequestBaseUrl:"http://localhost:8080",
+    wxRequestBaseUrl:"http://localhost:8080",
 
     // 座位信息
     chairInfo:[{

@@ -2,19 +2,18 @@
   "pages": [
     "pages/bespeak/bespeak",
     "pages/test/picker/picker",
-    
     "pages/test/changeList/changeList",
     "pages/launch/launch",
-    "pages/canvas/canvas",
+    "pages/test/canvas/canvas",
     "pages/order/order",
     "pages/index/index",
     "pages/vip/vip",
     "pages/user/user",
     "pages/lab/lab",
     "pages/record/record",
-    "pages/canvas1/canvas1",
+    "pages/test/canvas1/canvas1",
     "pages/test/test"
-    ],
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",

@@ -3,18 +3,73 @@
 @import"../../app.wxss";  
 #box{
   background-color: #ecf0f8;
-  height: 750px;
+  height: 1300rpx;
   width: auto;
 }
 
+.img{
+  height:35rpx;
+  width:35rpx;
+}
+.bottom_bespeak{
+  background-color:white;
+  text-align:center;
+  position:fixed;
+  /* 固定底部 */
+   bottom:0;
+   height:250rpx;
+   width: 750rpx;
+}
+.in_bottom_bespeak_1{
+  padding:20rpx;
+  text-align:center;
+  width:100%;
+  height:50rpx;
+  /* border:1px solid black; */
+}
+.in_in_bottom_bespeak_1{
+  display: inline-block;
+  width:200rpx;
+}
+.in_bottom_bespeak_2{
+  text-align:center;
+  /* border:1px solid black; */
+  height:150rpx;
+  width:100%;
+}
+
+.in_in_bottom_bespeak_2{
+  text-align:center;
+  border:1rpx solid gray;
+  color:gray;
+  margin:20rpx;
+  margin-top: 2rpx;
+  padding:20rpx;
+  font-size:50rpx;
+  border-radius: 20rpx;
+  background-color:#fafafa;
+}
+.in_in_bottom_bespeak_2_select{
+  text-align:center;
+  /* border:1rpx solid gray; */
+  color:white;
+  margin:20rpx;
+  margin-top: 2rpx;
+  padding:20rpx;
+  font-size:50rpx;
+  border-radius: 20rpx;
+  background-color:#b6c2f8;
+}
+
 .classify_list{
+  padding-top:15rpx;
   background-color: white;
+  /* border:1px solid black; */
   display: flex;
   font-size: 15px;
   width: 100%;
   overflow-y: scroll;
   white-space: nowrap;
-
 }
 /* 这一层 */
 .classify{
