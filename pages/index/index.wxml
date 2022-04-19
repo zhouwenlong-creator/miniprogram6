@@ -1,20 +1,20 @@
-<!-- 引用的组件模板，，名称  数据 -->
-<custom-components my-property='{{custom_components}}' /> 
-<view class="mianban">
-		<!-- <view class="biaoti"> -->
-			<!-- 行内选择器 -->
-			<!-- <span>
-				<text class="biaoti1">核桃自习室</text>
-			</span>
-			<span>
-				<text class="weizhi">距您198.93km</text>
-			</span>
-			<span>
-				<text class="fenxiang">分享</text>
-			</span>
-		</view> -->
+<view class="box">
+		<view class="map">
+			<view style="display: inline-block;">
+				<view style="font-weight: bold;">起航自习室(24小时营业) ></view>
+				<view style="color:gray;font-size:25rpx;padding-top:10rpx;">
+					<image src="/images/address.png" mode="aspectFill" style="width:25rpx;height: 25rpx;"></image>
+					湖北省荆州市荆州区城南街道99号
+				</view>
+			</view>
+			<view style="display: inline-block;font-weight: bold;margin:20rpx;">
+				<image src="/images/advice.png" mode="aspectFill" style="width:50rpx;height: 50rpx;margin:30rpx;"></image>
+				<image src="/images/contact.png" mode="aspectFill" style="width:50rpx;height: 50rpx;margin:30rpx;"></image>
 
-    <view>
+			</view>
+		</view>
+
+    <view class="main">
       <swiper class="swiper"
 			 autoplay="true" 
 			 interval="3000" 
@@ -24,30 +24,63 @@
 			 indicator-active-color="#f88c6b"
 			 circular>
         <swiper-item wx:for="{{swipers}}" wx:key="id">
-        <image class="img1" src="/static/swiper/{{item}}"></image>
+        <image class="swiperimg" src="/static/swiper/{{item}}"></image>
+
         </swiper-item>
       </swiper>
     </view>
 
-<!-- 联系 -->
-			<view class="lianxi">
-				<span>
-					<text>营业时间 00:00-24:00 \n</text>
-				</span>
-				<span>
-					<text>联系电话 15272551132 \n</text>
-				</span>
-				<span>
-					<text>店铺地址 湖北省荆州市荆州区长江大学东校区</text>
-				</span>
+		<!-- 预约 -->
+		<view style="background-color: white;">
+			<view class="bespeak">
+<!-- 在线预约还是直接入座 -->
+				<view class="bespeak_1">
+					<view wx:for="{{bespeakway}}" wx:key="item">
+						<view class="{{item.isactive==1?'bespeakisactive':'bespeak_1_1'}}" bindtap="onChangeBespeakWay" data-isactive="{{item.isactive}}">{{item.wayName}}</view>
+					</view>
+				</view>
 
+				<view class="bespeak_2">
+					<view wx:if="{{bespeakway[0].isactive==1}}">
+						<view class="bespeak_2_1">星期二 4月19日 16:00</view>
+						<view style="padding-left: 30rpx;color:gray">———————————————————</view>
+						<view class="bespeak_2_2">请选中结束时间</view>
+						<view style="padding-left: 30rpx;color:gray">———————————————————</view>
+						<view class="bespeak_2_3">
+							<view class="bespeak_2_3_1" wx:for="{{bespeakwaytime0}}" wx:key="item">{{item.name}}</view>
+						</view>
+						<view class="bespeak_2_4">下一步</view>
+						<!-- 使用说明，联系客服 -->
+						<view class="bespeak_2_5">
+							<view>
+								<image src="/images/explain.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
+								使用说明
+							</view>
+							<view>|</view>
+							<view style="align-items: center;">
+								<image src="/images/contact1.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
+								联系客服
+							</view>
+						</view>
+					</view>
+
+					<view wx:if="{{bespeakway[0].isactive==0}}">
+					 <view class="bespeak_2_6">
+					 	
+					 </view>
+					</view>
+
+
+					
+				</view>
+
+				<view>
+				</view>
+			</view>
 		</view>
+
+
+
 		<!-- 预约座位 会员卡 -->
-		<view class="bespeak">
-			<text style="margin-left: 80rpx;" bindtap="navigateToOrder">预约座位</text>
-			<text style="margin-left: 260rpx;">会员卡</text>
-		</view>
-		<view>
-		<text bindtap="logins">登录:{{result}}</text>
-		</view>
+
 	</view>

@@ -10,4 +10,5 @@
   background-color: white;
   /* 字体 */
   color:#a5a4a4;
+  font-weight:bold;
 }

@@ -11,6 +11,7 @@
   padding:35rpx;
    /* 字体 */
    color:#a5a4a4;
+   font-weight:bold;
 }
 
 .active{
@@ -58,6 +59,7 @@
   justify-content: space-between;
 }
 .name{
+
   height:16px;
   background-color: black;
   /* 字体 */
@@ -65,6 +67,7 @@
   border:1px solid black;
   border-bottom-left-radius: 10px;
   padding:4px 10px;
+
 }
 .box1_2_1{
   font-size:30px;

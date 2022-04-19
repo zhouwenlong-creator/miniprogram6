@@ -1,14 +1,12 @@
 {
   "pages": [
-
+    "pages/launch/launch",
     "pages/index/index",
     "pages/bespeak/bespeak",
     "pages/order/order",
     "pages/test/picker/picker",
     "pages/test/changeList/changeList",
-    "pages/launch/launch",
     "pages/test/canvas/canvas",
-    
     "pages/vip/vip",
     "pages/user/user",
     "pages/lab/lab",

@@ -1,4 +1,5 @@
 // pages/vip/vip.js
+var url=getApp().globalData.wxRequestBaseUrl;
 Page({
 
   /**
@@ -32,7 +33,7 @@ Page({
     var that = this;
     console.log("onshow开始了。。。。。。");
     wx.request({
-      url:app.globalData.wxRequestBaseUrl+"/vip/selectAllVips.do",
+      url:url+"/vip/selectAllVips.do",
       method:'GET',
       data:{
         tagId:that.data.tagId
@@ -98,7 +99,7 @@ Page({
       tagId:e.currentTarget.dataset.tagids
     });
     wx.request({
-      url:app.globalData.wxRequestBaseUrl+"/vip/selectAllVips.do",
+      url:url+"/vip/selectAllVips.do",
       method:'GET',
       data:{
         tagId:that.data.tagId

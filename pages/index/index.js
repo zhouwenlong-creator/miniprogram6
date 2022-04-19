@@ -1,16 +1,85 @@
 Page({
     data:{
-      // 自定义顶部navigationBar数据
-      custom_components: {
-        // "bg_color": "white",
-        // "color": "#000",
-        // "flag": 1,
-        // "name": "QIHANG"
-        
-      },
       swipers:["swiper-1.jpg","swiper-2.jpg","swiper-3.jpg","swiper-4.jpg","swiper-5.jpg","swiper-6.jpg","swiper-7.jpg"],
-      result:'请求后台中.....',
-      that:''
+
+      //当前选中的预约方式
+      bespeakway:[
+        {
+          wayName:'在线预约',
+          isactive:1
+        },
+        {
+          wayName:'直接入座',
+          isactive:0
+        }
+      ],
+
+    // 设置预约时长数组
+      bespeakwaytime0:[
+      {
+        id:2,
+        name:"2小时",
+        isactive:1
+      },
+      {
+        id:4,
+        name:"4小时",
+        isactive:0
+      },
+      {
+        id:6,
+        name:"6小时",
+        isactive:0
+      },
+      {
+        id:8,
+        name:"8小时",
+        isactive:0
+      }
+    ],
+    // 设置预约时长数组
+    bespeakwaytime1:[
+      {
+        id:1,
+        name:"1小时",
+        isactive:1
+      },
+      {
+        id:2,
+        name:"2小时",
+        isactive:0
+      },
+      {
+        id:3,
+        name:"3小时",
+        isactive:0
+      },
+      {
+        id:4,
+        name:"4小时",
+        isactive:0
+      },
+      {
+        id:6,
+        name:"8小时",
+        isactive:0
+      },
+      {
+        id:8,
+        name:"8小时",
+        isactive:0
+      },
+      {
+        id:12,
+        name:"12小时",
+        isactive:0
+      },
+      {
+        id:24,
+        name:"24小时",
+        isactive:0
+      }
+    ],
     },
 
 
@@ -93,6 +162,22 @@ Page({
       })
       }
     })
+  },
+
+  //改变预约的方式
+  onChangeBespeakWay:function(e){
+    var that=this;
+    console.log("改变预约方式。。。");
+    var isactive=e.target.dataset.isactive;
+    //如果点击的是未选中的，就直接两者交换
+    if(isactive==0){
+      var isactive1=that.data.bespeakway[0].isactive;
+      var isactive2=that.data.bespeakway[1].isactive;
+      that.setData({
+        [`bespeakway[0].isactive`]:isactive2,
+        [`bespeakway[1].isactive`]:isactive1
+      })
+    }
   }
 
 
