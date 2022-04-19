@@ -1,18 +1,23 @@
 {
   "pages": [
+
+    "pages/index/index",
     "pages/bespeak/bespeak",
+    "pages/order/order",
     "pages/test/picker/picker",
     "pages/test/changeList/changeList",
     "pages/launch/launch",
     "pages/test/canvas/canvas",
-    "pages/order/order",
-    "pages/index/index",
+    
     "pages/vip/vip",
     "pages/user/user",
     "pages/lab/lab",
     "pages/record/record",
     "pages/test/canvas1/canvas1",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/test/father/father",
+    "pages/test/son/son"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",

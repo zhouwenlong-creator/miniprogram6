@@ -73,7 +73,7 @@ Page({
   },
   navigateToOrder(){
     wx.navigateTo({
-      url: '../order/order',
+      url: '/pages/bespeak/bespeak',
       success(res){
         wx.showToast({
           title: "进入选座中", // 提示的内容

@@ -55,7 +55,7 @@
   </view>
   <!-- 第二层 -->
   <scroll-view class='classify_list' scroll-x="true" scroll-left="10">
-    <view class="{{item.isactive?'isactive':'classify_1'}}" wx:for="{{room}}" wx:key="id" style="margin: auto;display: inline-block;" data-roomtype="{{item.roomtype}}" bindtap="onRoom">{{item.roomname}}</view>
+    <view class="{{item.isactive?'isactive':'classify_1'}}" wx:for="{{room}}" wx:key="id" style="margin: auto;display: inline-block;" data-roomid="{{item.roomId}}" bindtap="onRoom">{{item.roomName}}</view>
      <!-- <view class="classify_1" id="room0" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="0">公共区</view>
      <view class="classify_1" id="room1" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="1">电脑屋</view>
      <view class="classify_1" id="room2" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="2">小黑屋</view>
@@ -63,7 +63,7 @@
      <view class="classify_1" id="room4" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="4">小白屋</view> -->
   </scroll-view>
   <!-- 公共区 -->
-  <view wx:if="{{roomtype==0}}">
+  <view wx:if="{{roomId==0}}">
     <movable-area scale-area id="movable-area-id">
       <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room0.png);background-size: cover;">   
         <!-- 引用模板 -->
@@ -92,7 +92,7 @@
     </movable-area>
   </view>
   <!-- 电脑屋 -->
-  <view wx:if="{{roomtype==1}}">
+  <view wx:if="{{roomId==1}}">
     <movable-area scale-area id="movable-area-id">
       <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room1.png);background-size: cover;">   
         <!-- 引用模板 -->
@@ -142,7 +142,7 @@
     </movable-area>
   </view>
   <!-- 小黑屋 -->
-  <view wx:if="{{roomtype==2}}">
+  <view wx:if="{{roomId==2}}">
     <movable-area scale-area id="movable-area-id">
       <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room2.png);background-size: cover;">   
         <!-- 引用模板 -->
@@ -188,7 +188,7 @@
     </movable-area>
   </view>
   <!-- 独立屋 -->
-  <view wx:if="{{roomtype==3}}">
+  <view wx:if="{{roomId==3}}">
     <movable-area scale-area id="movable-area-id">
       <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room3.png);background-size: cover;">   
         <!-- 引用模板 -->
@@ -217,7 +217,7 @@
     </movable-area>
   </view>
   <!-- 小白屋 -->
-  <view wx:if="{{roomtype==4}}">
+  <view wx:if="{{roomId==4}}">
     <movable-area scale-area id="movable-area-id">
       <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room4.png);background-size: cover;">   
         <!-- 引用模板 -->
@@ -290,7 +290,7 @@
 <!-- 新建一个模板 -->
 <template name="chair">
             <!-- 椅子的两部分 -->
-  <view  bindtap="ontap">
+  <view  bindtap="onChooseSeat">
     <view id="{{seatStyle1}}" data-id="{{seatId}}">{{seatId}}</view>
     <view id="{{seatStyle2}}"></view>
   </view>

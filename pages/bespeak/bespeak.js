@@ -58,7 +58,7 @@ Page({
     chairInfo:[],
 
     //设置房间的编号（那个房间）
-    roomtype:"0",
+    roomId:"0",
 
     // 设置平面图底部的预定按钮
     bottombespeak:"in_in_bottom_bespeak_2",
@@ -136,35 +136,8 @@ Page({
         name:"12小时"
       },
     ],
-
-    room:[
-      {
-        roomtype:0,
-        roomname:"公共区",
-        isactive:1
-      },
-      {
-        roomtype:1,
-        roomname:"电脑屋",
-        isactive:0
-      },
-      {
-        roomtype:2,
-        roomname:"小黑屋",
-        isactive:0
-      },
-      {
-        roomtype:3,
-        roomname:"独立屋",
-        isactive:0
-
-      },
-      {
-        roomtype:4,
-        roomname:"小白屋",
-        isactive:0
-      }
-    ]
+//房间
+    room:[]
    },
 
   /**
@@ -176,9 +149,9 @@ Page({
     //   chairInfo:information
     // })
     var that=this;
-    var app=getApp();
+    //查询当前座位
     wx.request({
-      url: app.globalData.wxRequestBaseUrl+"/seat/selectAllSeats.do",
+      url: url+"/seat/selectAllSeats.do",
       method:'GET',
       header:{
         // 请求头部
@@ -192,6 +165,24 @@ Page({
         chairInfo:res.data
       })
     console.log(that.data.chairInfo[0]);
+    }
+    }),
+    //查询当前所有房间
+    wx.request({
+      url: url+"/room/selectAllRooms.do",
+      method:'GET',
+      header:{
+        // 请求头部
+        // 'content-type':'application/x-www-form-urlencoded'
+        'content-type':'application/json'
+    },
+    // 请求成功返回什么
+    success(res){
+      console.log(res);
+      that.setData({
+        room:res.data
+      })
+    console.log(that.data.room[0]);
     }
     })
   },
@@ -249,7 +240,7 @@ Page({
   onRoom:function(e){
     console.log("切换平面图...");
     //接受前台传来的那个room
-    var roomtypes = e.target.dataset.roomtype;
+    var roomids = e.target.dataset.roomid;
     var roomlength=this.data.room.length;
     var i=0;
     for(i=0;i<roomlength;i++){
@@ -259,7 +250,7 @@ Page({
           //修改数组中的元素
           [`room[${i}].isactive`]:0,
         })
-      if(this.data.room[i].roomtype==roomtypes){
+      if(this.data.room[i].roomId==roomids){
         this.setData({
           [`room[${i}].isactive`]:1,
         })
@@ -267,13 +258,13 @@ Page({
     };
     this.setData({
       //用于刷新座位图
-      roomtype:roomtypes
+      roomId:roomids
     });
   },
 
 
 //点击座位事件
-  ontap:function(e){
+  onChooseSeat:function(e){
     var that = this;
     console.log("点击座位...");
     var id = e.target.dataset.id;
@@ -414,6 +405,16 @@ Page({
     console.log("submitbespeak...");
     var that=this;
     if(that.data.seat!=0){
+      // 传值给下一个页面（利用缓存）
+    //    //选择预约时间
+    // bespeaktime:0,
+    // // 预定的时长
+    // bespeakduration:1
+    // //当前选中的座位，默认为0，就表示不能预约
+    // seat:0,
+      wx.setStorageSync('bespeaktime',this.data.bespeaktime);
+      wx.setStorageSync('bespeakduration',this.data.bespeakduration);
+      wx.setStorageSync('seat',this.data.seat);
       wx.navigateTo({
         url: '/pages/order/order',
       })
