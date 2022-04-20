@@ -39,7 +39,8 @@
   width:100%;
 }
 
-.in_in_bottom_bespeak_2{
+.in_in_bottom_bespeak_2{ 
+  
   text-align:center;
   border:1rpx solid rgb(192, 192, 192);
   color:rgb(214, 213, 213);
