@@ -141,10 +141,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 初始化
-    // this.setData({
-    //   chairInfo:information
-    // })
+    //加载座位以及当前房间
     var that=this;
     //查询当前座位
     wx.request({
@@ -157,11 +154,9 @@ Page({
     },
     // 请求成功返回什么
     success(res){
-      console.log(res);
       that.setData({
         chairInfo:res.data
       })
-    console.log(that.data.chairInfo[0]);
     }
     }),
     //查询当前所有房间
@@ -175,13 +170,12 @@ Page({
     },
     // 请求成功返回什么
     success(res){
-      console.log(res);
       that.setData({
         room:res.data
       })
-    console.log(that.data.room[0]);
     }
     })
+    console.log("seats and room loading...");
   },
 
   /**
@@ -235,7 +229,7 @@ Page({
 
   // 选座位界面切换房间
   onRoom:function(e){
-    console.log("切换平面图...");
+    console.log("change room...");
     //接受前台传来的那个room
     var roomids = e.target.dataset.roomid;
     var roomlength=this.data.room.length;

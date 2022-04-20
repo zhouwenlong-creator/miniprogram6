@@ -101,6 +101,12 @@
   padding-left:50rpx;
   padding-right:30rpx;
 }
+.bespeak_2_2active{
+  font-weight: bold;
+  padding-top:15rpx;
+  padding-left:50rpx;
+  padding-right:30rpx;
+}
 
 
 .bespeak_2_3_1{

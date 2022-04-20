@@ -1,7 +1,7 @@
 <view class="box">
 		<view class="map">
 			<view style="display: inline-block;">
-				<view style="font-weight: bold;">起航自习室(24小时营业) ></view>
+				<view style="font-weight: bold;" bindtap="getUserInfo">起航自习室(24小时营业) ></view>
 				<view style="color:gray;font-size:25rpx;padding-top:10rpx;">
 					<image src="/images/address.png" mode="aspectFill" style="width:25rpx;height: 25rpx;"></image>
 					湖北省荆州市荆州区城南街道99号
@@ -42,14 +42,21 @@
 
 				<view class="bespeak_2">
 					<view wx:if="{{bespeakway[0].isactive==1}}">
-						<view class="bespeak_2_1">星期二 4月19日 16:00</view>
+						<view class="bespeak_2_1">{{bespeaktimeToString}}</view>
 						<view style="padding-left: 30rpx;color:gray">———————————————————</view>
-						<view class="bespeak_2_2">请选中结束时间</view>
+					
+						<view wx:if="{{bespeaktimeEndIsActive==0}}">
+							<view class="bespeak_2_2">请选择预约结束时间</view>
+						</view>
+						<view wx:if="{{bespeaktimeEndIsActive==1}}">
+							<view class="bespeak_2_2active">{{bespeaktimeEndToString}}</view>
+						</view>
+					
 						<view style="padding-left: 30rpx;color:gray">———————————————————</view>
 						<view class="bespeak_2_3">
-							<view class="{{item.isactive==1?'bespeak_2_3_1active':'bespeak_2_3_1'}}" wx:for="{{bespeakwaytime0}}" wx:key="item" bindtap="onChooseBespeakDuration1" data-bespeakduration="{{item.id}}">{{item.name}}</view>
+							<view class="{{item.isactive==1?'bespeak_2_3_1active':'bespeak_2_3_1'}}" wx:for="{{bespeakwaytime0}}" wx:key="item" bindtap="onChooseBespeakDuration1" data-bespeakduration1="{{item.id}}">{{item.name}}</view>
 						</view>
-						<view class="bespeak_2_4" bindtap="onSwitchToBespeak">下一步</view>
+						<view class="bespeak_2_4" bindtap="onSwitchToBespeak" data-bespeakway="1">下一步</view>
 						<!-- 使用说明，联系客服 -->
 						<view class="bespeak_2_5">
 							<view>
@@ -66,9 +73,9 @@
 
 					<view wx:if="{{bespeakway[0].isactive==0}}">
 					 <view class="bespeak_2_6">
-						<view class="{{item.isactive==1?'bespeak_2_6_1active':'bespeak_2_6_1'}}}" wx:for="{{bespeakwaytime1}}" wx:key="item" bindtap="onChooseBespeakDuration2" data-bespeakduration="{{item.id}}">{{item.name}}</view>
+						<view class="{{item.isactive==1?'bespeak_2_6_1active':'bespeak_2_6_1'}}}" wx:for="{{bespeakwaytime1}}" wx:key="item" bindtap="onChooseBespeakDuration2" data-bespeakduration2="{{item.id}}">{{item.name}}</view>
 					 </view>
-					 <view class="bespeak_2_7" bindtap="onSwitchToBespeak">下一步</view>
+					 <view class="bespeak_2_7" bindtap="onSwitchToBespeak" data-bespeakway="2">下一步</view>
 						<!-- 使用说明，联系客服 -->
 						<view class="bespeak_2_8">
 							<view>
