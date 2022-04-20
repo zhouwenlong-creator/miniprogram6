@@ -14,7 +14,15 @@ App({
     })
   },
   globalData: {
-    userInfo: null,
+    //微信用户信息
+    userInfo:{
+      // 微信用户昵称
+      nickName:"",
+      // 头像地址
+      avatarUrl:"",
+      //用户性别 0未知 1男 2女
+      gender:0,
+    },
     // 远程
     // wxRequestBaseUrl:"https://www.zwlserver.top",
     // 本地

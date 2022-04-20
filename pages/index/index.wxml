@@ -1,7 +1,7 @@
 <view class="box">
 		<view class="map">
 			<view style="display: inline-block;">
-				<view style="font-weight: bold;" bindtap="getUserInfo">起航自习室(24小时营业) ></view>
+				<view style="font-weight: bold;">起航自习室(24小时营业) ></view>
 				<view style="color:gray;font-size:25rpx;padding-top:10rpx;">
 					<image src="/images/address.png" mode="aspectFill" style="width:25rpx;height: 25rpx;"></image>
 					湖北省荆州市荆州区城南街道99号

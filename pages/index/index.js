@@ -1,3 +1,4 @@
+var url=getApp().globalData.wxRequestBaseUrl;
 Date.prototype.format = function(format) {
   var date = {
          "M+": this.getMonth() + 1,
@@ -119,12 +120,20 @@ Page({
       //设置当前预约结束时间的格式
       bespeaktimeEndIsActive:0,
 
-      //微信用户信息
-      userInfo:0,
+      //微信用户信息(数组类型)
+      userInfo:{
+        // 微信用户昵称
+        nickName:"",
+        // 头像地址
+        avatarUrl:"",
+        //用户性别 0未知 1男 2女
+        gender:0,
+      },
 
     },
     // 获取微信用户的昵称 头像 性别
   getUserInfo() {
+    var that=this;
     wx.showModal({
       title: '温馨提示',
       content: '亲，授权微信登录后才能正常使用小程序功能',
@@ -134,7 +143,47 @@ Page({
           wx.getUserProfile({
             desc: '获取你的昵称、头像、地区及性别',
             success: res => {
-              console.log("获取昵称，头像，地区，性别成功！")
+              console.log(res);
+              console.log("获取昵称，头像，地区，性别成功！");
+              //给当前页面数组赋值
+              that.setData({
+                ['userInfo.nickName']:res.userInfo.nickName,
+                ['userInfo.avatarUrl']:res.userInfo.avatarUrl,
+                ['userInfo.gender']:res.userInfo.gender,
+              })
+              //给全局空间赋值
+              getApp().globalData.userInfo=that.data.userInfo;
+              console.log("用户："+getApp().globalData.userInfo.nickName);
+              //登录，如果成功的话，success中就会返回 res.code
+              wx.login({
+                success(res){
+                  wx.request({
+                    url: url+'/user/userLoginAndRegister.do',
+                    method:"POST",
+                    header:{
+                      // 'Content-Type': 'text/plain;charset=ISO-8859-1'
+                      'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+                      // 'content-type':'application/json;'
+                    },
+                    //后台通过request.getPatameter("name")来接受
+                    data:{
+                      "nickName":getApp().globalData.userInfo.nickName,
+                      "avatarUrl":getApp().globalData.userInfo.avatarUrl,
+                      "gender":getApp().globalData.userInfo.gender,
+                      "code":res.code,
+                    },
+                    // 请求成功返回什么
+                    success(res){
+                      console.log(res);
+                    },
+                    fail(res){
+                      console.log("登录/注册失败，请稍后再试！");
+                    }
+                  })
+                  
+                },
+               
+              })
             },
             fail: res => {
               //拒绝授权
@@ -148,7 +197,6 @@ Page({
           });
         } else if (res.cancel) {
           //如果用户点击了取消按钮
-          console.log(3);
           wx.showToast({
             title: '您拒绝了请求！',
             icon: 'error',
@@ -291,6 +339,7 @@ Page({
   //刚加载时，需要加载当前时间
   onLoad:function(e){
     var that=this;
+    //获取用户的昵称 头像地址 性别等
     that.getUserInfo();
     console.log("index loading...");
     var dateTimeNow=new Date();
