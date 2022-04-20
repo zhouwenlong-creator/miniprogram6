@@ -2,7 +2,7 @@
 /* 引入app.wxss */
 @import"../../app.wxss";  
 #box{
-  background-color: #ecf0f8;
+  background-color: white;
   height: 1300rpx;
   width: auto;
 }
@@ -21,6 +21,7 @@
    width: 750rpx;
 }
 .in_bottom_bespeak_1{
+  border-top: 1rpx solid gray;
   padding:20rpx;
   text-align:center;
   width:100%;
@@ -40,25 +41,27 @@
 
 .in_in_bottom_bespeak_2{
   text-align:center;
-  border:1rpx solid gray;
-  color:gray;
+  border:1rpx solid rgb(192, 192, 192);
+  color:rgb(214, 213, 213);
   margin:20rpx;
   margin-top: 2rpx;
   padding:20rpx;
   font-size:50rpx;
   border-radius: 20rpx;
   background-color:#fafafa;
+  font-weight: bold;
 }
 .in_in_bottom_bespeak_2_select{
   text-align:center;
-  /* border:1rpx solid gray; */
+  border:1rpx solid black;
   color:white;
   margin:20rpx;
   margin-top: 2rpx;
   padding:20rpx;
   font-size:50rpx;
   border-radius: 20rpx;
-  background-color:#b6c2f8;
+  background-color:black;
+  font-weight: bold;
 }
 
 .classify_list{

@@ -47,9 +47,9 @@
 						<view class="bespeak_2_2">请选中结束时间</view>
 						<view style="padding-left: 30rpx;color:gray">———————————————————</view>
 						<view class="bespeak_2_3">
-							<view class="bespeak_2_3_1" wx:for="{{bespeakwaytime0}}" wx:key="item">{{item.name}}</view>
+							<view class="{{item.isactive==1?'bespeak_2_3_1active':'bespeak_2_3_1'}}" wx:for="{{bespeakwaytime0}}" wx:key="item" bindtap="onChooseBespeakDuration1" data-bespeakduration="{{item.id}}">{{item.name}}</view>
 						</view>
-						<view class="bespeak_2_4">下一步</view>
+						<view class="bespeak_2_4" bindtap="onSwitchToBespeak">下一步</view>
 						<!-- 使用说明，联系客服 -->
 						<view class="bespeak_2_5">
 							<view>
@@ -66,18 +66,30 @@
 
 					<view wx:if="{{bespeakway[0].isactive==0}}">
 					 <view class="bespeak_2_6">
-					 	
+						<view class="{{item.isactive==1?'bespeak_2_6_1active':'bespeak_2_6_1'}}}" wx:for="{{bespeakwaytime1}}" wx:key="item" bindtap="onChooseBespeakDuration2" data-bespeakduration="{{item.id}}">{{item.name}}</view>
 					 </view>
+					 <view class="bespeak_2_7" bindtap="onSwitchToBespeak">下一步</view>
+						<!-- 使用说明，联系客服 -->
+						<view class="bespeak_2_8">
+							<view>
+								<image src="/images/explain.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
+								使用说明
+							</view>
+							<view>|</view>
+							<view style="align-items: center;">
+								<image src="/images/contact1.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
+								联系客服
+							</view>
+						</view>
 					</view>
-
-
-					
-				</view>
-
-				<view>
 				</view>
 			</view>
+
+			<view>
+				<image src="/images/note.png" mode="scaleToFill" style="height:1200rpx;width:750rpx"></image>
+			</view>
 		</view>
+
 
 
 

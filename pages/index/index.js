@@ -2,6 +2,10 @@ Page({
     data:{
       swipers:["swiper-1.jpg","swiper-2.jpg","swiper-3.jpg","swiper-4.jpg","swiper-5.jpg","swiper-6.jpg","swiper-7.jpg"],
 
+      //选择预约时间
+    bespeaktime:0,
+    // 预定的时长
+    bespeakduration:1,
       //当前选中的预约方式
       bespeakway:[
         {
@@ -19,7 +23,7 @@ Page({
       {
         id:2,
         name:"2小时",
-        isactive:1
+        isactive:0
       },
       {
         id:4,
@@ -61,7 +65,7 @@ Page({
       },
       {
         id:6,
-        name:"8小时",
+        name:"6小时",
         isactive:0
       },
       {
@@ -70,13 +74,13 @@ Page({
         isactive:0
       },
       {
-        id:12,
-        name:"12小时",
+        id:10,
+        name:"10小时",
         isactive:0
       },
       {
-        id:24,
-        name:"24小时",
+        id:12,
+        name:"12小时",
         isactive:0
       }
     ],
@@ -178,7 +182,57 @@ Page({
         [`bespeakway[1].isactive`]:isactive1
       })
     }
+  },
+
+  // 选中预约的时长1
+  onChooseBespeakDuration1:function(e){
+    console.log("选中预约的时长并更新样式...");
+    var that=this;
+    var i=0;
+    var bespeakduration=e.target.dataset.bespeakduration;
+    // 更新样式
+    for(i=0;i<that.data.bespeakwaytime0.length;i++){
+      that.setData({
+        [`bespeakwaytime0[${i}].isactive`]:0
+      })
+      if(that.data.bespeakwaytime0[i].id==bespeakduration){
+        that.setData({
+          [`bespeakwaytime0[${i}].isactive`]:1
+        })
+      }
+    }
+    //保存当前预约的时间
+    that.setData({
+      bespeakduration:bespeakduration
+    })
+    console.log("用户选中的预约时长"+bespeakduration+"小时");
+  },
+  // 选中预约的时长2
+  onChooseBespeakDuration2:function(e){
+    console.log("选中预约的时长并更新样式...");
+    var that=this;
+    var i=0;
+    var bespeakduration=e.target.dataset.bespeakduration;
+    // 更新样式
+    for(i=0;i<that.data.bespeakwaytime1.length;i++){
+      that.setData({
+        [`bespeakwaytime1[${i}].isactive`]:0
+      })
+      if(that.data.bespeakwaytime1[i].id==bespeakduration){
+        that.setData({
+          [`bespeakwaytime1[${i}].isactive`]:1
+        })
+      }
+    }
+    //保存当前预约的时间
+    that.setData({
+      bespeakduration:bespeakduration
+    })
+    console.log("用户选中的预约时长"+bespeakduration+"小时");
+  },
+  onSwitchToBespeak:function(e){
+    wx.navigateTo({
+      url: '/pages/bespeak/bespeak',
+    })
   }
-
-
 })

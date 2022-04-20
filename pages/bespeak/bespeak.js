@@ -18,13 +18,11 @@ years.push(date.getFullYear());
 months.push(date.getMonth()+1);
 //日
 var day = date.getDate();
-console.log(day)
 for (let i = day; i <= 31; i++) {
 days.push(i);
 }
 // 获取小时
 var hour=date.getHours();
-console.log(hour);
 for (let i = hour; i <= 23; i++) {
 var k = i;
 if (0 <= i && i < 10) {
@@ -34,7 +32,6 @@ hours.push(k)
 }
 // 获取分钟
 var minute=date.getMinutes();
-console.log(minute);
 for (let i = minute; i <= 59; i++) {
 var k = i;
 if (0 <= i && i < 10) {

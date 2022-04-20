@@ -3,7 +3,7 @@
 #box{
   
   width: 390px;
-  height: 753px;
+  height: 553px;
   /* border: 1px dashed #000; */
   display: table-cell; /*主要是这个属性*/
   vertical-align: middle; 

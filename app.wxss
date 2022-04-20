@@ -42,8 +42,8 @@
   width:54rpx;
   height:54rpx;
   border-radius: 27rpx;
-  border:1px solid #b6c2f8;
-  background-color: #b6c2f8;
+  border:1px solid #002fa7;
+  background-color: #002fa7;
 }
 #chair_4{
 text-align: center;
@@ -51,6 +51,6 @@ text-align: center;
 margin-top:-27rpx;
 width:54rpx;
 height:27rpx;
-border:1px solid #b6c2f8;
-background-color: #b6c2f8;
+border:1px solid #002fa7;
+background-color: #002fa7;
 }
