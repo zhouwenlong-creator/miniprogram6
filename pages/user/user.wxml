@@ -28,16 +28,16 @@
       <view>
         <view class="box1_2_2">
           <view class="box1_2_2_1">
-            <image src="/static/func/func-record.png"></image>
+            <image src="{{static}}/func/func-record.png"></image>
           </view>
           <view class="box1_2_2_1">
-            <image src="/static/func/func-notice.png"></image>
+            <image src="{{static}}/func/func-notice.png"></image>
           </view>
           <view class="box1_2_2_1">
-            <image src="/static/func/func-assistance.png"></image>
+            <image src="{{static}}/func/func-assistance.png"></image>
           </view>
           <view class="box1_2_2_1">
-            <image src="/static/func/func-connect.png"></image>
+            <image src="{{static}}/func/func-connect.png"></image>
           </view>
         
         </view>
@@ -55,16 +55,16 @@
       <view>
         <view class="box1_2_2">
           <view class="box1_2_2_1">
-            <image src="/static/applications/applications-vip.png"></image>
+            <image src="{{static}}/applications/applications-vip.png"></image>
           </view>
           <view class="box1_2_2_1">
-            <image src="/static/applications/applications-box.png"></image>
+            <image src="{{static}}/applications/applications-box.png"></image>
           </view>
           <view class="box1_2_2_1">
-            <image src="/static/applications/applications-shop.png"></image>
+            <image src="{{static}}/applications/applications-shop.png"></image>
           </view>
           <view class="box1_2_2_1">
-            <image src="/static/applications/applications-list.png"></image>
+            <image src="{{static}}/applications/applications-list.png"></image>
           </view>
         </view>
         <!-- 我的应用 -->

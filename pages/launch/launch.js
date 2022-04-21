@@ -1,10 +1,13 @@
 // pages/launch/launch.js
+var static1=getApp().globalData.static;
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    //加载静态资源
+    static:"",
 
   },
 
@@ -13,6 +16,9 @@ Page({
    */
   onLoad: function (options) {
     var that = this;  
+    that.setData({
+      static:static1
+    })
     var timer = setTimeout(()=>{
         clearTimeout(timer)
         that.direct()

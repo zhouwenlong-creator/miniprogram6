@@ -1,4 +1,5 @@
 var url=getApp().globalData.wxRequestBaseUrl;
+var static1=getApp().globalData.static;
 Date.prototype.format = function(format) {
   var date = {
          "M+": this.getMonth() + 1,
@@ -22,6 +23,7 @@ Date.prototype.format = function(format) {
 }
 Page({
     data:{
+      static:"",
       swipers:["swiper-1.jpg","swiper-2.jpg","swiper-3.jpg","swiper-4.jpg","swiper-5.jpg","swiper-6.jpg","swiper-7.jpg"],
         //当前选中的预约方式
         bespeakway:[
@@ -34,6 +36,7 @@ Page({
             isactive:0
           }
         ],
+        bespeakway1:0,
 
       // 设置预约时长数组
         bespeakwaytime0:[
@@ -154,8 +157,9 @@ Page({
               //给全局空间赋值
               getApp().globalData.userInfo=that.data.userInfo;
               console.log("用户："+getApp().globalData.userInfo.nickName);
-              //登录，如果成功的话，success中就会返回 res.code
+              //登录
               wx.login({
+                // 如果成功的话，success中就会返回 res.code，主要用的就是res.code 用来传到后端，再通过code3json接口获取openid(微信唯一标识) 和session_key
                 success(res){
                   wx.request({
                     url: url+'/user/userLoginAndRegister.do',
@@ -175,6 +179,10 @@ Page({
                     // 请求成功返回什么
                     success(res){
                       console.log(res);
+                      that.setData({
+                        //虽然说回传了很多信息，但是我只要id，openid对前台需隐私
+                        ['userInfo.id']:res.data.id,
+                      })
                     },
                     fail(res){
                       console.log("登录/注册失败，请稍后再试！");
@@ -295,13 +303,15 @@ Page({
     var bespeakduration=0;
     //获取刚传过来的值 到地址 在线预约的 值 还是 直接入座的值
     var bespeakway=e.target.dataset.bespeakway;
+    console.log(typeof(bespeakway));
     if(bespeakway=="1"){
       bespeakduration=bespeakduration1;
     }else{
       bespeakduration=bespeakduration2;
     }
     that.setData({
-      bespeakduration:bespeakduration
+      bespeakduration:bespeakduration,
+      bespeakway1:bespeakway,
     })
     //如果未选择预约时间
     if(bespeakduration==0){
@@ -312,6 +322,12 @@ Page({
       })
     }else{
       console.log("bespeak loading...");
+      wx.setStorageSync('bespeaktime',that.data.bespeaktimeStart);
+      //设置预约时长 分享所有页面（主要bespeak order页面）
+      wx.setStorageSync('bespeakduration',that.data.bespeakduration);
+      //设置什么方式进入，选择哪个方式
+      //bespeakway=="1"  表示第一个在线预约     =="2" 表示第二个直接入座
+      wx.setStorageSync('bespeakway1', that.data.bespeakway1)
       wx.navigateTo({
         url: '/pages/bespeak/bespeak',
         success(res){
@@ -339,6 +355,10 @@ Page({
   //刚加载时，需要加载当前时间
   onLoad:function(e){
     var that=this;
+    // 加载静态资源
+    that.setData({
+      static:static1
+    })
     //获取用户的昵称 头像地址 性别等
     that.getUserInfo();
     console.log("index loading...");

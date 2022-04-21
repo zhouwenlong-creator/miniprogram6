@@ -55,3 +55,25 @@ height:27rpx;
 border:1px solid #002fa7;
 background-color: #002fa7;
 }
+
+/* 已经有人 */
+/* 椅子的两部分 */
+#chair_5{
+  text-align: center;
+  color: white;
+  /* display: flex; */
+  width:54rpx;
+  height:54rpx;
+  border-radius: 27rpx;
+  border:1px solid black;
+  background-color: black;
+}
+#chair_6{
+text-align: center;
+/* display: flex; */
+margin-top:-27rpx;
+width:54rpx;
+height:27rpx;
+border:1px solid black;
+background-color: black;
+}

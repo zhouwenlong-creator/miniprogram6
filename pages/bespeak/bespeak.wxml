@@ -4,68 +4,63 @@
 
   <!-- 第一层 -->
   <view class='classify_list'>
-    <view class="classify" style="margin: auto;">在线预约</view>
+    <view class="classify" style="margin: auto;font-weight: bold;">在线预约</view>
 
 
     <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
     <view class="modalDlg" wx:if="{{showModal}}">
     <!-- 头部 -->
     <!-- <view style="text-align:center;font-size:50rpx;">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view> -->
-    <view style="text-align:center;padding:20rpx;">预约时间选取</view>
-        <picker-view wx:if="{{years.length>0 && months.length>0 && days.length>0}}" style="width: 100%; height: 500rpx;" indicator-style="height: 50px;" class="view_picker" value="{{value}}" bindchange="bindChange" bindpickend="bindpickend">
+    <view style="text-align:center;padding:20rpx;font-weight: bold;font-size: 150%;">预约时间选取</view>
+        <picker-view wx:if="{{years.length>0 && months.length>0 && days.length>0}}" style="width: 100%; height: 500rpx;" indicator-style="height: 50px;" class="view_picker" value="{{valuebespeakstart}}" bindchange="bindChange">
             <picker-view-column>
-            <view wx:for="{{years}}" wx:key='{{index}}' class="view_picker_text">{{item}}年</view>
+            <view wx:for="{{years}}" wx:key='{{index1}}' class="view_picker_text">{{item}}年</view>
             </picker-view-column>
 
             <picker-view-column>
-            <view wx:for="{{months}}" wx:key='{{index}}' class="view_picker_text">{{item}}月</view>
+            <view wx:for="{{months}}" wx:key='{{index2}}' class="view_picker_text">{{item}}月</view>
             </picker-view-column>
 
             <picker-view-column>
-            <view wx:for="{{days}}" wx:key='{{index}}' class="view_picker_text">{{item}}日</view>
+            <view wx:for="{{days}}" wx:key='{{index3}}' class="view_picker_text">{{item}}日</view>
             </picker-view-column>
 
             <picker-view-column>
-            <view wx:for="{{hours}}" wx:key='{{index}}' class="view_picker_text">{{item}}</view>
+            <view wx:for="{{hours}}" wx:key='{{index4}}' class="view_picker_text">{{item}}</view>
             </picker-view-column>
 
             <picker-view-column>
-            <view wx:for="{{minutes}}" wx:key='{{index}}' class="view_picker_text">{{item}}</view>
+            <view wx:for="{{minutes}}" wx:key='{{index5}}' class="view_picker_text">{{item}}</view>
             </picker-view-column>
         </picker-view>
         <button bindtap="go">确定</button>
     </view>
-    <view class="classify" style="margin: auto;" bindtap="datesubmit">日期选择</view>
+    <view class="classify" style="margin: auto;font-weight: bold;" bindtap="datesubmit">日期选择></view>
 
     <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal1}}"></view>
     <view class="modalDlg" wx:if="{{showModal1}}">
     <!-- 头部 -->
     <!-- <view style="text-align:center;font-size:50rpx;">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view> -->
-    <view style="text-align:center;padding:20rpx;">预约时长</view>
-        <picker-view style="width: 100%; height: 500rpx;" indicator-style="height: 100rpx;" class="view_picker" value="{{value}}" bindchange="bindChange1">
+    <view style="text-align:center;padding:20rpx;font-weight: bold;font-size: 150%;">预约时长</view>
+        <picker-view style="width: 100%; height: 500rpx;" indicator-style="height: 100rpx;" class="view_picker" value="{{valuebespeakduration}}" bindchange="bindChange1">
             <picker-view-column>
                 <view style="text-align: center;" wx:for="{{time}}" wx:key="{{index}}">{{item.name}}</view>
             </picker-view-column>
         </picker-view>
         <button bindtap="go1">确定</button>
     </view>
-     <view class="classify" style="margin: auto;" bindtap="timesubmit">预约时长</view>
+     <view class="classify" style="margin: auto;font-weight: bold;" bindtap="timesubmit">预约时长></view>
 
 
   </view>
   <!-- 第二层 -->
   <scroll-view class='classify_list' scroll-x="true" scroll-left="10">
     <view class="{{item.isactive?'isactive':'classify_1'}}" wx:for="{{room}}" wx:key="id" style="margin: auto;display: inline-block;" data-roomid="{{item.roomId}}" bindtap="onRoom">{{item.roomName}}</view>
-     <!-- <view class="classify_1" id="room0" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="0">公共区</view>
-     <view class="classify_1" id="room1" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="1">电脑屋</view>
-     <view class="classify_1" id="room2" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="2">小黑屋</view>
-     <view class="classify_1" id="room3" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="3">独立屋</view>
-     <view class="classify_1" id="room4" style="margin: auto;display: inline-block;" bindtap="onRoom" data-roomtype="4">小白屋</view> -->
   </scroll-view>
   <!-- 公共区 -->
   <view wx:if="{{roomId==0}}">
     <movable-area scale-area id="movable-area-id">
-      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room0.png);background-size: cover;">   
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url({{static}}/seat-imgs/room0.png);background-size: cover;">   
         <!-- 引用模板 -->
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
@@ -94,7 +89,7 @@
   <!-- 电脑屋 -->
   <view wx:if="{{roomId==1}}">
     <movable-area scale-area id="movable-area-id">
-      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room1.png);background-size: cover;">   
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url({{static}}/seat-imgs/room1.png);background-size: cover;">   
         <!-- 引用模板 -->
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
@@ -144,7 +139,7 @@
   <!-- 小黑屋 -->
   <view wx:if="{{roomId==2}}">
     <movable-area scale-area id="movable-area-id">
-      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room2.png);background-size: cover;">   
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url({{static}}/seat-imgs/room2.png);background-size: cover;">   
         <!-- 引用模板 -->
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
@@ -190,7 +185,7 @@
   <!-- 独立屋 -->
   <view wx:if="{{roomId==3}}">
     <movable-area scale-area id="movable-area-id">
-      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room3.png);background-size: cover;">   
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url({{static}}/seat-imgs/room3.png);background-size: cover;">   
         <!-- 引用模板 -->
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
@@ -219,7 +214,7 @@
   <!-- 小白屋 -->
   <view wx:if="{{roomId==4}}">
     <movable-area scale-area id="movable-area-id">
-      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url(https://www.zwlserver.top/seat-imgs/room4.png);background-size: cover;">   
+      <movable-view id="movable-view-id" direction="all" x="{{x}}" y="{{y}}" scale="true" scale-min="0.5" scale-max="4" scale-value="{{scale}}" style="background-image: url({{static}}/seat-imgs/room4.png);background-size: cover;">   
         <!-- 引用模板 -->
         <!-- 第一张椅子 -->
             <!-- 位置(绝对定位带上) -->
@@ -258,15 +253,15 @@
 
     <view class="in_bottom_bespeak_1">
       <view class="in_in_bottom_bespeak_1">
-        <image src="/static/icon-bespeak/icon_bespeak_1.png" mode="aspectFit" class="img"></image>
+        <image src="{{static}}/icon-bespeak/icon_bespeak_1.png" mode="aspectFit" class="img"></image>
         可用座位
       </view>
       <view class="in_in_bottom_bespeak_1">
-        <image src="/static/icon-bespeak/icon_bespeak_2.png" mode="aspectFit" class="img"></image>
+        <image src="{{static}}/icon-bespeak/icon_bespeak_2.png" mode="aspectFit" class="img"></image>
         选中座位
       </view>
       <view class="in_in_bottom_bespeak_1">
-        <image src="/static/icon-bespeak/icon_bespeak_3.png" mode="aspectFit" class="img"></image>
+        <image src="{{static}}/icon-bespeak/icon_bespeak_3.png" mode="aspectFit" class="img"></image>
         已被占用
       </view>
     </view>

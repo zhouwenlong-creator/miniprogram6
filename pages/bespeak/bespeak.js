@@ -1,8 +1,6 @@
 // pages/bespeak/bespeak.js
-var information = getApp().globalData.chairInfo;
 var url=getApp().globalData.wxRequestBaseUrl;
-// console.log(url);
-// console.log(information);
+var static1=getApp().globalData.static;
 
 const date = new Date();//获取系统日期
 const years = [];
@@ -14,16 +12,17 @@ const bigMonth = [1, 3, 5, 7, 8, 10, 12];
 //将日期分开写入对应数组
 //年
 years.push(date.getFullYear());
-//月
+//月(添加两个月)
 months.push(date.getMonth()+1);
+months.push(date.getMonth()+2);
 //日
 var day = date.getDate();
-for (let i = day; i <= 31; i++) {
+for (let i = 1; i < 31; i++) {
 days.push(i);
 }
 // 获取小时
 var hour=date.getHours();
-for (let i = hour; i <= 23; i++) {
+for (let i = 0; i <= 23; i++) {
 var k = i;
 if (0 <= i && i < 10) {
 k = "0" + i;
@@ -32,7 +31,7 @@ hours.push(k)
 }
 // 获取分钟
 var minute=date.getMinutes();
-for (let i = minute; i <= 59; i++) {
+for (let i = 0; i <= 59; i++) {
 var k = i;
 if (0 <= i && i < 10) {
 k = "0" + i
@@ -46,6 +45,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //当前页面静态资源
+    static:"",
     // 设置座位图的初始位置
     x:20, 
     y:20,
@@ -64,10 +65,12 @@ Page({
     bespeaktime:0,
 
     // 预定的时长
-    bespeakduration:1,
+    bespeakduration:0,
 
     //当前选中的座位，默认为0，就表示不能预约
     seat:0,
+    //之前选中的座位
+    seatBefore:0,
 
     // 跟日期时间相关的变量
     years: years,
@@ -83,6 +86,7 @@ Page({
     minute: date.getMinutes(),
 
     // 设置预约时长数组
+    // time:[1,2,3,4,5,6,7,8,9]
     time:[
       {
         id:1,
@@ -134,15 +138,59 @@ Page({
       },
     ],
 //房间
-    room:[]
+    room:[],
+    //设置pick-view,
+    valuebespeakstart:[],
+    valuebespeakduration:[0],
    },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //加载座位以及当前房间
     var that=this;
+    //加载静态资源
+    that.setData({
+      static:static1
+    })
+        //加载座位以及当前房间
+        
+    // 加载上个页面选择的预约开始时间何预约时长
+    var bespeaktime=wx.getStorageSync('bespeaktime');
+    var bespeakduration=wx.getStorageSync('bespeakduration');
+    var bespeakway1=wx.getStorageSync('bespeskway1');
+    if(bespeakway1=="1"){
+      console.log(bespeakway1+":在线预约！！！");
+    }else{
+      console.log(bespeakway1+":直接入座！！！");
+    }
+    
+    //通过预约时长，获取数组中的位置（为 pick-view中默认值用）
+    var i=0;
+    var time1=that.data.time;
+    for(i=0;i<time1.length;i++){
+      if(time1[i].id==bespeakduration){
+        that.setData({
+          valuebespeakduration:[i]
+        })
+      }
+    }
+    var dateNow=bespeaktime.getDate();
+    var hourNow=bespeaktime.getHours();
+    var minuteNow=bespeaktime.getMinutes();
+    that.setData({
+      valuebespeakstart:[0,0,dateNow,hourNow,minuteNow],
+    })
+    //通过预约开始事件，获取数组中的位置（为 pick-view中默认值用）
+
+    
+    
+    that.setData({
+      bespeaktime:bespeaktime,
+      bespeakduration:bespeakduration
+    })
+
+
     //查询当前座位
     wx.request({
       url: url+"/seat/selectAllSeats.do",
@@ -259,31 +307,56 @@ Page({
     var that = this;
     console.log("点击座位...");
     var id = e.target.dataset.id;
-    //座位id是从1开始
+    console.log(e)
+    //座位id是从1开始，二数组是从
     id=id-1;
+    //设置当前选中的座位
     // 更新座位的状态
     // var cha1 = 'chairInfo['+parseInt(parseInt(id)-1)+'].seatStyle1';
     // var cha2 = 'chairInfo['+parseInt(parseInt(id)-1)+'].seatStyle2';
     // console.log(cha1);
-    if(this.data.chairInfo[id].seatStyle1=="chair_1"){
+    //当座位（空闲）可选的时候
+    if(that.data.chairInfo[id].seatStyle1!="chair_5"){
+      //为了使seat seatBefore有差异
       that.setData({
-        [`chairInfo[${id}].seatStyle1`]:"chair_3",
-        [`chairInfo[${id}].seatStyle2`]:"chair_4",
-        bottombespeak:"in_in_bottom_bespeak_2_select",
-        //选中就传当前座位的值
-        seat:id+1
+        seat:id+1,
       })
+      //如果seat seatBefore 不相等，并且seatBefore!=0,说明 上一个选中，又想选下一个
+      if((that.data.seat!=that.data.seatBefore) && (that.data.seatBefore!=0)&&(that.data.seat!=0)){
+        //将seatBefore设置成 未选中
+        var seatBeforeId=that.data.seatBefore-1
+        that.setData({
+          [`chairInfo[${seatBeforeId}].seatStyle1`]:"chair_1",
+          [`chairInfo[${seatBeforeId}].seatStyle2`]:"chair_2",
+        })
+      }
+      //当之前未选中，则变成选中的样式
+      if(that.data.chairInfo[id].seatStyle1=="chair_1"){
+        that.setData({
+          [`chairInfo[${id}].seatStyle1`]:"chair_3",
+          [`chairInfo[${id}].seatStyle2`]:"chair_4",
+          bottombespeak:"in_in_bottom_bespeak_2_select",
+          //选中就传当前座位的值
+          seat:id+1,      //2
+          seatBefore:id+1    //2
+        })
+        //否则如果之前是已经选中的状态，则变成未选中的样式
+      }else if(that.data.chairInfo[id].seatStyle1=="chair_3"){
+        that.setData({
+          [`chairInfo[${id}].seatStyle1`]:"chair_1",
+          [`chairInfo[${id}].seatStyle2`]:"chair_2",
+          bottombespeak:"in_in_bottom_bespeak_2",
+          //选中就传当前座位的值
+          seat:0,
+          seatBefore:0
+         })
+      }
     }else{
-      that.setData({
-        [`chairInfo[${id}].seatStyle1`]:"chair_1",
-        [`chairInfo[${id}].seatStyle2`]:"chair_2",
-        bottombespeak:"in_in_bottom_bespeak_2",
-        //选中就传当前座位的值
-        seat:0
-       })
+      console.log("This seat is busy!");
+
     }
-    console.log(this.data.seat);
-    
+    console.log("seat:"+that.data.seat)
+    console.log("seatBefore"+that.data.seatBefore)
   },
   // 选择日期时间
   datesubmit:function(e){
@@ -383,7 +456,7 @@ Page({
     minute: setMinute
     })
     console.log("打印时间！");
-    const dateTime=setYear+"-"+setMonth+"-"+setDay+"- "+setHour+":"+setMinute;
+    const dateTime=setYear+"/"+setMonth+"/"+setDay+"/ "+setHour+":"+setMinute;
     var datatime1 = new Date(dateTime);
     //将选取的时间
     that.setData({
@@ -403,13 +476,12 @@ Page({
     // bespeakduration:1
     // //当前选中的座位，默认为0，就表示不能预约
     // seat:0,
-      wx.setStorageSync('bespeaktime',this.data.bespeaktime);
-      wx.setStorageSync('bespeakduration',this.data.bespeakduration);
-      wx.setStorageSync('seat',this.data.seat);
+      wx.setStorageSync('bespeaktime',that.data.bespeaktime);
+      wx.setStorageSync('bespeakduration',that.data.bespeakduration);
+      wx.setStorageSync('seat',that.data.seat);
       wx.navigateTo({
         url: '/pages/order/order',
       })
     }
   }
-
 })
