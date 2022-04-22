@@ -1,5 +1,4 @@
 var url=getApp().globalData.wxRequestBaseUrl;
-var static1=getApp().globalData.static;
 Date.prototype.format = function(format) {
   var date = {
          "M+": this.getMonth() + 1,
@@ -23,7 +22,7 @@ Date.prototype.format = function(format) {
 }
 Page({
     data:{
-      static:"",
+      static:getApp().globalData.static,
       swipers:["swiper-1.jpg","swiper-2.jpg","swiper-3.jpg","swiper-4.jpg","swiper-5.jpg","swiper-6.jpg","swiper-7.jpg"],
         //当前选中的预约方式
         bespeakway:[
@@ -36,7 +35,7 @@ Page({
             isactive:0
           }
         ],
-        bespeakway1:0,
+        bespeakways:"1",
 
       // 设置预约时长数组
         bespeakwaytime0:[
@@ -122,6 +121,7 @@ Page({
       bespeaktimeEndToString:"",
       //设置当前预约结束时间的格式
       bespeaktimeEndIsActive:0,
+
 
       //微信用户信息(数组类型)
       userInfo:{
@@ -293,6 +293,11 @@ Page({
     that.setData({
       bespeakduration2:bespeakduration2
     })
+    //获取直接入座，获取当前时间
+    var datenow=new Date();
+    that.setData({
+      bespeaktimeStart:datenow,
+    })
     console.log("bespeakduration:"+bespeakduration2+"hour");
   },
   onSwitchToBespeak:function(e){
@@ -303,18 +308,23 @@ Page({
     var bespeakduration=0;
     //获取刚传过来的值 到地址 在线预约的 值 还是 直接入座的值
     var bespeakway=e.target.dataset.bespeakway;
-    console.log(typeof(bespeakway));
     if(bespeakway=="1"){
       bespeakduration=bespeakduration1;
+      that.setData({
+        bespeakways:bespeakway,
+      })
     }else{
       bespeakduration=bespeakduration2;
+      that.setData({
+        bespeakways:bespeakway,
+      })
     }
     that.setData({
       bespeakduration:bespeakduration,
-      bespeakway1:bespeakway,
+      // bespeakway1:bespeakway,
     })
     //如果未选择预约时间
-    if(bespeakduration==0){
+    if(that.data.bespeakduration==0){
       wx.showToast({
         title: '请选择预约时间！',
         icon: 'error',
@@ -322,12 +332,14 @@ Page({
       })
     }else{
       console.log("bespeak loading...");
+      console.log("duration:"+that.data.bespeakduration)
+      console.log("bespeakways:"+that.data.bespeakways);
       wx.setStorageSync('bespeaktime',that.data.bespeaktimeStart);
       //设置预约时长 分享所有页面（主要bespeak order页面）
       wx.setStorageSync('bespeakduration',that.data.bespeakduration);
       //设置什么方式进入，选择哪个方式
       //bespeakway=="1"  表示第一个在线预约     =="2" 表示第二个直接入座
-      wx.setStorageSync('bespeakway1', that.data.bespeakway1)
+      wx.setStorageSync('bespeakduration1',that.data.bespeakways);
       wx.navigateTo({
         url: '/pages/bespeak/bespeak',
         success(res){
@@ -352,15 +364,15 @@ Page({
     }
   },
 
-  //刚加载时，需要加载当前时间
+//第一次加载
   onLoad:function(e){
     var that=this;
-    // 加载静态资源
-    that.setData({
-      static:static1
-    })
     //获取用户的昵称 头像地址 性别等
     that.getUserInfo();
+  },
+  //每次加载时，需要加载当前时间
+  onShow:function(e){
+    var that=this;
     console.log("index loading...");
     var dateTimeNow=new Date();
     var minutesNow=dateTimeNow.getMinutes();
@@ -386,6 +398,7 @@ Page({
     //将时间转化成字符串类型
     var bespeaktimeToString = dateTimeNow.toLocaleString();
     that.setData({
+      //整点时间
       bespeaktimeStart:dateTimeNow,
       bespeaktimeToString:bespeaktimeToString
     })

@@ -35,7 +35,7 @@
     <view class="bottom_bespeakdetail_1" bindtap="onChangeVip">办卡享更多优惠，立即办卡 > </view>
     <view class="bottom_bespeakdetail_2">
       <view class="bottom_bespeakdetail_2_1" style="display: inline-block;">共计：16元</view>
-      <view class="bottom_bespeakdetail_2_2" style="display: inline-block;">确认支付</view>
+      <view class="bottom_bespeakdetail_2_2" style="display: inline-block;" bindtap="onConfirmPay" data-money="{{money}}">确认支付</view>
     </view>
     
   </view>

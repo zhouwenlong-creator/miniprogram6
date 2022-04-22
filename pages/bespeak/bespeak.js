@@ -1,6 +1,26 @@
 // pages/bespeak/bespeak.js
 var url=getApp().globalData.wxRequestBaseUrl;
-var static1=getApp().globalData.static;
+Date.prototype.format = function(format) {
+  var date = {
+         "M+": this.getMonth() + 1,
+         "d+": this.getDate(),
+         "h+": this.getHours(),
+         "m+": this.getMinutes(),
+         "s+": this.getSeconds(),
+         "q+": Math.floor((this.getMonth() + 3) / 3),
+         "S+": this.getMilliseconds()
+  };
+  if (/(y+)/i.test(format)) {
+         format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+  }
+  for (var k in date) {
+         if (new RegExp("(" + k + ")").test(format)) {
+                format = format.replace(RegExp.$1, RegExp.$1.length == 1
+                       ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+         }
+  }
+  return format;
+}
 
 const date = new Date();//获取系统日期
 const years = [];
@@ -46,7 +66,7 @@ Page({
    */
   data: {
     //当前页面静态资源
-    static:"",
+    static:getApp().globalData.static,
     // 设置座位图的初始位置
     x:20, 
     y:20,
@@ -63,10 +83,11 @@ Page({
 
     //选择预约时间
     bespeaktime:0,
-
     // 预定的时长
     bespeakduration:0,
-
+    //设置进入的方式
+    bespeakwayname:"在线预约",
+    
     //当前选中的座位，默认为0，就表示不能预约
     seat:0,
     //之前选中的座位
@@ -149,20 +170,23 @@ Page({
    */
   onLoad: function (options) {
     var that=this;
-    //加载静态资源
-    that.setData({
-      static:static1
-    })
+
         //加载座位以及当前房间
         
     // 加载上个页面选择的预约开始时间何预约时长
     var bespeaktime=wx.getStorageSync('bespeaktime');
     var bespeakduration=wx.getStorageSync('bespeakduration');
-    var bespeakway1=wx.getStorageSync('bespeskway1');
-    if(bespeakway1=="1"){
-      console.log(bespeakway1+":在线预约！！！");
+    var bespeakways=wx.getStorageSync('bespeakduration1');
+    console.log("bespeak:duration:"+bespeakduration)
+    console.log("bespeak:bespeakways:"+bespeakways);
+    if(bespeakways=="1"){
+      that.setData({
+        bespeakwayname:"在线预约",
+      })
     }else{
-      console.log(bespeakway1+":直接入座！！！");
+      that.setData({
+        bespeakwayname:"直接入座",
+      })
     }
     
     //通过预约时长，获取数组中的位置（为 pick-view中默认值用）
@@ -476,7 +500,27 @@ Page({
     // bespeakduration:1
     // //当前选中的座位，默认为0，就表示不能预约
     // seat:0,
+
+    // const dateTime=setYear+"/"+setMonth+"/"+setDay+"/ "+setHour+":"+setMinute;
+    // var datatime1 = new Date(dateTime);
+    // 设置座位结束时间
+    // that.data.bespeaktime
+    // new time ---->  +duration=====bespeaktimestop
+    //获取预约开始时间
+    var bespeaktimeStart=that.data.bespeaktime;
+    //设置预约开始时间的  字符串格式（用于新建预约结束时间，，（为什么不直接 end=start   因为两个时间值一样，会保存在同一个常量池中，更新一个另一个也会随着更新））
+    var bespeaktimeStartToString=bespeaktimeStart.format('yyyy/MM/dd h:m:s');
+    //通过上面格式的字符串来新建一个Date对象（Date方法中只能通过这种格式的字符串来新建对象）
+    var bespeaktimeEnd=new Date(bespeaktimeStartToString);
+    //设置当前预约结束的小时
+    var hourNow=bespeaktimeEnd.getHours()+that.data.bespeakduration;
+    bespeaktimeEnd.setHours(hourNow);
+    that.setData({
+      bespeaktimestop:bespeaktimeEnd,
+    })
+
       wx.setStorageSync('bespeaktime',that.data.bespeaktime);
+      wx.setStorageSync('bespeaktimestop',that.data.bespeaktimestop);
       wx.setStorageSync('bespeakduration',that.data.bespeakduration);
       wx.setStorageSync('seat',that.data.seat);
       wx.navigateTo({

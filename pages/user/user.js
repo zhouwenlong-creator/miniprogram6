@@ -1,5 +1,4 @@
 // pages/user/user.js
-var static1=getApp().globalData.static;
 Page({
 
   /**
@@ -7,17 +6,13 @@ Page({
    */
   data: {
     //加载静态资源
-    static:"",
+    static:getApp().globalData.static,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this;
-    that.setData({
-      static:static1,
-    })
   },
 
   /**

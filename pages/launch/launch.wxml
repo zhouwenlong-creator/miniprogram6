@@ -4,7 +4,8 @@
 <!-- <view id="name1">起航自习室</view> -->
 <!-- <view id="name2">QIHANG</view> -->
 <view>
-  <image id="logo_name" src="{{static}}/launch/logo_name.png" mode="aspectFit"></image>
+  <image id="logo_name" src='{{static}}/launch/logo_name.png' mode="aspectFit"></image>
+  <!-- <image id="logo_name" src="{{static?{{static}}+'/launch/logo_name.png':''}}" mode="aspectFit"></image> -->
 </view>
 
 </view>

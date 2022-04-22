@@ -4,7 +4,7 @@
 
   <!-- 第一层 -->
   <view class='classify_list'>
-    <view class="classify" style="margin: auto;font-weight: bold;">在线预约</view>
+    <view class="classify" style="margin: auto;font-weight: bold;">{{bespeakwayname}}</view>
 
 
     <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
