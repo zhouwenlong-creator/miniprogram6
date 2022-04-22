@@ -173,6 +173,18 @@ Page({
       success:function(e){
         console.log(e);
         console.log("插入成功！");
+        wx.showToast({
+          title: '支付成功!',
+          icon:'success',
+          duration: 1000,
+          success:function(){
+            setTimeout(function(){
+            wx.switchTab({
+              url: '/pages/record/record',
+            })
+            },2000);
+          }
+        });
       },
       fail:function(e){
         console.log(e);

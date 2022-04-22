@@ -1,13 +1,55 @@
-<!--pages/record/record.wxml-->
-<view class="panel1">
-  <view class="package">
-    <text decode="{{true}}">全部 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}">未消费 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}">已消费 &nbsp;&nbsp;&nbsp;</text>
-    <text decode="{{true}}">已取消 &nbsp;&nbsp;&nbsp;</text>
+<view class="panel">
+<!-- 导航栏 -->
+  <view class="record_top">
+    <view class="{{item.isactive==1?'record_top_1active':'record_top_1'}}"  wx:for="{{recordlist}}" wx:key="item" bindtap="onChangeRecord" data-recordtopid="{{item.recordtopid}}">{{item.recordname}}</view>
   </view>
 
+<!-- 订单 -->
+  <view>
+
+    <view class="record_bottom">
+<!-- 座位号 在哪个屋子  消费了吗 -->
+      <view class="record_bottom_1">
+        <view class="record_bottom_1_1" style="display: inline-block;">公共区 B1</view>
+        <view class="record_bottom_1_2" style="display: inline-block;">未消费</view>
+      </view>
+<!-- 什么期间  查询座位开始/结束时间  持续时间 -->
+      <view class="record_bottom_2">
+      <!-- 1 -->
+        <view>
+          <view>2022-04-23</view>
+          <view>00:00</view>
+        </view>
+        <!-- 2 -->
+        <view>
+          <view>0.5小时</view>
+          <view>—————————></view>
+        </view>
+        <!-- 3 -->
+        <view>
+          <view>2022-04-23</view>
+          <view>00:30</view>
+        </view>
+      </view>
+<!-- 支付时间 -->
+      <view class="record_bottom_3">支付时间 : 2022-04-22 20:22</view>
+<!-- 扫码开门 或者显示未到使用时间   ，取消预约-->
+      <view class="record_bottom_4">
+        <view>未到使用时间</view>
+        <view>取消预约</view>
+      </view>
+    </view>
+
+  </view>
 </view>
 
 
 
+
+
+
+
+<!-- 新建记录(订单记录模板)的模板 -->
+<template name="recordtemplate">
+
+</template>

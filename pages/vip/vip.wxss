@@ -1,8 +1,7 @@
 /* pages/vip/vip.wxss */
 .panel1{
   width:100%;
-  height:700px;
-  background: #f3eeee;
+  background: #f8f8f8;
 /* background-color: blue;   */
 }
 .package{
@@ -21,7 +20,7 @@
 
 
 .box{
-
+  /* border:5rpx solid black; */
   background-color: white;
   height:200px;
   border:1px white solid;

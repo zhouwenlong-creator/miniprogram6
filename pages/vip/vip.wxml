@@ -14,7 +14,7 @@
         wx:for-item="item"
         wx:for-index="index"
         wx:key="id"
-        >
+        style="border:3rpx solid black;">
 
     <!-- 第一个卡片 -->
     <view class="box">
