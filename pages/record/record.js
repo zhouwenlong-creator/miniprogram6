@@ -69,6 +69,28 @@ Page({
         that.setData({
           orderInfo:res.data
         })
+        // 设置是否消费，以及设置在哪个房间
+        var i=0;
+        for(i=0;i<that.data.orderInfo.length;i++){
+          var time=that.data.orderInfo[i].orderBeginTime;
+          var str=time.split(" ");
+          that.setData({
+            [`orderInfo[${i}].orderBeginTimeToStringDate`]:str[0],
+            [`orderInfo[${i}].orderBeginTimeToStringTime`]:str[1],
+          })
+          var time1=that.data.orderInfo[i].orderStopTime;
+          var str1=time1.split(" ");
+          that.setData({
+            [`orderInfo[${i}].orderStopTimeToStringDate`]:str1[0],
+            [`orderInfo[${i}].orderStopTimeToStringTime`]:str1[1],
+          })
+
+          //查看当前的时间看是否能开门
+          var timeStart=new Date(that.data.orderInfo[i].orderBeginTime);
+          var timeEnd=new Date(that.data.orderInfo[i].orderStopTime);
+          console.log(timeStart);
+          console.log(timeEnd);
+        }
         console.log(that.data.orderInfo);
       },
       fail(res){

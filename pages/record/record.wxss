@@ -97,7 +97,7 @@
 .record_bottom_5{
   height: 80rpx;
 }
-.in_record_bottom_5_1{
+.in_record_bottom_5_2{
   margin-top: 15rpx;
   float:right;
   padding:20rpx;
