@@ -265,7 +265,6 @@
         已被占用
       </view>
     </view>
-
     <!-- 预定座位 -->
     <view class="in_bottom_bespeak_2">
      <view class="{{bottombespeak}}" bindtap="submitbespeak">预定座位</view>

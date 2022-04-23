@@ -1,4 +1,5 @@
 // pages/record/record.js
+var url=getApp().globalData.wxRequestBaseUrl;
 Page({
 
   /**
@@ -31,13 +32,17 @@ Page({
 
     // 属性 订单id id    订单创建时间   create_time  订单开始时间 order_begin_time 订单结束时间 order_stop_time  订单持续时间 bespeakduration    订单座位号  order_seat_id      金额 money     订单所属的用户   user_id    订单的状态 order_status     订单的套餐名 还是个联合查询
     orderInfo:[],
+    userInfo:{},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that=this;
+    that.setData({
+      userInfo:getApp().globalData.userInfo,
+    })
   },
 
   /**
@@ -52,6 +57,27 @@ Page({
    */
   onShow: function () {
     // 每次点击该页面 页面都刷新（每次进入该页面）
+    //每次进入该页面，就刷新订单记录页面
+    var that=this;
+    wx.request({
+      url:url+'/order/selectOrdersByUserId.do',
+      method:'POST',
+      header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+      success(res){
+        console.log(res);
+        console.log("查询成功");
+        that.setData({
+          orderInfo:res.data
+        })
+        console.log(that.data.orderInfo);
+      },
+      fail(res){
+        console.log("查询失败！");
+      },
+      data:{
+        "userid":that.data.userInfo.id,
+      }
+    })
 
   },
 
