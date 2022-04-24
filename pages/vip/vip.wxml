@@ -14,10 +14,11 @@
         wx:for-item="item"
         wx:for-index="index"
         wx:key="id"
-        style="border:3rpx solid black;">
+
+        >
 
     <!-- 第一个卡片 -->
-    <view class="box">
+    <view class="box" style="border:5rpx solid rgb(221, 221, 221);">
   
       <view class="box1">
         <image class="bg-image" src="{{item.productTypeSrc}}"></image>

@@ -32,7 +32,7 @@ Page({
 
     // 属性 订单id id    订单创建时间   create_time  订单开始时间 order_begin_time 订单结束时间 order_stop_time  订单持续时间 bespeakduration    订单座位号  order_seat_id      金额 money     订单所属的用户   user_id    订单的状态 order_status     订单的套餐名 还是个联合查询
     orderInfo:[],
-    userInfo:{},
+    userInfo:getApp().globalData.userInfo,
   },
 
   /**
@@ -85,11 +85,34 @@ Page({
             [`orderInfo[${i}].orderStopTimeToStringTime`]:str1[1],
           })
 
-          //查看当前的时间看是否能开门
-          var timeStart=new Date(that.data.orderInfo[i].orderBeginTime);
-          var timeEnd=new Date(that.data.orderInfo[i].orderStopTime);
-          console.log(timeStart);
-          console.log(timeEnd);
+          // //查看当前的时间看是否能开门
+          // var timeStart=new Date(that.data.orderInfo[i].orderBeginTime);
+          // var timeEnd=new Date(that.data.orderInfo[i].orderStopTime);
+          // var timeNow=new Date();
+          // // console.log(timeStart);
+          // // console.log(timeNow);
+          // var timeSub=timeStart-timeNow;
+          // //如果在30分钟以内，就可以扫码；在30分钟之前 就不能扫码入座；在30min以后，自动释放座位
+          // //30分钟之后，就释放座位
+          // if(timeSub<-1800000){
+          //   console.log("释放座位");
+          //   that.setData({
+          //     [`orderInfo[${i}].orderflag`]:0
+          //   })
+          //   // 在座位的前后30min，就可以 扫码入座
+          // }else if(timeSub>=-1800000 && timeSub<=1800000){
+          //   //30分钟之后了,释放座位
+          //   console.log("扫码入座");
+          //   that.setData({
+          //     [`orderInfo[${i}].orderflag`]:1
+          //   })
+          // //在30min之前来，提示，还没到时间
+          // }else{
+          //   console.log("还没到时间");
+          //   that.setData({
+          //     [`orderInfo[${i}].orderflag`]:2
+          //   })
+          // }
         }
         console.log(that.data.orderInfo);
       },
@@ -155,5 +178,33 @@ Page({
         [`recordlist[${i}].isactive`]:1,
       })
     }
+  },
+  // 点击扫码入座
+  onSitDown:function(res){
+    console.log("扫码入座！");
+    var that=this;
+    // 更新flag的值为1 说明占座了，
+    console.log(res);
+    wx.request({
+      url:url+'/order/updateOrderSitflagByUserId.do',
+      method:'POST',
+      header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+      data:{
+        "sitflag":1,
+        "id":res.target.dataset.id,
+      },
+      success(res){
+        console.log("更新sitflag成功");
+        wx.showToast({
+          title: '入座成功',
+          icon: 'success',
+          duration: 1000
+        })
+        that.onShow();
+      },
+      fail(res){
+        console.log("更新sitflag失败");
+      }
+    })
   }
 })

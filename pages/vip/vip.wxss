@@ -2,7 +2,6 @@
 .panel1{
   width:100%;
   background: #f8f8f8;
-/* background-color: blue;   */
 }
 .package{
   background-color: white;

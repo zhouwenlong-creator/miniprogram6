@@ -157,8 +157,15 @@ Page({
               //给全局空间赋值
               getApp().globalData.userInfo=that.data.userInfo;
               console.log("用户："+getApp().globalData.userInfo.nickName);
+
+              wx.showToast({
+                title: '正在处理...',
+                icon: 'loading',
+                duration: 2000
+              });
               //登录
               wx.login({
+                
                 // 如果成功的话，success中就会返回 res.code，主要用的就是res.code 用来传到后端，再通过code3json接口获取openid(微信唯一标识) 和session_key
                 success(res){
                   wx.request({
@@ -218,6 +225,8 @@ Page({
   //改变预约的方式
   onChangeBespeakWay:function(e){
     var that=this;
+    //每次都要更新一次时间
+    that.onShow();
     console.log("change bespeakway...");
     var isactive=e.target.dataset.isactive;
     //如果点击的是未选中的，就直接两者交换

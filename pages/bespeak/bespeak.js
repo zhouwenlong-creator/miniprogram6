@@ -202,8 +202,9 @@ Page({
     var dateNow=bespeaktime.getDate();
     var hourNow=bespeaktime.getHours();
     var minuteNow=bespeaktime.getMinutes();
+    console.log("dateNow:"+dateNow);
     that.setData({
-      valuebespeakstart:[0,0,dateNow,hourNow,minuteNow],
+      valuebespeakstart:[0,0,dateNow-1,hourNow,minuteNow],
     })
     //通过预约开始事件，获取数组中的位置（为 pick-view中默认值用）
 
@@ -228,7 +229,12 @@ Page({
     success(res){
       that.setData({
         chairInfo:res.data
-      })
+      });
+      // 坐座位期间，我们需要更新座位的样式（在预约的座位开始 结束期间 更新座位的样式）
+      that.updateSeatStyle(that);
+      var dateNow=new Date();
+
+
     }
     }),
     //查询当前所有房间
@@ -527,5 +533,64 @@ Page({
         url: '/pages/order/order',
       })
     }
+  },
+  //查询某个座位的订单，再根据 目前时间和订单时间来更新数据
+  updateSeatStyle(res){
+    console.log(res);
+    var chairInfoOld=res.data.chairInfo;
+    var i=0;
+    //循环查每个座位的订单
+    for(i=0;i<chairInfoOld.length;i++){
+      // wx.request({
+      //   url: url+'/order/selectOrdersBySeatId.do',
+      //   header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+      //   method:'POST',
+      //   data:{
+      //     "seatId":chairInfoOld[i].seatId,
+      //   },
+      //   success(res){
+      //     console.log("成功："+res);
+      //   },
+      //   fail(res){
+      //     console.log("失败"+res);
+      //   }
+      // })
+    }
+
+
+
+
   }
+  // // 坐座位期间，我们需要更新座位的样式（在预约的座位开始 结束期间 更新座位的样式）
+  // updateSeatStyle(res){
+  //   var that=this;
+  //   console.log("坐座位期间，我们需要更新座位的样式（在预约的座位开始 结束期间 更新座位的样式）");
+  //   var dateNow=new Date();
+  //   var dateStartString="2022-04-23 19:01:22";
+  //   var dateStopString="2022-04-23 22:01:22";
+  //   var dateStart=new Date(dateStartString);
+  //   var dateStop=new Date(dateStopString);
+  //   console.log(dateStart);
+  //   console.log(dateStop);
+  //   var seatId=1;
+  //   // 根据座位查询订单  在这个座位的所有订单中
+  //   // 当前时间是否在这个坐座位的区间内
+  //   if(dateStart<=dateNow && dateStop>=dateNow){
+  //     console.log("在这个区间中");
+  //     // 更新这个座位的样式
+  //     console.log(that.data.chairInfo);
+  //     var chair0=that.data.chairInfo[0];
+  //     //更新后台的样式  
+  //     that.setData({
+  //       [`chairInfo[0].seatStyle1`]:"chair_5",
+  //       [`chairInfo[0].seatStyle2`]:"chair_6",
+  //     })
+  //   }
+
+
+
+  //   // 最后所有的座位样式都更新完成，在重新查询当前的座位样式
+  // },
+
+  
 })
