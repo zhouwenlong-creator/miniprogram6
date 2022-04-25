@@ -1,6 +1,7 @@
 {
   "pages": [
-
+    "pages/user/user",
+    
     "pages/launch/launch",
     "pages/test/wxlogin/wxlogin",
     "pages/index/index",
@@ -10,7 +11,7 @@
     "pages/test/changeList/changeList",
     "pages/test/canvas/canvas",
     "pages/vip/vip",
-    "pages/user/user",
+
     "pages/lab/lab",
     "pages/record/record",
     "pages/test/canvas1/canvas1",
