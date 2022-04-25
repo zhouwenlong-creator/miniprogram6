@@ -16,19 +16,24 @@ App({
   globalData: {
     //微信用户信息
     userInfo:{
-      // 微信用户昵称
-      nickName:"",
-      // 头像地址
-      avatarUrl:"",
-      //用户性别 0未知 1男 2女
-      gender:0,
-      //用户唯一标识，这里不用openid，因为openid比较隐私
+      appid:"",
+      // 用户唯一标识
       id:0,
+      // 头像地址
+      imgurl:"",
+      //电话号码
+      mobile:null,
+      // 性别 0未知 1男 2女
+      sex:0,
+      //类型  1前台  0后台
+      type:0,
+      //用户名
+      username:"",
     },
     // 远程
-    // wxRequestBaseUrl:"https://www.zwlserver.top",
+    wxRequestBaseUrl:"https://www.zwlserver.top",
     // 本地
-    wxRequestBaseUrl:"http://localhost:8080",
+    // wxRequestBaseUrl:"http://localhost:8080",
 
     //静态文件的位置
     // static:"/static",

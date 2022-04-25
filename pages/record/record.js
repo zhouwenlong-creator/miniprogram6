@@ -59,13 +59,15 @@ Page({
     // 每次点击该页面 页面都刷新（每次进入该页面）
     //每次进入该页面，就刷新订单记录页面
     var that=this;
+    //每次加载都要新的userInfo
+    that.setData({
+      userInfo:getApp().globalData.userInfo
+    })
     wx.request({
       url:url+'/order/selectOrdersByUserId.do',
       method:'POST',
       header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
       success(res){
-        console.log(res);
-        console.log("查询成功");
         that.setData({
           orderInfo:res.data
         })

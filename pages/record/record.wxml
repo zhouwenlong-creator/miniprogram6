@@ -5,7 +5,7 @@
   </view>
 <!-- 订单 -->
 <!-- wx:for和template的嵌套 -->
-  <view wx:for="{{orderInfo}}">
+  <view wx:for="{{orderInfo}}" wx:key="item">
     <view wx:if="{{(recordlist[0].isactive==1)}}">
       <template is="recordtemplate" data="{{...item}}"></template>
     </view>

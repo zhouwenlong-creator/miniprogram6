@@ -1,26 +1,4 @@
-// pages/bespeak/bespeak.js
 var url=getApp().globalData.wxRequestBaseUrl;
-Date.prototype.format = function(format) {
-  var date = {
-         "M+": this.getMonth() + 1,
-         "d+": this.getDate(),
-         "h+": this.getHours(),
-         "m+": this.getMinutes(),
-         "s+": this.getSeconds(),
-         "q+": Math.floor((this.getMonth() + 3) / 3),
-         "S+": this.getMilliseconds()
-  };
-  if (/(y+)/i.test(format)) {
-         format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
-  }
-  for (var k in date) {
-         if (new RegExp("(" + k + ")").test(format)) {
-                format = format.replace(RegExp.$1, RegExp.$1.length == 1
-                       ? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
-         }
-  }
-  return format;
-}
 
 const date = new Date();//获取系统日期
 const years = [];
@@ -65,6 +43,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    //当前可能冲突的订单
+    maybeConfiltOrders:[],
     //当前页面静态资源
     static:getApp().globalData.static,
     // 设置座位图的初始位置
@@ -169,8 +149,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    
     var that=this;
-
         //加载座位以及当前房间
         
     // 加载上个页面选择的预约开始时间何预约时长
@@ -207,36 +187,19 @@ Page({
       valuebespeakstart:[0,0,dateNow-1,hourNow,minuteNow],
     })
     //通过预约开始事件，获取数组中的位置（为 pick-view中默认值用）
-
-    
+    // 获取上个页面传来的chairInfo
+    var chairInfo=wx.getStorageSync('chairInfo');
     
     that.setData({
       bespeaktime:bespeaktime,
-      bespeakduration:bespeakduration
+      bespeakduration:bespeakduration,
+      chairInfo:chairInfo,
     })
+    // 刚接收
+    // console.log(that.data.chairInfo);
 
 
-    //查询当前座位
-    wx.request({
-      url: url+"/seat/selectAllSeats.do",
-      method:'GET',
-      header:{
-        // 请求头部
-        // 'content-type':'application/x-www-form-urlencoded'
-        'content-type':'application/json'
-    },
-    // 请求成功返回什么
-    success(res){
-      that.setData({
-        chairInfo:res.data
-      });
-      // 坐座位期间，我们需要更新座位的样式（在预约的座位开始 结束期间 更新座位的样式）
-      that.updateSeatStyle(that);
-      var dateNow=new Date();
 
-
-    }
-    }),
     //查询当前所有房间
     wx.request({
       url: url+"/room/selectAllRooms.do",
@@ -267,7 +230,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    that.setData({
+      userInfo:getApp().globalData.userInfo,
+    })
   },
 
   /**
@@ -428,6 +394,7 @@ Page({
         bespeakduration:bespeakdurations
       })
       console.log(this.data.bespeakduration);
+      that.updateConfilctSeat();
     },
   
   //判断元素是否在一个数组
@@ -486,15 +453,80 @@ Page({
     minute: setMinute
     })
     console.log("打印时间！");
-    const dateTime=setYear+"/"+setMonth+"/"+setDay+"/ "+setHour+":"+setMinute;
+    const dateTime=setYear+"/"+setMonth+"/"+setDay+" "+setHour+":"+setMinute;
     var datatime1 = new Date(dateTime);
     //将选取的时间
     that.setData({
       //将最终的事件给js保存
       bespeaktime:datatime1
     })
+    //查看是否有冲突
+    that.updateConfilctSeat();
   },
+  updateConfilctSeat(){
+    var that=this;
+    // 选中的开始时间
+    var bespeaktimeStart=that.data.bespeaktime;
+    var bespeakduration=that.data.bespeakduration
+    var bespeaktimeStartToString=bespeaktimeStart.getFullYear()+'-'+(bespeaktimeStart.getMonth()+1)+'-'+bespeaktimeStart.getDate()+' '+bespeaktimeStart.getHours()+':'+bespeaktimeStart.getMinutes()+':'+bespeaktimeStart.getSeconds();
+    // 选中结束时间
+    var bespeaktimeEnd=new Date(bespeaktimeStartToString);
+    bespeaktimeEnd.setHours(bespeaktimeEnd.getHours()+bespeakduration);
+    //获取到了选中的开始时间和结束时间
+    //检查与当前选中的时间冲突的订单
+    //1.查询所有 未消费 和已经消费未入座 已经消费且入座的订单
+    wx.request({
+      url:url+'/order/selectConfiltOrders.do',
+      method:'POST',
+      header:{
+        'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+      },
+      data:{
+        "orderStatus1":0,
+        "orderStatus2":1,
+      },
+      success(res){
+        that.setData({
+          maybeConfiltOrders:res.data,
+        })
 
+      //查询当前选中的时间和可能冲突的订单的时间直接的冲突  orderBeginTime  7   orderStopTime  9  bespeaktimeStart 8;30   bespeaktimeEnd  10;30
+      var i=0;
+      for(i=0;i<that.data.maybeConfiltOrders.length;i++){
+        var maybeConfiltOrders=that.data.maybeConfiltOrders[i];
+        var orderBeginTime=new Date(maybeConfiltOrders.orderBeginTime);
+        var orderStopTime=new Date(maybeConfiltOrders.orderStopTime);
+        if((bespeaktimeStart<=orderBeginTime && bespeaktimeEnd>orderBeginTime)||(bespeaktimeEnd>=orderStopTime&&bespeaktimeStart<orderStopTime)||(bespeaktimeStart>=orderBeginTime&&bespeaktimeEnd<=orderStopTime)){
+          console.log("冲突");
+          //找到这个订单的seatId   并设置这个seatId 为不可选中
+          var seatIdConflict=maybeConfiltOrders.orderSeatId;
+          //获取所有房间信息 如果 座位号相等 直接改变这个座位的样式
+          if(seatIdConflict==that.data.chairInfo[seatIdConflict-1].seatId){
+            that.setData({
+              [`chairInfo[${seatIdConflict-1}].seatStyle1`]:'chair_5',
+              [`chairInfo[${seatIdConflict-1}].seatStyle2`]:'chair_6',
+            })
+          }
+        }else{
+          // 不冲突
+          var seatIdConflict=maybeConfiltOrders.orderSeatId;
+          //获取所有房间信息 如果 座位号相等 直接改变这个座位的样式
+          if(seatIdConflict==that.data.chairInfo[seatIdConflict-1].seatId){
+            that.setData({
+              [`chairInfo[${seatIdConflict-1}].seatStyle1`]:'chair_1',
+              [`chairInfo[${seatIdConflict-1}].seatStyle2`]:'chair_2',
+            })
+          }
+        }
+      }
+      //所有冲突处理完
+      },
+      fail(res){
+        console.log("请求可能冲突订单失败！");
+        console.log(res);
+      }
+    })
+  },
   submitbespeak:function(e){
     console.log("submitbespeak...");
     var that=this;
@@ -515,10 +547,16 @@ Page({
     //获取预约开始时间
     var bespeaktimeStart=that.data.bespeaktime;
     //设置预约开始时间的  字符串格式（用于新建预约结束时间，，（为什么不直接 end=start   因为两个时间值一样，会保存在同一个常量池中，更新一个另一个也会随着更新））
-    var bespeaktimeStartToString=bespeaktimeStart.format('yyyy/MM/dd h:m:s');
+    // var bespeaktimeStartToString=bespeaktimeStart.format('yyyy/MM/dd h:m:s');
+    var year=bespeaktimeStart.getFullYear();
+    var month=bespeaktimeStart.getMonth();
+    var date=bespeaktimeStart.getDate();
+    var hour=bespeaktimeStart.getHours();
+    var minute=bespeaktimeStart.getMinutes();
+    // console.log(bespeaktimeStartToString);
     //通过上面格式的字符串来新建一个Date对象（Date方法中只能通过这种格式的字符串来新建对象）
-    var bespeaktimeEnd=new Date(bespeaktimeStartToString);
-    //设置当前预约结束的小时
+    var bespeaktimeEnd=new Date(year,month,date,hour,minute);
+    //设置当前预约结束的小时js
     var hourNow=bespeaktimeEnd.getHours()+that.data.bespeakduration;
     bespeaktimeEnd.setHours(hourNow);
     that.setData({
@@ -534,63 +572,4 @@ Page({
       })
     }
   },
-  //查询某个座位的订单，再根据 目前时间和订单时间来更新数据
-  updateSeatStyle(res){
-    console.log(res);
-    var chairInfoOld=res.data.chairInfo;
-    var i=0;
-    //循环查每个座位的订单
-    for(i=0;i<chairInfoOld.length;i++){
-      // wx.request({
-      //   url: url+'/order/selectOrdersBySeatId.do',
-      //   header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
-      //   method:'POST',
-      //   data:{
-      //     "seatId":chairInfoOld[i].seatId,
-      //   },
-      //   success(res){
-      //     console.log("成功："+res);
-      //   },
-      //   fail(res){
-      //     console.log("失败"+res);
-      //   }
-      // })
-    }
-
-
-
-
-  }
-  // // 坐座位期间，我们需要更新座位的样式（在预约的座位开始 结束期间 更新座位的样式）
-  // updateSeatStyle(res){
-  //   var that=this;
-  //   console.log("坐座位期间，我们需要更新座位的样式（在预约的座位开始 结束期间 更新座位的样式）");
-  //   var dateNow=new Date();
-  //   var dateStartString="2022-04-23 19:01:22";
-  //   var dateStopString="2022-04-23 22:01:22";
-  //   var dateStart=new Date(dateStartString);
-  //   var dateStop=new Date(dateStopString);
-  //   console.log(dateStart);
-  //   console.log(dateStop);
-  //   var seatId=1;
-  //   // 根据座位查询订单  在这个座位的所有订单中
-  //   // 当前时间是否在这个坐座位的区间内
-  //   if(dateStart<=dateNow && dateStop>=dateNow){
-  //     console.log("在这个区间中");
-  //     // 更新这个座位的样式
-  //     console.log(that.data.chairInfo);
-  //     var chair0=that.data.chairInfo[0];
-  //     //更新后台的样式  
-  //     that.setData({
-  //       [`chairInfo[0].seatStyle1`]:"chair_5",
-  //       [`chairInfo[0].seatStyle2`]:"chair_6",
-  //     })
-  //   }
-
-
-
-  //   // 最后所有的座位样式都更新完成，在重新查询当前的座位样式
-  // },
-
-  
 })

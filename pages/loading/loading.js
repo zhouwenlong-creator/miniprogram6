@@ -1,20 +1,27 @@
-// pages/user/user.js
+// pages/loading/loading.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //加载静态资源
     static:getApp().globalData.static,
-    userInfo:getApp().globalData.userInfo,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    var that=this;
+    var timer=setTimeout(() => {
+      that.func();
+    }, 1000);
+
+  },
+  func(){
+    wx.navigateTo({
+      url: '/pages/bespeak/bespeak',
+    })
   },
 
   /**
@@ -29,7 +36,6 @@ Page({
    */
   onShow: function () {
     var that=this;
-    // 刷新当前用户信息，
     that.setData({
       userInfo:getApp().globalData.userInfo,
     })

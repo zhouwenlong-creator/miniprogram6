@@ -1,5 +1,6 @@
 {
   "pages": [
+
     "pages/launch/launch",
     "pages/test/wxlogin/wxlogin",
     "pages/index/index",
@@ -16,7 +17,8 @@
     "pages/test/test",
     "pages/test/father/father",
     "pages/test/son/son",
-    "pages/test/Interval/Inteval"
+    "pages/test/Interval/Inteval",
+    "pages/loading/loading"
   ],
   "window": {
     "backgroundTextStyle": "light",

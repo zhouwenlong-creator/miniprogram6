@@ -22,6 +22,8 @@ Date.prototype.format = function(format) {
 }
 Page({
     data:{
+      //优先加载座位
+      chairInfo:[],
       static:getApp().globalData.static,
       swipers:["swiper-1.jpg","swiper-2.jpg","swiper-3.jpg","swiper-4.jpg","swiper-5.jpg","swiper-6.jpg","swiper-7.jpg"],
         //当前选中的预约方式
@@ -123,14 +125,13 @@ Page({
       bespeaktimeEndIsActive:0,
 
 
+      //当前可能冲突的订单
+      maybeConfiltOrders:[],
+      //当前的座位信息
+
+
       //微信用户信息(数组类型)
       userInfo:{
-        // 微信用户昵称
-        nickName:"",
-        // 头像地址
-        avatarUrl:"",
-        //用户性别 0未知 1男 2女
-        gender:0,
       },
 
     },
@@ -146,7 +147,6 @@ Page({
           wx.getUserProfile({
             desc: '获取你的昵称、头像、地区及性别',
             success: res => {
-              console.log(res);
               console.log("获取昵称，头像，地区，性别成功！");
               //给当前页面数组赋值
               that.setData({
@@ -154,14 +154,13 @@ Page({
                 ['userInfo.avatarUrl']:res.userInfo.avatarUrl,
                 ['userInfo.gender']:res.userInfo.gender,
               })
-              //给全局空间赋值
-              getApp().globalData.userInfo=that.data.userInfo;
-              console.log("用户："+getApp().globalData.userInfo.nickName);
+              var userInfo=res.userInfo;
+              console.log("用户："+res.userInfo.nickName);
 
               wx.showToast({
                 title: '正在处理...',
                 icon: 'loading',
-                duration: 2000
+                duration: 1000
               });
               //登录
               wx.login({
@@ -178,9 +177,9 @@ Page({
                     },
                     //后台通过request.getPatameter("name")来接受
                     data:{
-                      "nickName":getApp().globalData.userInfo.nickName,
-                      "avatarUrl":getApp().globalData.userInfo.avatarUrl,
-                      "gender":getApp().globalData.userInfo.gender,
+                      "nickName":userInfo.nickName,
+                      "avatarUrl":userInfo.avatarUrl,
+                      "gender":userInfo.gender,
                       "code":res.code,
                     },
                     // 请求成功返回什么
@@ -188,14 +187,14 @@ Page({
                       console.log(res);
                       that.setData({
                         //虽然说回传了很多信息，但是我只要id，openid对前台需隐私
-                        ['userInfo.id']:res.data.id,
+                        // ['userInfo.id']:res.data.id,
                       })
+                      getApp().globalData.userInfo=res.data;
                     },
                     fail(res){
                       console.log("登录/注册失败，请稍后再试！");
                     }
                   })
-                  
                 },
                
               })
@@ -270,7 +269,13 @@ Page({
     var hourNow=bespeaktimeEnd.getHours()+bespeakduration1;
     bespeaktimeEnd.setHours(hourNow);
     //预约结束的时间字符串
-    var bespeaktimeEndToString=bespeaktimeEnd.toLocaleString();
+    var hour=bespeaktimeEnd.getHours();
+    hour=hour>9?hour:'0'+hour;
+    var minute=bespeaktimeEnd.getMinutes();
+    minute=minute>9?minute:'0'+minute;
+    var second=bespeaktimeEnd.getSeconds();
+    second=second>9?second:'0'+second;
+    var bespeaktimeEndToString=bespeaktimeEnd.getFullYear()+'/'+(bespeaktimeEnd.getMonth()+1)+'/'+bespeaktimeEnd.getDate()+' '+hour+':'+minute+':'+second;
     //保存当前预约结束时间，预约结束时间字符串，预约持续时间
     that.setData({
       bespeaktimeEndIsActive:1,
@@ -343,45 +348,123 @@ Page({
       console.log("bespeak loading...");
       console.log("duration:"+that.data.bespeakduration)
       console.log("bespeakways:"+that.data.bespeakways);
+      // 设置预约开始时间
       wx.setStorageSync('bespeaktime',that.data.bespeaktimeStart);
       //设置预约时长 分享所有页面（主要bespeak order页面）
       wx.setStorageSync('bespeakduration',that.data.bespeakduration);
       //设置什么方式进入，选择哪个方式
       //bespeakway=="1"  表示第一个在线预约     =="2" 表示第二个直接入座
       wx.setStorageSync('bespeakduration1',that.data.bespeakways);
-      wx.navigateTo({
-        url: '/pages/bespeak/bespeak',
+
+
+      // 选中的开始时间
+      var bespeaktimeStart=that.data.bespeaktimeStart;
+      var bespeaktimeStartToString=bespeaktimeStart.format('yyyy/MM/dd h:m:s');
+      // 选中结束时间
+      var bespeaktimeEnd=new Date(bespeaktimeStartToString);
+      bespeaktimeEnd.setHours(bespeaktimeEnd.getHours()+bespeakduration);
+      //获取到了选中的开始时间和结束时间
+      //检查与当前选中的时间冲突的订单
+      //1.查询所有 未消费 和已经消费未入座 已经消费且入座的订单
+      wx.request({
+        url:url+'/order/selectConfiltOrders.do',
+        method:'POST',
+        header:{
+          'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+        },
+        data:{
+          "orderStatus1":0,
+          "orderStatus2":1,
+        },
         success(res){
-          wx.showToast({
-            title: "进入选座中", // 提示的内容
-            icon: "loading", // 图标，默认success
-            image: "", // 自定义图标的本地路径，image 的优先级高于 icon
-            duration: 500, // 提示的延迟时间，默认1500
-            mask: false, // 是否显示透明蒙层，防止触摸穿透
-        })
+          that.setData({
+            maybeConfiltOrders:res.data,
+          })
+
+        //查询当前选中的时间和可能冲突的订单的时间直接的冲突  orderBeginTime  7   orderStopTime  9  bespeaktimeStart 8;30   bespeaktimeEnd  10;30
+        var i=0;
+        for(i=0;i<that.data.maybeConfiltOrders.length;i++){
+          var maybeConfiltOrders=that.data.maybeConfiltOrders[i];
+          var orderBeginTime=new Date(maybeConfiltOrders.orderBeginTime);
+          var orderStopTime=new Date(maybeConfiltOrders.orderStopTime);
+          if((bespeaktimeStart<=orderBeginTime && bespeaktimeEnd>orderBeginTime)||(bespeaktimeEnd>=orderStopTime&&bespeaktimeStart<orderStopTime)||(bespeaktimeStart>=orderBeginTime&&bespeaktimeEnd<=orderStopTime)){
+            console.log("冲突");
+            //找到这个订单的seatId   并设置这个seatId 为不可选中
+            var seatIdConflict=maybeConfiltOrders.orderSeatId;
+            //获取所有房间信息 如果 座位号相等 直接改变这个座位的样式
+            if(seatIdConflict==that.data.chairInfo[seatIdConflict-1].seatId){
+              that.setData({
+                [`chairInfo[${seatIdConflict-1}].seatStyle1`]:'chair_5',
+                [`chairInfo[${seatIdConflict-1}].seatStyle2`]:'chair_6',
+              })
+            }
+          }
+        }
+        //所有冲突处理完全
+
+
+        wx.setStorageSync('chairInfo', that.data.chairInfo);
         },
         fail(res){
-          wx.showToast({
-            title: "The system is wrong,please try again later!", // 提示的内容
-            icon: "error", // 图标，默认success
-            image: "", // 自定义图标的本地路径，image 的优先级高于 icon
-            duration: 200, // 提示的延迟时间，默认1500
-            mask: false, // 是否显示透明蒙层，防止触摸穿透
-        })
+          console.log("请求可能冲突订单失败！");
+          console.log(res);
         }
+      })
+      wx.navigateTo({
+        url: '/pages/loading/loading',
+        // success(res){
+        //   wx.showToast({
+        //     title: "进入选座中", // 提示的内容
+        //     icon: "loading", // 图标，默认success
+        //     image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+        //     duration: 2000, // 提示的延迟时间，默认1500
+        //     mask: false, // 是否显示透明蒙层，防止触摸穿透
+        // })
+        // },
+        // fail(res){
+        //   wx.showToast({
+        //     title: "The system is wrong,please try again later!", // 提示的内容
+        //     icon: "error", // 图标，默认success
+        //     image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+        //     duration: 200, // 提示的延迟时间，默认1500
+        //     mask: false, // 是否显示透明蒙层，防止触摸穿透
+        // })
+        // }
       })
     }
   },
 
 //第一次加载
   onLoad:function(e){
+    wx.removeStorage({
+      key: 'chairInfo',
+    })
     var that=this;
     //获取用户的昵称 头像地址 性别等
     that.getUserInfo();
+    //查询当前座位
+    wx.request({
+      url: url+"/seat/selectAllSeats.do",
+      method:"POST",
+      header:{
+        'content-type': 'application/x-www-form-urlencoded;charset=utf-8', // 默认值
+        // 'content-type':'application/json;'
+      },
+      // 请求成功返回什么
+      success(res){
+        that.setData({
+          chairInfo:res.data
+        });
+      }
+    })
+
   },
   //每次加载时，需要加载当前时间
   onShow:function(e){
     var that=this;
+    that.setData({
+      userInfo:getApp().globalData.userInfo,
+    })
     console.log("index loading...");
     var dateTimeNow=new Date();
     var minutesNow=dateTimeNow.getMinutes();
@@ -405,7 +488,13 @@ Page({
     dateTimeNow.setMinutes(minutesAfter);
     dateTimeNow.setSeconds(secondAfter);
     //将时间转化成字符串类型
-    var bespeaktimeToString = dateTimeNow.toLocaleString();
+    var hour=dateTimeNow.getHours();
+    hour=hour>9?hour:'0'+hour;
+    var minute=dateTimeNow.getMinutes();
+    minute=minute>9?minute:'0'+minute;
+    var second=dateTimeNow.getSeconds();
+    second=second>9?second:'0'+second;
+    var bespeaktimeToString=dateTimeNow.getFullYear()+'/'+(dateTimeNow.getMonth()+1)+'/'+dateTimeNow.getDate()+' '+hour+':'+minute+':'+second;
     that.setData({
       //整点时间
       bespeaktimeStart:dateTimeNow,

@@ -6,6 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+
+    userInfo:{},
     // 默认所选择的导航栏
     tagId:'1',
     products:''
@@ -29,9 +31,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (e) {
+    var that=this;
+    that.setData({
+      userInfo:getApp().globalData.userInfo,
+    })
     var app = getApp();
     var that = this;
-    console.log("onshow开始了。。。。。。");
     wx.request({
       url:url+"/vip/selectAllVips.do",
       method:'GET',
@@ -52,7 +57,6 @@ Page({
       // console.log(that.data.products[0]);
       }
     })
-    console.log("onshow结束了。。。。。。");
   },
 
   /**

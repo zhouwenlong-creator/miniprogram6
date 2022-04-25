@@ -21,6 +21,7 @@ Date.prototype.format = function(format) {
   }
   return format;
 }
+
 Page({
 
   /**
@@ -49,10 +50,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(getApp().globalData.userInfo)
     var that=this;
     //获取bespeak传过来的数据（通过缓存ss）
     var bespeaktime=wx.getStorageSync('bespeaktime');
+    console.log("当前时间");
+    console.log(bespeaktime)
     var bespeaktimestop=wx.getStorageSync('bespeaktimestop');
     var bespeakduration=wx.getStorageSync('bespeakduration');
     var seat=wx.getStorageSync('seat');
@@ -60,7 +62,15 @@ Page({
       var bespeaktime=new Date();
     }
     // 将日期转化成字符串类型
-    var bespeaktimeToString=bespeaktime.toLocaleString();
+    //预约结束的时间字符串
+    var hour=bespeaktime.getHours();
+    hour=hour>9?hour:'0'+hour;
+    var minute=bespeaktime.getMinutes();
+    minute=minute>9?minute:'0'+minute;
+    var second=bespeaktime.getSeconds();
+    second=second>9?second:'0'+second;
+    var bespeaktimeToString=bespeaktime.getFullYear()+'/'+(bespeaktime.getMonth()+1)+'/'+bespeaktime.getDate()+' '+hour+':'+minute+':'+second;
+    // var bespeaktimeToString=bespeaktime.format('yyyy/MM/dd hh:mm:ss');
     that.setData({
       //座位开始时间
       bespeaktime:bespeaktime,
@@ -99,7 +109,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    var that=this;
+    that.setData({
+      userInfo:getApp().globalData.userInfo,
+    })
   },
 
   /**
@@ -148,11 +161,15 @@ Page({
     //订单创建时间
     var bespeakcreatetime=new Date();
     //将日期都转化成这种格式的字符串
-    var bespeakcreatetimeToString=bespeakcreatetime.format('yyyy-MM-dd h:m:s');
+    // var bespeakcreatetimeToString=bespeakcreatetime.format('yyyy-MM-dd h:m:s');
+    var bespeakcreatetimeToString=bespeakcreatetime.getFullYear()+'-'+(bespeakcreatetime.getMonth()+1)+'-'+bespeakcreatetime.getDate()+' '+bespeakcreatetime.getHours()+':'+bespeakcreatetime.getMinutes()+':'+bespeakcreatetime.getSeconds();
     var bespeaktime=that.data.bespeaktime;
-    var bespeakToString=bespeaktime.format('yyyy-MM-dd h:m:s');
+    // var bespeakToString=bespeaktime.format('yyyy-MM-dd h:m:s');
+    var bespeakToString=bespeaktime.getFullYear()+'-'+(bespeaktime.getMonth()+1)+'-'+bespeaktime.getDate()+' '+bespeaktime.getHours()+':'+bespeaktime.getMinutes()+':'+bespeaktime.getSeconds();
     var bespeaktimestop=that.data.bespeaktimestop;
-    var bespeaktimestopToString=bespeaktimestop.format('yyyy-MM-dd h:m:s');
+    // var bespeaktimestopToString=bespeaktimestop.format('yyyy-MM-dd h:m:s');
+    var bespeaktimestopToString=bespeaktimestop.getFullYear()+'-'+(bespeaktimestop.getMonth()+1)+'-'+bespeaktimestop.getDate()+' '+bespeaktimestop.getHours()+':'+bespeaktimestop.getMinutes()+':'+bespeaktimestop.getSeconds();
+
     //插入订单表
     wx.request({
       url:url+'/order/insertOrder.do',
@@ -171,7 +188,6 @@ Page({
         "id":getApp().globalData.userInfo.id,
       },
       success:function(e){
-        console.log(e);
         console.log("插入成功！");
         wx.showToast({
           title: '支付成功!',
@@ -180,7 +196,7 @@ Page({
           success:function(){
             setTimeout(function(){
             wx.switchTab({
-              url: '/pages/record/record',
+              url: '/pages/index/index',
             })
             },2000);
           }
