@@ -365,7 +365,7 @@ Page({
   go: function (e) {
     var that=this;
     //显示平面图
-    this.setData({
+    that.setData({
     showModal: false
     })
     //后续操作

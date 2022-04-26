@@ -20,6 +20,45 @@ Date.prototype.format = function(format) {
   }
   return format;
 }
+
+const date = new Date();//获取系统日期
+const years = [];
+const months = [];
+const days = [];
+const hours = [];
+const minutes = [];
+const bigMonth = [1, 3, 5, 7, 8, 10, 12];
+//将日期分开写入对应数组
+//年
+years.push(date.getFullYear());
+//月(添加两个月)
+months.push(date.getMonth()+1);
+months.push(date.getMonth()+2);
+//日
+var day = date.getDate();
+for (let i = 1; i < 31; i++) {
+days.push(i);
+}
+// 获取小时
+var hour=date.getHours();
+for (let i = 0; i <= 23; i++) {
+var k = i;
+if (0 <= i && i < 10) {
+k = "0" + i;
+}
+hours.push(k)
+}
+// 获取分钟
+var minute=date.getMinutes();
+for (let i = 0; i <= 59; i++) {
+var k = i;
+if (0 <= i && i < 10) {
+k = "0" + i
+}
+minutes.push(k)
+}
+
+
 Page({
     data:{
       // 地图的地点
@@ -139,6 +178,19 @@ Page({
       //微信用户信息(数组类型)
       userInfo:{
       },
+
+      // 跟日期时间相关的变量
+      years: years,
+      year: date.getFullYear(),
+      months: months,
+      month: date.getMonth(),
+      days: days,
+      day: date.getDate(),
+      value: [9999, 1, 1],
+      hours: hours,
+      hour: date.getHours(),
+      minutes: minutes,
+      minute: date.getMinutes(),
 
     },
     // 获取微信用户的昵称 头像 性别
@@ -319,6 +371,7 @@ Page({
     })
     console.log("bespeakduration:"+bespeakduration2+"hour");
   },
+
   onSwitchToBespeak:function(e){
     var that=this;
     // 获取两个预约时长
@@ -405,9 +458,7 @@ Page({
             }
           }
         }
-        //所有冲突处理完全
-
-
+        //所有冲突处理完
         wx.setStorageSync('chairInfo', that.data.chairInfo);
         },
         fail(res){
@@ -442,6 +493,35 @@ Page({
 //第一次加载
   onLoad:function(e){
     var that=this;
+    var dateTimeNow=new Date();
+    var minutesNow=dateTimeNow.getMinutes();
+    var hourNow=dateTimeNow.getHours();
+    // 存储更新后的 小时 分钟
+    var minutesAfter=0;
+    var hourAfter=0;
+    var secondAfter=0;
+    if(minutesNow>0 && minutesNow<=30){
+      minutesAfter=30;
+      hourAfter=hourNow;
+    }else if(minutesNow>30 && minutesNow<60){
+      minutesAfter=0;
+      hourAfter=hourNow+1;
+    }else{
+      hourAfter=hourNow;
+      minutesAfter=minutesNow;
+    }
+    // 设置预约开始时间
+    dateTimeNow.setHours(hourAfter);
+    dateTimeNow.setMinutes(minutesAfter);
+    dateTimeNow.setSeconds(secondAfter);
+    
+
+    var dateNow=dateTimeNow.getDate();
+    var hourNow=dateTimeNow.getHours();
+    var minuteNow=dateTimeNow.getMinutes();
+    that.setData({
+      valuebespeakstart:[0,0,dateNow-1,hourNow,minuteNow],
+    })
     that.setData({
       userInfo:getApp().globalData.userInfo
     })
@@ -504,10 +584,28 @@ Page({
     var second=dateTimeNow.getSeconds();
     second=second>9?second:'0'+second;
     var bespeaktimeToString=dateTimeNow.getFullYear()+'/'+(dateTimeNow.getMonth()+1)+'/'+dateTimeNow.getDate()+' '+hour+':'+minute+':'+second;
+    var datetime=new Date(bespeaktimeToString);
+    datetime.setHours(datetime.getHours()+that.data.bespeakduration1);
+    //将时间转化成字符串类型
+    var hour=datetime.getHours();
+    hour=hour>9?hour:'0'+hour;
+    var minute=datetime.getMinutes();
+    minute=minute>9?minute:'0'+minute;
+    var second=datetime.getSeconds();
+    second=second>9?second:'0'+second;
+    var datetimeToString=datetime.getFullYear()+'/'+(datetime.getMonth()+1)+'/'+datetime.getDate()+' '+hour+':'+minute+':'+second;
+
+    
+    // //预约结束时间
+    // bespeaktimeEnd:0,
+    // //预约结束时间的字符串类型
+    // bespeaktimeEndToString:"",
     that.setData({
       //整点时间
       bespeaktimeStart:dateTimeNow,
-      bespeaktimeToString:bespeaktimeToString
+      bespeaktimeToString:bespeaktimeToString,
+      bespeaktimeEnd:datetime,
+      bespeaktimeEndToString:datetimeToString,
     })
     console.log(that.data.bespeaktimeStart);
   },
@@ -578,5 +676,171 @@ Page({
       name: that.currentTarget.dataset.address,//要导航的地址名称
       address:that.currentTarget.dataset.address,//要导航的地址地址
     })
+  },
+  //判断元素是否在一个数组
+  contains: function (arr, obj) {
+    var i = arr.length;
+    while (i--) {
+      if (arr[i] === obj) {
+      return true;
+      }
+    }
+    return false;
+  },
+
+  setDays: function (day) {
+    const temp = [];
+    for (let i = 1; i <= day; i++) {
+    temp.push(i);
+    }
+    this.setData({
+      days: temp
+    })
+  },
+  //开始的选择滚动器改变触发事件
+  bindChange: function (e) {
+    var that = this;
+    const val = e.detail.value;
+    console.log(e);
+    //判断月的天数
+    const setYear = this.data.years[val[0]];
+    const setMonth = this.data.months[val[1]];
+    const setDay = this.data.days[val[2]];
+    const setHour = this.data.hours[val[3]];
+    const setMinute = this.data.minutes[val[4]];
+    //闰年
+    if (setMonth === 2) {
+      if (setYear % 4 === 0 && setYear % 100 !== 0) {
+      // console.log('闰年')
+      this.setDays(29);
+      }else {
+      // console.log('非闰年')
+      this.setDays(28);
+      }
+    } else {
+    //大月
+    if (this.contains(bigMonth, setMonth)) {
+      this.setDays(31)
+    } else {
+      this.setDays(30)
+    }
   }
+    this.setData({
+    year: setYear,
+    month: setMonth,
+    day: setDay,
+    hour: setHour,
+    minute: setMinute
+    })
+    console.log("打印时间！");
+    const dateTime=setYear+"/"+setMonth+"/"+setDay+" "+setHour+":"+setMinute;
+    var datetime1 = new Date(dateTime);
+    //将选取的时间
+          // //预约开始时间
+      // bespeaktimeStart:0,
+      // //预约时间的字符串类型
+      // bespeaktimeToString:"",
+            //预约结束时间
+    var bespeaktimeStart=datetime1;
+    //预约结束的时间字符串
+    var hour=bespeaktimeStart.getHours();
+    hour=hour>9?hour:'0'+hour;
+    var minute=bespeaktimeStart.getMinutes();
+    minute=minute>9?minute:'0'+minute;
+    var second=bespeaktimeStart.getSeconds();
+    second=second>9?second:'0'+second;
+    var bespeaktimeToString=bespeaktimeStart.getFullYear()+'/'+(bespeaktimeStart.getMonth()+1)+'/'+bespeaktimeStart.getDate()+' '+hour+':'+minute+':'+second;
+
+    if(that.data.bespeakduration1!=0){
+      var datetime=new Date(bespeaktimeToString);
+      datetime.setHours(datetime.getHours()+that.data.bespeakduration1);
+      //将时间转化成字符串类型
+      var hour=datetime.getHours();
+      hour=hour>9?hour:'0'+hour;
+      var minute=datetime.getMinutes();
+      minute=minute>9?minute:'0'+minute;
+      var second=datetime.getSeconds();
+      second=second>9?second:'0'+second;
+      var datetimeToString=datetime.getFullYear()+'/'+(datetime.getMonth()+1)+'/'+datetime.getDate()+' '+hour+':'+minute+':'+second;
+      that.setData({
+           // //预约结束时间
+        // bespeaktimeEnd:0,
+        // //预约结束时间的字符串类型
+        // bespeaktimeEndToString:"",
+        bespeaktimeEnd:datetime,
+        bespeaktimeEndToString:datetimeToString
+      })
+    }
+
+    that.setData({
+      //将最终的事件给js保存
+      bespeaktimeStart:datetime1,
+      bespeaktimeToString:bespeaktimeToString,
+    })
+  },
+//选择 开始的时间
+  onChooseBespeakStartTime(e){
+    console.log("onChooseBespeakStartTime");
+    // 点击之后背景变灰色
+    this.setData({
+      showModal: true
+      })
+  },
+  // 在showModel中点击确定
+  go: function (e) {
+    var that=this;
+    //显示平面图
+    that.setData({
+      showModal: false
+    })
+    //后续操作
+  },
+
+  //结束的选择滚动器改变触发事件
+  bindChange1: function (e) {
+    var that = this;
+    const val = e.detail.value;
+    console.log(e);
+    //判断月的天数
+    const setYear = this.data.years[val[0]];
+    const setMonth = this.data.months[val[1]];
+    const setDay = this.data.days[val[2]];
+    const setHour = this.data.hours[val[3]];
+    const setMinute = this.data.minutes[val[4]];
+    //闰年
+    if (setMonth === 2) {
+      if (setYear % 4 === 0 && setYear % 100 !== 0) {
+      // console.log('闰年')
+      this.setDays(29);
+      }else {
+      // console.log('非闰年')
+      this.setDays(28);
+      }
+    } else {
+    //大月
+    if (this.contains(bigMonth, setMonth)) {
+      this.setDays(31)
+    } else {
+      this.setDays(30)
+    }
+  }
+    this.setData({
+    year: setYear,
+    month: setMonth,
+    day: setDay,
+    hour: setHour,
+    minute: setMinute
+    })
+    console.log("打印时间！");
+    const dateTime=setYear+"/"+setMonth+"/"+setDay+" "+setHour+":"+setMinute;
+    var datatime1 = new Date(dateTime);
+    //将选取的时间
+      // bespeaktimeEnd:0,
+      // //预约结束时间的字符串类型
+      // bespeaktimeEndToString:"",
+    that.setData({
+      //将最终的事件给js保存
+      bespeaktimeEnd:datatime1
+    })
+  },
 })

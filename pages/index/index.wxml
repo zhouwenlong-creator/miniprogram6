@@ -46,7 +46,37 @@
 
 				<view class="bespeak_2">
 					<view wx:if="{{bespeakway[0].isactive==1}}">
-						<view class="bespeak_2_1">{{bespeaktimeToString}}</view>
+
+						<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+						<view class="modalDlg" wx:if="{{showModal}}">
+						<!-- 头部 -->
+						<!-- <view style="text-align:center;font-size:50rpx;">{{year}}年{{month}}月{{day}}日 {{hour}}时{{minute}}分</view> -->
+						<view style="text-align:center;padding:20rpx;font-weight: bold;font-size: 150%;">预约时间选取</view>
+								<picker-view wx:if="{{years.length>0 && months.length>0 && days.length>0}}" style="width: 100%; height: 500rpx;" indicator-style="height: 50px;" class="view_picker" value="{{valuebespeakstart}}" bindchange="bindChange">
+										<picker-view-column>
+										<view wx:for="{{years}}" wx:key='{{index1}}' class="view_picker_text">{{item}}年</view>
+										</picker-view-column>
+
+										<picker-view-column>
+										<view wx:for="{{months}}" wx:key='{{index2}}' class="view_picker_text">{{item}}月</view>
+										</picker-view-column>
+
+										<picker-view-column>
+										<view wx:for="{{days}}" wx:key='{{index3}}' class="view_picker_text">{{item}}日</view>
+										</picker-view-column>
+
+										<picker-view-column>
+										<view wx:for="{{hours}}" wx:key='{{index4}}' class="view_picker_text">{{item}}</view>
+										</picker-view-column>
+
+										<picker-view-column>
+										<view wx:for="{{minutes}}" wx:key='{{index5}}' class="view_picker_text">{{item}}</view>
+										</picker-view-column>
+								</picker-view>
+								<button bindtap="go">确定</button>
+						</view>
+
+						<view class="bespeak_2_1" bindtap="onChooseBespeakStartTime">{{bespeaktimeToString}}</view>
 						<view style="padding-left: 30rpx;color:gray">———————————————————</view>
 					
 						<view wx:if="{{bespeaktimeEndIsActive==0}}">
