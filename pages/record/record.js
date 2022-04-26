@@ -86,35 +86,6 @@ Page({
             [`orderInfo[${i}].orderStopTimeToStringDate`]:str1[0],
             [`orderInfo[${i}].orderStopTimeToStringTime`]:str1[1],
           })
-
-          // //查看当前的时间看是否能开门
-          // var timeStart=new Date(that.data.orderInfo[i].orderBeginTime);
-          // var timeEnd=new Date(that.data.orderInfo[i].orderStopTime);
-          // var timeNow=new Date();
-          // // console.log(timeStart);
-          // // console.log(timeNow);
-          // var timeSub=timeStart-timeNow;
-          // //如果在30分钟以内，就可以扫码；在30分钟之前 就不能扫码入座；在30min以后，自动释放座位
-          // //30分钟之后，就释放座位
-          // if(timeSub<-1800000){
-          //   console.log("释放座位");
-          //   that.setData({
-          //     [`orderInfo[${i}].orderflag`]:0
-          //   })
-          //   // 在座位的前后30min，就可以 扫码入座
-          // }else if(timeSub>=-1800000 && timeSub<=1800000){
-          //   //30分钟之后了,释放座位
-          //   console.log("扫码入座");
-          //   that.setData({
-          //     [`orderInfo[${i}].orderflag`]:1
-          //   })
-          // //在30min之前来，提示，还没到时间
-          // }else{
-          //   console.log("还没到时间");
-          //   that.setData({
-          //     [`orderInfo[${i}].orderflag`]:2
-          //   })
-          // }
         }
         console.log(that.data.orderInfo);
       },
@@ -206,6 +177,54 @@ Page({
       },
       fail(res){
         console.log("更新sitflag失败");
+      }
+    })
+  },
+  // 取消订单
+  onCancelOrderById(res){
+    var that=this;
+    var id=res.target.dataset.id;
+    wx.showModal({
+      title:"提示",
+      content:"是否确认取消预约？",
+      success(res){
+        if(res.confirm){
+          console.log("用户点击确认");
+          that.onCancelOrderByIdMysql(id);
+        }else if(res.cancel){
+          console.log("用户点击取消");
+        }
+      }
+    })
+  },
+  onCancelOrderByIdMysql(id){
+    var that=this;
+    //向后台发请求
+    wx.request({
+      url:url+'/order/updateOrderCancelById.do',
+      method:'GET',
+      header:{
+        header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+      },
+      data:{
+        'orderStatus':2,
+        'id':id
+      },
+      success(res){
+        console.log(res);
+        wx.showToast({
+          title: '取消预约成功！',
+          icon: 'success',
+          duration: 1000,
+          success:function(){
+            setTimeout(function(){
+              that.onShow();
+            },1000);
+          }
+        })
+      },
+      fail(res){
+        console.log(res);
       }
     })
   }

@@ -31,22 +31,18 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function (e) {
+    console.log("onshow 开始");
     var that=this;
     that.setData({
       userInfo:getApp().globalData.userInfo,
     })
-    var app = getApp();
     var that = this;
     wx.request({
       url:url+"/vip/selectAllVips.do",
-      method:'GET',
+      method:"POST",
+      header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
       data:{
-        tagId:that.data.tagId
-      },
-      header:{
-          // 请求头部
-          // 'content-type':'application/x-www-form-urlencoded'
-          'content-type':'application/json'
+        "tagId":that.data.tagId
       },
       // 请求成功返回什么
       success(res){
@@ -104,14 +100,10 @@ Page({
     });
     wx.request({
       url:url+"/vip/selectAllVips.do",
-      method:'GET',
+      method:"POST",
+      header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
       data:{
-        tagId:that.data.tagId
-      },
-      header:{
-          // 请求头部
-          // 'content-type':'application/x-www-form-urlencoded'
-          'content-type':'application/json'
+        "tagId":that.data.tagId
       },
       // 请求成功返回什么
       success(res){

@@ -22,6 +22,12 @@ Date.prototype.format = function(format) {
 }
 Page({
     data:{
+      // 地图的地点
+      place:{
+        address:"湖北省荆州市荆州区城南街道99号起航自习室",
+        lat:39.90469,
+        lng:116.40717,
+      },
       //优先加载座位
       chairInfo:[],
       static:getApp().globalData.static,
@@ -160,11 +166,10 @@ Page({
               wx.showToast({
                 title: '正在处理...',
                 icon: 'loading',
-                duration: 1000
+                duration: 500
               });
               //登录
               wx.login({
-                
                 // 如果成功的话，success中就会返回 res.code，主要用的就是res.code 用来传到后端，再通过code3json接口获取openid(微信唯一标识) 和session_key
                 success(res){
                   wx.request({
@@ -436,12 +441,16 @@ Page({
 
 //第一次加载
   onLoad:function(e){
-    wx.removeStorage({
-      key: 'chairInfo',
-    })
     var that=this;
+    that.setData({
+      userInfo:getApp().globalData.userInfo
+    })
+    // 如果没有登录
+    if(that.data.userInfo.id==0){
     //获取用户的昵称 头像地址 性别等
-    that.getUserInfo();
+      that.getUserInfo();
+    }
+
     //查询当前座位
     wx.request({
       url: url+"/seat/selectAllSeats.do",
@@ -501,5 +510,73 @@ Page({
       bespeaktimeToString:bespeaktimeToString
     })
     console.log(that.data.bespeaktimeStart);
+  },
+
+  // 反馈
+  onFeedback(){
+    console.log("反馈给我们!");
+    wx.navigateTo({
+      url: '/pages/feedback/feedback',
+    })
+  },
+  //点击电话
+  onContact(){
+    console.log("点击反馈！");
+    wx.showModal({
+      title: '联系电话',
+      content: '15272551132',
+      cancelText:'呼叫',
+      success (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+        } else if (res.cancel) {
+          console.log('用户点击呼叫');
+            wx.makePhoneCall({
+              phoneNumber: '15272551132', //此号码并非真实电话号码，仅用于测试
+              success: function () {
+                console.log("拨打电话成功！")
+              },
+              fail: function () {
+                console.log("拨打电话失败！")
+              }
+            })
+          // wx.setClipboardData({
+          //   data: '15272551132',
+          //   success(res){
+          //     console.log(res);
+          //     console.log("复制成功");
+          //   }
+          // })
+        }
+      }
+    })
+  },
+  // 使用说明
+  onShowNotice(){
+    console.log("用户点击使用说明！");
+    wx.showModal({
+      title:"使用说明",
+      content:"1.可提前5天预约\n2.可提前一分钟取消预约，全额退款\n3.如果座位没人的情况下可提前10分钟入座\n4.过期10分钟自动释放，全额退款\n5.30天内可取消20次，超出进入黑名单",
+      showCancel:false,
+      confirmText:"知道了！",
+      success(res){
+        if(res.confirm){
+          console.log("用户知道了！")
+        }
+      }
+    })
+  },
+  navigate:function(e){
+    //使用微信内置地图查看标记点位置，并进行导航
+    var that = e;
+    //注意：经纬度必须是数字类型
+    var latitude = 	parseFloat(that.currentTarget.dataset.latitude);
+    var longitude = parseFloat(that.currentTarget.dataset.longitude);
+    wx.openLocation({
+      latitude: latitude,//要去的纬度-地址
+      longitude: longitude,//要去的经度-地址
+      name: that.currentTarget.dataset.address,//要导航的地址名称
+      address:that.currentTarget.dataset.address,//要导航的地址地址
+    })
   }
 })

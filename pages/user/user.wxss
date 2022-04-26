@@ -1,20 +1,25 @@
 /* pages/user/user.wxss */
 .top{
-  background-image: url('https://www.zwlserver.top/pictures/wallpaper.png');
-  background-size:740rpx 200%;
-  height:500rpx;
+  background-image: url('https://www.zwlserver.top/pictures/wallpaper.jpg');
+  background-size:740rpx 250%;
+  height:450rpx;
 }
 .bottom{
+  /* background-color: #002fa7; */
   height:905rpx;
   margin-top:-50rpx;
   border-top-left-radius: 40rpx;
   border-top-right-radius: 40rpx;
-  border-top:4rpx solid rgb(226, 226, 226);
+  border:4rpx solid #002fa7;
+  border-left: 1rpx solid white;
+  border-right: 1rpx solid white;
+  border-bottom: 1rpx solid white;
+  /* border-top:4rpx solid rgb(226, 226, 226); */
 }
 .bottom_1{
   margin-top:-120rpx;
   height:300rpx;
-  border:3rpx solid rgb(226, 226, 226);
+  border:3rpx solid #002fa7;
   /* border:5rpx dotted black; */
   border-radius: 40rpx;
   background-color: white;
@@ -57,7 +62,7 @@
 .bottom_2{
   margin-top:40rpx;
   height:220rpx;
-  border:3rpx solid rgb(226, 226, 226);
+  border:3rpx solid #002fa7;
   border-radius: 40rpx;
   background-color: white;
   margin-left: 30rpx;
@@ -66,8 +71,8 @@
 .bottom_2_1{
   margin-top: 60rpx;
   display: inline-block;
-  margin-left: 46rpx;
-  margin-right: 30rpx;
+  margin-left: 50rpx;
+  margin-right: 40rpx;
 }
 .bottom_2_2{
   display: inline-block;

@@ -105,7 +105,7 @@
       </view>
       <view class="record_bottom_5">
         <view wx:if="{{orderStatus==0||(orderStatus==1 && sitflag==0)}}">
-          <view class="in_record_bottom_5_2">取消预约</view>
+          <view class="in_record_bottom_5_2" bindtap="onCancelOrderById" data-id="{{id}}">取消预约</view>
         </view>
       </view>
     </view>

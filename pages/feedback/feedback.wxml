@@ -1,0 +1,7 @@
+<!--pages/feedback/feedback.wxml-->
+<view>
+  <view class="top">
+    <textarea class="input" name="remark" placeholder="请输入您的反馈！" auto-focus="true" bindinput="onBindinput"/>
+  </view> 
+  <view class="bottom" bindtap="onFeedbackCommit">提交</view>
+</view>

@@ -1,15 +1,19 @@
 <view class="box">
 		<view class="map">
 			<view style="display: inline-block;">
-				<view style="font-weight: bold;">起航自习室(24小时营业) ></view>
+				<view>
+				<!--注意一定要用button标签-->
+					<button style="background-color:#f3f3f3;padding:1rpx;font-weight: bold;width:400rpx;" bindtap="navigate" data-address="{{place.address}}" data-latitude="{{place.lat}}" data-longitude="{{place.lng}}">起航自习室(24小时营业) ></button>
+					<!-- <button></button> -->
+					</view>
 				<view style="color:gray;font-size:25rpx;padding-top:10rpx;">
 					<image src="{{static}}/index/address.png" mode="aspectFill" style="width:25rpx;height: 25rpx;"></image>
 					湖北省荆州市荆州区城南街道99号
 				</view>
 			</view>
 			<view style="display: inline-block;font-weight: bold;margin:20rpx;">
-				<image src="{{static}}/index/advice.png" mode="aspectFill" style="width:50rpx;height: 50rpx;margin:30rpx;"></image>
-				<image src="{{static}}/index/contact.png" mode="aspectFill" style="width:50rpx;height: 50rpx;margin:30rpx;"></image>
+				<image src="{{static}}/index/advice.png" mode="aspectFill" style="width:50rpx;height: 50rpx;margin:30rpx;" bindtap="onFeedback"></image>
+				<image src="{{static}}/index/contact.png" mode="aspectFill" style="width:50rpx;height: 50rpx;margin:30rpx;" bindtap="onContact"></image>
 
 			</view>
 		</view>
@@ -59,12 +63,12 @@
 						<view class="bespeak_2_4" bindtap="onSwitchToBespeak" data-bespeakway="1">下一步</view>
 						<!-- 使用说明，联系客服 -->
 						<view class="bespeak_2_5">
-							<view>
+							<view bindtap="onShowNotice">
 								<image src="{{static}}/index/explain.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
 								使用说明
 							</view>
 							<view>|</view>
-							<view style="align-items: center;">
+							<view style="align-items: center;" bindtap="onContact">
 								<image src="{{static}}/index/contact1.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
 								联系客服
 							</view>
@@ -78,12 +82,12 @@
 					 <view class="bespeak_2_7" bindtap="onSwitchToBespeak" data-bespeakway="2">下一步</view>
 						<!-- 使用说明，联系客服 -->
 						<view class="bespeak_2_8">
-							<view>
+							<view bindtap="onShowNotice">
 								<image src="{{static}}/index/explain.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
 								使用说明
 							</view>
 							<view>|</view>
-							<view style="align-items: center;">
+							<view style="align-items: center;" bindtap="onContact">
 								<image src="{{static}}/index/contact1.png" mode="aspectFill" style="width:26rpx;height: 26rpx;"></image>
 								联系客服
 							</view>

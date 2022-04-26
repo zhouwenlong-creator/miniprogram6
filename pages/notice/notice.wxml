@@ -1,0 +1,17 @@
+<!--pages/notice/notice.wxml-->
+<view wx:for="{{noticeInfo}}" wx:key="item">
+  <template is="noticetemplate" data="{{...item}}"></template>
+</view>
+
+
+
+
+<template name="noticetemplate">
+  <view class="box" bindtap="onSwitchNoticeDetail" data-id="{{id}}">
+  <view style="display: inline-block;">
+    <image src="{{noticeimgurl}}" style="height: 200rpx;width:200rpx;"></image>
+  </view>
+  <view style="display: inline-block;font-weight:bold;margin-top: -160rpx;vertical-align:middle;margin-left: 40rpx;">{{noticeName}}</view>
+  </view>
+
+</template>

@@ -8,16 +8,24 @@
     <view class="bottom_1">
     <!-- 头像 昵称 -->
       <view class="bottom_1_1">
-        <view class="bottom_1_1_1">
+        <view wx:if="{{userInfo.id!=0}}">
+          <view class="bottom_1_1_1">
           <image class="bottom_1_1_1_1" src="{{userInfo.imgurl}}"></image>
+          </view>
+          <view class="bottom_1_1_2">昵称: {{userInfo.username}}</view>
         </view>
-        <view class="bottom_1_1_2">昵称: {{userInfo.username}}</view>
+
+        <view wx:if="{{userInfo.id==0}}">
+          <view style="padding-left:40rpx;padding-top:40rpx;font-size: 120%;font-weight: bold;color:red;" bindtap="getUserInfo">请登录！</view>
+        </view>
+       
+
       </view>
-      <view style="margin-top:40rpx;color:rgb(245, 245, 245);">_________________________________________________</view>
+      <!-- <view style="margin-top:40rpx;color:rgb(245, 245, 245);">_________________________________________________</view> -->
       <!-- 我的资产 -->
       <view class="bottom_1_2">
 
-        <view class="bottom_1_2_1">
+        <view class="bottom_1_2_1" style="margin-top:80rpx;">
           <view class="bottom_1_2_1_1">
             <view style="display: inline-block;font-size: 130%;font-weight: bold;">99</view>
             <view style="display: inline-block;">张</view>
@@ -47,15 +55,17 @@
     <view class="bottom_2">
       <view class="bottom_2_1">
         <view>
-          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/func-record.png"></image>
+          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/rank.svg"></image>
+          <!-- <image style="margin-left:10rpx;height:60rpx;width:60rpx;" src="/static/rank.svg"></image> -->
         </view>
-        <view style="font-size: 80%;color:rgb(73, 73, 73);">订单记录</view>
+        <view style="font-size: 80%;color:rgb(73, 73, 73);">排行榜</view>
        
       </view>
 
-      <view class="bottom_2_2">
+      <view class="bottom_2_2" bindtap="onSwitchNotice">
         <view>
-          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/func-notice.png"></image>
+          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/notice.svg"></image>
+          <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/notice.svg"></image> -->
         </view>
         <view style="font-size: 80%;color:rgb(73, 73, 73);">门店公告</view>
 
@@ -63,7 +73,9 @@
 
       <view class="bottom_2_3">
         <view>
-          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/func-assistance.png"></image>
+          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/help.svg"></image>
+          <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/help.svg"></image> -->
+
         </view>
         <view style="font-size: 80%;color:rgb(73, 73, 73);">使用帮助</view>
 
@@ -71,7 +83,8 @@
 
       <view class="bottom_2_4">
         <view>
-          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/func-connect.png"></image>  
+          <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/func/contact.svg"></image>
+          <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/contact.svg"></image>   -->
         </view>
         <view style="font-size: 80%;color:rgb(73, 73, 73);">联系商家</view>
 

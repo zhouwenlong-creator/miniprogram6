@@ -20,18 +20,23 @@ Page({
    */
   onLoad: function (options) {
     var that = this;  
+    that.setData({
+      userInfo:getApp().globalData.userInfo,
+    })
     var timer = setTimeout(()=>{
         clearTimeout(timer)
         that.direct()
       },1000);
-    
-    //查询所有订单，并返回更新所有订单
-    var fader = setInterval(function() {
-      // 定时查询未消费订单状态
-      that.selectOrderByOrderStatus();
-      //定时查询已消费订单状态 入座 未入座均有
-      that.selectOrderByOrderStatusAlreadyConsume();
-    }, 5000);
+    // if(that.data.userInfo.id!=0){
+      //查询所有订单，并返回更新所有订单
+      var fader = setInterval(function() {
+        // 定时查询未消费订单状态
+        that.selectOrderByOrderStatus();
+        //定时查询已消费订单状态 入座 未入座均有
+        that.selectOrderByOrderStatusAlreadyConsume();
+      }, 5000);
+    // }
+
     //更新订单状态
     // updateAllOrders();
   },

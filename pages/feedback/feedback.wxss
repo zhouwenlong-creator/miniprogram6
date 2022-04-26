@@ -1,0 +1,27 @@
+/* pages/feedback/feedback.wxss */
+.top{
+/* border:4rpx solid red; */
+  margin-top: 40rpx;
+  height: 500rpx;
+  /* width:80%; */
+
+}
+.input{
+  border:2rpx solid black;
+  border-radius: 20rpx;
+  height: 500rpx;
+  width:700rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.bottom{
+  margin-top: 20rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  padding:30rpx;
+  background-color: black;
+  color:white;
+  font-weight: bold;
+  margin-left: 420rpx;
+  margin-right: 30rpx;
+}
