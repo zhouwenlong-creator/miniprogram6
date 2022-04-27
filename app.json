@@ -1,5 +1,6 @@
 {
   "pages": [
+
     "pages/launch/launch",
     "pages/test/wxlogin/wxlogin",
     "pages/index/index",
@@ -20,7 +21,9 @@
     "pages/loading/loading",
     "pages/feedback/feedback",
     "pages/noticedetail/noticedetail",
-    "pages/notice/notice"
+    "pages/notice/notice",
+    "pages/test/scanCode/scanCode",
+    "pages/scancode/scancode"
   ],
   "window": {
     "backgroundTextStyle": "light",

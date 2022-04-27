@@ -33,6 +33,8 @@ Page({
     // 属性 订单id id    订单创建时间   create_time  订单开始时间 order_begin_time 订单结束时间 order_stop_time  订单持续时间 bespeakduration    订单座位号  order_seat_id      金额 money     订单所属的用户   user_id    订单的状态 order_status     订单的套餐名 还是个联合查询
     orderInfo:[],
     userInfo:getApp().globalData.userInfo,
+    // 二维码存储
+    scancode:[],
   },
 
   /**
@@ -156,27 +158,75 @@ Page({
   onSitDown:function(res){
     console.log("扫码入座！");
     var that=this;
-    // 更新flag的值为1 说明占座了，
-    console.log(res);
+    wx.scanCode({
+      onlyFromCamera: true,
+      success(e){
+        var result=e.result;
+        // 请求后台当前的scancode
+        that.selectScanCodeUrlMysql(result,res);
+      }
+    })
+
+  },
+
+  // 请求后台存储的scancode
+  selectScanCodeUrlMysql(result,res1){
+    var that=this;
     wx.request({
-      url:url+'/order/updateOrderSitflagByUserId.do',
+      url:url+'/scancode/selectScanCodeUrl.do',
       method:'POST',
       header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
-      data:{
-        "sitflag":1,
-        "id":res.target.dataset.id,
-      },
+      data:{},
       success(res){
-        console.log("更新sitflag成功");
-        wx.showToast({
-          title: '入座成功',
-          icon: 'success',
-          duration: 1000
+        console.log("请求后台存储的scancode成功！");
+        console.log(res);
+        that.setData({
+          scancode:res.data,
         })
-        that.onShow();
+        console.log(res.data);
+        console.log(that.data.scancode);
+
+        // 检查两者是否相同
+        if(that.data.scancode[0].url==result){
+          console.log("扫码入座成功");
+          // 更新flag的值为1 说明占座了，
+          console.log(res1);
+          wx.request({
+            url:url+'/order/updateOrderSitflagByUserId.do',
+            method:'POST',
+            header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
+            data:{
+              "sitflag":1,
+              "id":res1.target.dataset.id,
+            },
+            success(res){
+              console.log("更新sitflag成功");
+              wx.showToast({
+                title: '入座成功',
+                icon: 'success',
+                duration: 1000
+              })
+              that.onShow();
+            },
+            fail(res){
+              console.log("更新sitflag失败");
+            }
+          })
+        }else{
+          wx.showToast({
+            title: '扫码入座失败！',
+            icon:'error',
+            duration:5000,
+            success:function(){
+              setTimeout(function(){
+                that.onShow();
+              },1000);
+            }
+          })
+        }
       },
       fail(res){
-        console.log("更新sitflag失败");
+        console.log("请求后台存储的scancode失败！");
       }
     })
   },
@@ -202,10 +252,8 @@ Page({
     //向后台发请求
     wx.request({
       url:url+'/order/updateOrderCancelById.do',
-      method:'GET',
-      header:{
-        header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
-      },
+      method:'POST',
+      header: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' },
       data:{
         'orderStatus':2,
         'id':id

@@ -165,7 +165,8 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
       },
       data:{
-        "id":res.id
+        "id":res.id,
+        "orderStatus":4
       },
       success(res){
         console.log("成功更新订单中的消费信息");
@@ -207,7 +208,8 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
       },
       data:{
-        "id":res.id
+        "id":res.id,
+        "orderStatus":3
       },
       success(res){
         console.log("成功3");
@@ -317,7 +319,8 @@ Page({
         'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
       },
       data:{
-        "id":res.id
+        "id":res.id,
+        "orderStatus":1
       },
       success(res){
         console.log("成功1");

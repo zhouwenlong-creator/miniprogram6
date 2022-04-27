@@ -59,7 +59,6 @@
           <!-- <image style="margin-left:10rpx;height:60rpx;width:60rpx;" src="/static/rank.svg"></image> -->
         </view>
         <view style="font-size: 80%;color:rgb(73, 73, 73);">排行榜</view>
-       
       </view>
 
       <view class="bottom_2_2" bindtap="onSwitchNotice">
@@ -68,7 +67,6 @@
           <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/notice.svg"></image> -->
         </view>
         <view style="font-size: 80%;color:rgb(73, 73, 73);">门店公告</view>
-
       </view>
 
       <view class="bottom_2_3">
@@ -78,7 +76,6 @@
 
         </view>
         <view style="font-size: 80%;color:rgb(73, 73, 73);">使用帮助</view>
-
       </view>
 
       <view class="bottom_2_4">
@@ -91,7 +88,55 @@
       </view>
     
     </view>
+    
+    <!-- 第三个卡片，只有管理员可见 -->
+    <view wx:if="{{userInfo.type==0}}">
 
+      <view class="bottom_3">
+        <view class="bottom_3_1">
+          <view>
+            <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_user.svg"></image>
+            <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_user.svg"></image> -->
+          </view>
+          <view style="font-size: 80%;color:rgb(73, 73, 73);">用户管理</view>
+        </view>
+
+        <view class="bottom_3_2">
+          <view>
+            <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_order.svg"></image>
+            <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_order.svg"></image> -->
+          </view>
+          <view style="font-size: 80%;color:rgb(73, 73, 73);">订单管理</view>
+        </view>
+
+        <view class="bottom_3_3">
+          <view>
+            <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_note.svg"></image>
+            <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_note1.svg"></image> -->
+          </view>
+          <view style="font-size: 80%;color:rgb(73, 73, 73);">公告管理</view>
+        </view>
+
+        <view class="bottom_3_4">
+          <view>
+            <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_feedback.svg"></image>
+            <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_feedback.svg"></image>   -->
+          </view>
+          <view style="font-size: 80%;color:rgb(73, 73, 73);">反馈管理</view>
+        </view>
+
+        <view class="bottom_3_5" bindtap="onScanCode">
+          <!-- logoImage="{{config.logoImage}}" -->
+          <view>
+            <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_signin.svg"></image>
+            <!-- <image style="margin-left:34rpx;height:60rpx;width:60rpx;" src="/static/manage_signin.svg"></image>   -->
+          </view>
+          <view style="font-size: 80%;color:rgb(73, 73, 73);">签到管理</view>
+        </view>
+
+      </view>
+
+    </view>
 
   </view>
 

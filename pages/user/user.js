@@ -183,6 +183,20 @@ Page({
         console.log(res);
       }
     })
+  },
+  
 
+
+
+
+  // 超级管理员管理
+  // 5.签到管理
+  onScanCode(e){
+    console.log(e);
+    wx.navigateTo({
+      url: '/pages/scancode/scancode',
+    })
   }
+
+
 })
