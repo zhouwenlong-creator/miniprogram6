@@ -1,0 +1,19 @@
+<!--pages/feedbackhandledetail/feedbackhandledetail.wxml-->
+<view wx:for="{{feedbackInfo}}" wx:key="item">
+  <view wx:if="{{item.id==feedbackid}}">
+
+    <view style="margin:20rpx;border:4rpx solid gray;border-radius: 20rpx;">
+      <!-- 标题 -->
+      <view style="font-weight: bolder;padding:20rpx;">反馈标题：{{item.feedbacktitle}}</view>
+      <!-- 内容 -->
+      <view style="padding:20rpx;">反馈内容：{{item.feedbackcontent}}</view>
+      <!-- 联系人 -->
+      <view style="font-weight: bolder;padding:20rpx;">反馈人：{{item.feedbackname}}</view>
+      <!-- 联系电话 -->
+      <view style="font-weight: bolder;padding:20rpx;">联系电话：{{item.feedbackphone}}</view>
+      <!-- 已经处理 -->
+      <button style="padding:20rpx;" bindtap="onCheckfeedback" data-feedbackid="{{item.id}}">已经处理！</button>
+
+    </view>
+  </view>
+</view>

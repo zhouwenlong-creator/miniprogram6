@@ -189,7 +189,14 @@ Page({
 
 
 
-  // 超级管理员管理
+  // 管理员管理
+  
+  // 4.反馈管理
+  onFeedbackHandle(){
+    wx.navigateTo({
+      url: '/pages/feedbackhandle/feedbackhandle',
+    })
+  },
   // 5.签到管理
   onScanCode(e){
     console.log(e);

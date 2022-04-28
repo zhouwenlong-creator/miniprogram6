@@ -6,9 +6,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    inputValue:"",
     // 用户信息
     userInfo:getApp().globalData.userInfo,
+    // 反馈的标题
+    feedbacktitle:"",
+    // 反馈的内容
+    feedbackcontent:"",
+    // 反馈的联系人
+    feedbackname:"",
+    // 反馈的联系电话
+    feedbackphone:"",
   },
 
   /**
@@ -70,13 +77,48 @@ Page({
   onShareAppMessage: function () {
 
   },
-  //获取输入的反馈
-  onBindinput(res){
-    var that=this;
+  // //获取输入的反馈
+  // onBindinput(res){
+  //   var that=this;
+  //   that.setData({
+  //     inputValue:res.detail.value,
+  //   })
+  // },
+  // 获取反馈的标题
+  onbindinputfeedbacktitle(res){
+    var that=this; 
     that.setData({
-      inputValue:res.detail.value,
+      feedbacktitle:res.detail.value,
     })
+    console.log(that.data.feedbacktitle);
   },
+  // 获取反馈的内容
+  onbindinputfeedbackcontent(res){
+    var that=this; 
+    that.setData({
+      feedbackcontent:res.detail.value,
+    })
+    console.log(that.data.feedbackcontent);
+  },
+    // 获取反馈的联系人
+    onbindinputfeedbackname(res){
+      var that=this; 
+      that.setData({
+        feedbackname:res.detail.value,
+      })
+      console.log(that.data.feedbackname);
+    },
+      // 获取反馈的联系电话
+  onbindinputfeedbackphone(res){
+    var that=this; 
+    that.setData({
+      feedbackphone:res.detail.value,
+    })
+    console.log(that.data.feedbackphone);
+  },
+
+
+
   onFeedbackCommit(){
     var that=this;
     console.log("提交用户的反馈！");
@@ -90,7 +132,10 @@ Page({
       },
       data:{
         "userId":that.data.userInfo.id,
-        "text":that.data.inputValue,
+        "feedbacktitle":that.data.feedbacktitle,
+        "feedbackcontent":that.data.feedbackcontent,
+        "feedbackname":that.data.feedbackname,
+        "feedbackphone":that.data.feedbackphone,
         "feedbackCreateTime":feedbackCreateTimeToString,
       },
       success(res){
@@ -101,15 +146,15 @@ Page({
         //   duration: 2000
         // });
         wx.showToast({
-          title: '非常感谢您的反馈！',
+          title: '感谢您的反馈！',
           icon:'success',
-          duration:1000,
+          duration:2000,
           success:function(){
             setTimeout(function(){
             wx.switchTab({
               url: '/pages/index/index',
             })
-            },500);
+            },1000);
           }
         })
       },

@@ -2,6 +2,8 @@
   "pages": [
 
     "pages/launch/launch",
+    "pages/feedbackhandle/feedbackhandle",
+    "pages/user/user",
     "pages/test/wxlogin/wxlogin",
     "pages/index/index",
     "pages/bespeak/bespeak",
@@ -10,7 +12,6 @@
     "pages/test/changeList/changeList",
     "pages/test/canvas/canvas",
     "pages/vip/vip",
-    "pages/user/user",
     "pages/lab/lab",
     "pages/record/record",
     "pages/test/canvas1/canvas1",
@@ -23,7 +24,8 @@
     "pages/noticedetail/noticedetail",
     "pages/notice/notice",
     "pages/test/scanCode/scanCode",
-    "pages/scancode/scancode"
+    "pages/scancode/scancode",
+    "pages/feedbackhandledetail/feedbackhandledetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -102,7 +102,7 @@
 .bottom_3_1{
   margin-top: 60rpx;
   display: inline-block;
-  margin-left: 30rpx;
+  margin-left: 46rpx;
   margin-right: 10rpx;
 }
 .bottom_3_2{

@@ -44,7 +44,7 @@ Page({
       codeUrl=that.data.codeUrl;
       that.updateScanCodeMysql(codeUrl);
       // that.onShow();
-    }, 5000);
+    }, 5000); 
   },
 
   /**
