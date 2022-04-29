@@ -24,10 +24,11 @@
 } */
 
 .box{
-  background-color: black;
+  background-color: white;
   height:1448rpx;
 }
 .box_1{
+  border:4rpx solid gray;
   display: flex;
   margin-top:-28rpx;
   margin-left:20rpx;
@@ -43,6 +44,7 @@
   font-size: 120%;
 }
 .box_2{
+  border:4rpx solid gray;
   margin-top:10rpx;
   width:630rpx;
   height:300rpx;
@@ -53,6 +55,7 @@
   padding:40rpx;
 }
 .box_3{
+  border:4rpx solid gray;
   font-weight: bold;
   display: flex;
   width:670rpx;
@@ -67,6 +70,7 @@
   margin-right: 20rpx;
 }
 .box_4{
+  border:4rpx solid gray;
   font-weight: bold;
   display: flex;
   width:670rpx;
@@ -81,6 +85,7 @@
   margin-right: 20rpx;
 }
 .box_5{
+  border:4rpx solid gray;
   margin-top: 10rpx;
   margin-left: 20rpx;
   margin-right: 24rpx;

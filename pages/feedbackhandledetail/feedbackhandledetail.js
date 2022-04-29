@@ -93,7 +93,7 @@ Page({
           duration: 1000,
           success(){
             setTimeout(function(){
-              wx.navigateTo({
+              wx.navigateBack({
                 url: '/pages/feedbackhandle/feedbackhandle',
               })
             },1000);

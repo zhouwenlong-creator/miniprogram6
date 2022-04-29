@@ -33,9 +33,9 @@ App({
       username:"",
     },
     // 远程
-    wxRequestBaseUrl:"https://www.zwlserver.top",
+    // wxRequestBaseUrl:"https://www.zwlserver.top",
     // 本地
-    // wxRequestBaseUrl:"http://localhost:8080",
+    wxRequestBaseUrl:"http://localhost:8080",
 
     //静态文件的位置
     // static:"/static",
