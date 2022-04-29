@@ -1,7 +1,10 @@
 {
   "pages": [
+    "pages/manageuserdetail/manageuserdetail",
+    "pages/manageuser/manageuser",
 
     "pages/launch/launch",
+    "pages/manageorder/manageorder",
     "pages/feedbackhandle/feedbackhandle",
     "pages/user/user",
     "pages/test/wxlogin/wxlogin",

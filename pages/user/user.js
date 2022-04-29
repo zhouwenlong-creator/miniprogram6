@@ -190,16 +190,27 @@ Page({
 
 
   // 管理员管理
+  //1.用户管理
+  onManageUser(){
+    wx.navigateTo({
+      url: '/pages/manageuser/manageuser',
+    })
+  },
+  // 2.订单管理
+  onManageOrder(){
+    wx.navigateTo({
+      url:'/pages/manageorder/manageorder',
+    })
+  },
   
   // 4.反馈管理
-  onFeedbackHandle(){
+  onManageFeedbackHandle(){
     wx.navigateTo({
       url: '/pages/feedbackhandle/feedbackhandle',
     })
   },
   // 5.签到管理
-  onScanCode(e){
-    console.log(e);
+  onManageScanCode(e){
     wx.navigateTo({
       url: '/pages/scancode/scancode',
     })

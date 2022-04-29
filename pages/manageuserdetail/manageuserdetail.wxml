@@ -1,0 +1,33 @@
+<!--pages/manageuserdetail/manageuserdetail.wxml-->
+<!-- <view>{{userInfoTarget.username}}</view> -->
+<view class="userdetailbox">
+<!-- 头像 -->
+  <view>头像：
+    <image src="{{userInfoTarget.imgurl}}" mode="aspectFit" style="width: 140rpx;height:140rpx;border-radius:70rpx; overflow: hidden;"></image>
+  </view>
+  <!-- 用户昵称 -->
+  <view style="font-weight: bold;">昵称：{{userInfoTarget.username}}</view>
+  <!-- 用户id -->
+  <view>ID：{{userInfoTarget.id}}</view>
+  <!-- 性别 -->
+  <view>性别：{{userInfoTarget.sex}}</view>
+  <!-- 手机号 -->
+  <view>手机号：{{userInfoTarget.mobile}}</view>
+  <!-- 注册时间 -->
+  <view>注册时间：{{userInfoTarget.registerTime}}</view>
+  <!-- 地区 -->
+  <view>地区：{{userInfoTarget.country}}</view>
+  <!-- 生日 -->
+  <view>生日：{{userInfoTarget.birthday}}</view>
+  <!-- 积分 -->
+  <view>积分：{{userInfoTarget.score}}</view>
+<!-- 功能 -->
+  <view>
+<!-- 功能1 拉黑 -->
+    <view>拉黑</view>
+<!-- 功能2 解除拉黑 -->
+    <view>解除拉黑</view>
+  
+  </view>
+
+</view>

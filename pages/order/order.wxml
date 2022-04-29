@@ -21,7 +21,7 @@
       </view>
       <view class="bespeakdetail_2">
         <view style="display: inline-block;">费用合计：</view>
-        <view style="display: inline-block;color:#002fa7;">16元</view>
+        <view style="display: inline-block;color:#002fa7;">{{money}}元</view>
       </view>
     </view>
     <view class="note">
@@ -34,7 +34,7 @@
   <view class="bottom_bespeakdetail">
     <view class="bottom_bespeakdetail_1" bindtap="onChangeVip">办卡享更多优惠，立即办卡 > </view>
     <view class="bottom_bespeakdetail_2">
-      <view class="bottom_bespeakdetail_2_1" style="display: inline-block;">共计：16元</view>
+      <view class="bottom_bespeakdetail_2_1" style="display: inline-block;">共计：{{money}}元</view>
       <view class="bottom_bespeakdetail_2_2" style="display: inline-block;" bindtap="onConfirmPay" data-money="{{money}}">确认支付</view>
     </view>
     

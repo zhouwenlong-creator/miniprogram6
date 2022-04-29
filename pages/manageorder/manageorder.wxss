@@ -113,3 +113,59 @@
   border-radius: 20rpx;
   color:gray;
 }
+
+.record_bottom_4_2{
+  display: inline-block;
+  margin-left:10rpx;
+  margin-right:10rpx;
+  margin-top:10rpx;
+  margin-bottom:10rpx;
+  padding:20rpx;
+  width:140rpx;
+  height:50rpx;
+  background-color: black;
+  border-radius: 20rpx;
+  color:white;
+  text-align: center;
+  border:4rpx solid black;
+}
+.record_bottom_4_2else{
+  display: inline-block;
+  margin-left:10rpx;
+  margin-right:10rpx;
+  margin-top:10rpx;
+  margin-bottom:10rpx;
+  padding:20rpx;
+  width:140rpx;
+  height:50rpx;
+  background-color: rgb(241, 241, 241);
+  border-radius: 20rpx;
+  color:gray;
+  text-align: center;
+  border:4rpx solid rgb(241, 241, 241);
+}
+
+.record_search{
+  height:90rpx;
+  border-top:3rpx solid rgb(240, 240, 240);
+  border-bottom:3rpx solid rgb(240, 240, 240);
+  padding-left:20rpx;
+  padding-top:20rpx;
+  background-color: white;
+  padding-bottom:10rpx;
+}
+.record_search_1{
+  display: inline-block;
+  background-color: white;
+  height:70rpx;
+  width:560rpx;
+  border-radius: 20rpx;
+  border:5rpx solid black; 
+}
+
+.record_search_2{
+  /* padding-top:20rpx; */
+  margin-left: 30rpx;
+  display: inline-block;
+  font-weight: bold;
+}

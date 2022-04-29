@@ -38,7 +38,7 @@ Page({
         //当前选中的座位，默认为0，就表示不能预约
         seat:0,
         //支付的货款
-        money:99,
+        money:0,
         //日期转化成字符串格式
         bespeaktimeToString:"",
         //当前座位所属的房间（显示第一行用的）
@@ -78,7 +78,8 @@ Page({
       bespeaktimestop:bespeaktimestop,
       bespeakduration:bespeakduration,
       seat:seat,
-      bespeaktimeToString:bespeaktimeToString
+      bespeaktimeToString:bespeaktimeToString,
+      money:bespeakduration*8,
     })
 
     //获取当前座位的房间

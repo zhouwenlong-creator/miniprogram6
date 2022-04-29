@@ -10,9 +10,10 @@
       <view class="bottom_1_1">
         <view wx:if="{{userInfo.id!=0}}">
           <view class="bottom_1_1_1">
-          <image class="bottom_1_1_1_1" src="{{userInfo.imgurl}}"></image>
+            <image class="bottom_1_1_1_1" src="{{userInfo.imgurl}}"></image>
           </view>
           <view class="bottom_1_1_2">昵称: {{userInfo.username}}</view>
+          <view wx:if="{{userInfo.type==0}}" style="color:red;margin-left: 210rpx;">超级管理员</view>
         </view>
 
         <view wx:if="{{userInfo.id==0}}">
@@ -93,7 +94,7 @@
     <view wx:if="{{userInfo.type==0}}">
 
       <view class="bottom_3">
-        <view class="bottom_3_1">
+        <view class="bottom_3_1" bindtap="onManageUser">
           <view>
             <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_user.svg"></image>
             <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_user.svg"></image> -->
@@ -101,7 +102,7 @@
           <view style="font-size: 80%;color:rgb(73, 73, 73);">用户管理</view>
         </view>
 
-        <view class="bottom_3_2">
+        <view class="bottom_3_2" bindtap="onManageOrder">
           <view>
             <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_order.svg"></image>
             <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_order.svg"></image> -->
@@ -117,7 +118,7 @@
           <view style="font-size: 80%;color:rgb(73, 73, 73);">公告管理</view>
         </view>
 
-        <view class="bottom_3_4" bindtap="onFeedbackHandle">
+        <view class="bottom_3_4" bindtap="onManageFeedbackHandle">
           <view>
             <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_feedback.svg"></image>
             <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_feedback.svg"></image>   -->
@@ -125,7 +126,7 @@
           <view style="font-size: 80%;color:rgb(73, 73, 73);">反馈管理</view>
         </view>
 
-        <view class="bottom_3_5" bindtap="onScanCode">
+        <view class="bottom_3_5" bindtap="onManageScanCode">
           <!-- logoImage="{{config.logoImage}}" -->
           <view>
             <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_signin.svg"></image>
