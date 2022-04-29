@@ -1,8 +1,5 @@
 {
   "pages": [
-    "pages/manageuserdetail/manageuserdetail",
-    "pages/manageuser/manageuser",
-
     "pages/launch/launch",
     "pages/manageorder/manageorder",
     "pages/feedbackhandle/feedbackhandle",
@@ -28,7 +25,9 @@
     "pages/notice/notice",
     "pages/test/scanCode/scanCode",
     "pages/scancode/scancode",
-    "pages/feedbackhandledetail/feedbackhandledetail"
+    "pages/feedbackhandledetail/feedbackhandledetail",
+    "pages/manageuser/manageuser",
+    "pages/manageuserdetail/manageuserdetail"
   ],
   "window": {
     "backgroundTextStyle": "light",
