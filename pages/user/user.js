@@ -202,7 +202,12 @@ Page({
       url:'/pages/manageorder/manageorder',
     })
   },
-  
+  //3.公告管理
+  onManageNotice(){
+    wx.navigateTo({
+      url: '/pages/managenotice/managenotice',
+    })
+  },
   // 4.反馈管理
   onManageFeedbackHandle(){
     wx.navigateTo({

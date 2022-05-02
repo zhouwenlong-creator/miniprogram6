@@ -1,6 +1,12 @@
 {
   "pages": [
+
     "pages/launch/launch",
+    "pages/test/uploadImage/uploadImage",
+
+    "pages/managenoticeinsert/managenoticeinsert",
+    "pages/managenotice/managenotice",
+    "pages/notice/notice",
     "pages/manageorder/manageorder",
     "pages/feedbackhandle/feedbackhandle",
     "pages/user/user",
@@ -22,7 +28,6 @@
     "pages/loading/loading",
     "pages/feedback/feedback",
     "pages/noticedetail/noticedetail",
-    "pages/notice/notice",
     "pages/test/scanCode/scanCode",
     "pages/scancode/scancode",
     "pages/feedbackhandledetail/feedbackhandledetail",

@@ -8,10 +8,12 @@
 
 <template name="noticetemplate">
   <view class="box" bindtap="onSwitchNoticeDetail" data-id="{{id}}">
-  <view style="display: inline-block;">
-    <image src="{{noticeimgurl}}" style="height: 200rpx;width:200rpx;"></image>
+    <view style="display: inline-block;">
+      <image src="{{noticeimgurl}}" style="height: 200rpx;width:200rpx;"></image>
+    </view>
+    <view style="display: inline-block;margin-top: -230rpx;margin-left: 240rpx;vertical-align:middle;">
+      <view style="font-weight:bold;">{{noticeName}}</view>
+      <view style="color:gray">{{noticeCreatetime}}</view>
+    </view>
   </view>
-  <view style="display: inline-block;font-weight:bold;margin-top: -160rpx;vertical-align:middle;margin-left: 40rpx;">{{noticeName}}</view>
-  </view>
-
 </template>

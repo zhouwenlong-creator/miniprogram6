@@ -27,7 +27,7 @@
 .userbox{
   border:3rpx solid black;
   border-radius: 20rpx;
-  padding:20rpx;
+  padding:40rpx;
   margin-top:20rpx;
   margin-left:20rpx;
   margin-right: 20rpx;

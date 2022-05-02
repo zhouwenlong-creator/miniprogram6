@@ -28,7 +28,12 @@
 <template name="usertemplate">
   <!-- 用户 -->
   <view class="userbox" bindtap="onbindUserDetail" data-id="{{id}}">
-    <view style="font-weight:bold;">用户昵称：{{username}}</view>
-    <view>用户id：{{id}}</view>
+    <view style="display: inline-block;">
+      <view style="font-weight:bold;">用户昵称：{{username}}</view>
+      <view>用户id：{{id}}</view>
+    </view>
+    <view style="display: inline-block;float:right;">
+      <image src="{{imgurl}}" mode="aspectFit" style="width: 100rpx;height:100rpx;border-radius:50rpx; overflow: hidden;"></image>
+    </view>
   </view>
 </template>

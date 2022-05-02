@@ -110,7 +110,7 @@
           <view style="font-size: 80%;color:rgb(73, 73, 73);">订单管理</view>
         </view>
 
-        <view class="bottom_3_3">
+        <view class="bottom_3_3" bindtap="onManageNotice">
           <view>
             <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="{{static}}/manage/manage_note.svg"></image>
             <!-- <image style="margin-left:20rpx;height:60rpx;width:60rpx;" src="/static/manage_note1.svg"></image> -->

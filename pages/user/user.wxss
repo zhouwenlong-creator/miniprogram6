@@ -18,7 +18,7 @@
 }
 .bottom_1{
   margin-top:-120rpx;
-  height:300rpx;
+  height:360rpx;
   border:3rpx solid #002fa7;
   /* border:5rpx dotted black; */
   border-radius: 40rpx;

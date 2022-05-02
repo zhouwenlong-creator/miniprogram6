@@ -1,0 +1,37 @@
+/* pages/managenoticeinsert/managenoticeinsert.wxss */
+.box_1{
+  font-weight: bolder;
+  text-align: center;
+  font-size: large;
+  margin-bottom: 40rpx;
+}
+.box_2{
+  border:4rpx solid gray;
+  font-weight: bold;
+  display: flex;
+  width:670rpx;
+  height:80rpx;
+  /* padding:20rpx; */
+  padding-left: 40rpx;
+  padding-top:40rpx;
+  border-radius: 20rpx;
+  margin-top:10rpx;
+  background-color: white;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+.box_3{
+  border:4rpx solid gray;
+  font-weight: bold;
+  display: flex;
+  width:670rpx;
+  height:400rpx;
+  /* padding:20rpx; */
+  padding-left: 40rpx;
+  padding-top:40rpx;
+  border-radius: 20rpx;
+  margin-top:10rpx;
+  background-color: white;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
