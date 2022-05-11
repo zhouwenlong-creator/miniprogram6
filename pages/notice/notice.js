@@ -73,7 +73,7 @@ Page({
   },
   // 跳转公告详情
   onSwitchNoticeDetail(e){
-    wx.setStorageSync('noticeId', e.currentTarget.dataset.id);
+    wx.setStorageSync('index', e.currentTarget.dataset.index);
     wx.navigateTo({
       url: '/pages/noticedetail/noticedetail',
     })

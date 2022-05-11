@@ -82,14 +82,16 @@ Page({
   },
   // 跳转公告详情
   onSwitchNoticeDetail(e){
+    console.log(e);
     console.log("公告详情")
-    wx.setStorageSync('noticeId', e.currentTarget.dataset.id);
+    wx.setStorageSync('index', e.currentTarget.dataset.index);
     wx.navigateTo({
       url: '/pages/noticedetail/noticedetail',
     })
   },
   // 删除公告
   onDeleteNotice(e){
+    console.log(e);
     var that=this;
     console.log("删除公告");
     wx.showModal({
@@ -141,5 +143,5 @@ Page({
     wx.navigateTo({
       url: '/pages/managenoticeinsert/managenoticeinsert',
     })
-  }
+  },
 })

@@ -144,7 +144,7 @@ Page({
     var that = this
     wx.chooseImage({
       count:9, // 默认3
-      sizeType: ["original", "compressed"], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ["compressed"], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ["album", "camera"], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
@@ -174,6 +174,11 @@ Page({
   },
 
   submitt(){
+    wx.showToast({
+      title: '正在添加请稍等！',
+      icon:'loading',
+      duration:5000,
+    });
     console.log("提交");
     var that=this;
     var noticeCreateTime=new Date();
@@ -190,8 +195,18 @@ Page({
         base64Data:that.data.aabase,
       },
       success(res){
-        console.log("成功");
-        console.log(res);
+        wx.showToast({
+          title: '添加公告成功',
+          icon:'success',
+          duration:1000,
+          success(res){
+            setTimeout(function(){
+              wx.navigateBack({
+                url: '/pages/managenotice/managenotice',
+              })
+            },1000);
+          }
+        })
       },
       fail(res){
         console.log("失败");

@@ -6,7 +6,7 @@ Page({
    */
   data: {
     noticeInfo:[],
-    noticeId:0,
+    index:0,
     
   },
 
@@ -35,9 +35,10 @@ Page({
     var that=this;
     that.setData({
       noticeInfo:wx.getStorageSync('noticeInfo'),
-      noticeId:wx.getStorageSync('noticeId'),
+      index:wx.getStorageSync('index'),
     })
-    console.log("hi欸选哪个吧  "+that.data.noticeId);
+    console.log(that.data.noticeInfo);
+    console.log(that.data.index);
   },
 
   /**

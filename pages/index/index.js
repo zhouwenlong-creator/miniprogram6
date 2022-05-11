@@ -218,7 +218,7 @@ Page({
               wx.showToast({
                 title: '正在处理...',
                 icon: 'loading',
-                duration: 500
+                // 成功后隐藏通知栏
               });
               //登录
               wx.login({
@@ -247,6 +247,7 @@ Page({
                         // ['userInfo.id']:res.data.id,
                       })
                       getApp().globalData.userInfo=res.data;
+                      wx.hideToast();
                     },
                     fail(res){
                       console.log("登录/注册失败，请稍后再试！");
@@ -421,6 +422,9 @@ Page({
       // 选中结束时间
       var bespeaktimeEnd=new Date(bespeaktimeStartToString);
       bespeaktimeEnd.setHours(bespeaktimeEnd.getHours()+bespeakduration);
+      var bespeaktimeEndToString=bespeaktimeEnd.getFullYear()+'/'+(bespeaktimeEnd.getMonth()+1)+'/'+bespeaktimeEnd.getDate()+' '+bespeaktimeEnd.getHours()+':'+bespeaktimeEnd.getMinutes()+':'+bespeaktimeEnd.getSeconds();
+      console.log(bespeaktimeStartToString,"开始时间");
+      console.log(bespeaktimeEndToString,"结束时间")
       //获取到了选中的开始时间和结束时间
       //检查与当前选中的时间冲突的订单
       //1.查询所有 未消费 和已经消费未入座 已经消费且入座的订单
@@ -435,10 +439,15 @@ Page({
           "orderStatus2":1,
         },
         success(res){
+          // wx.showToast({
+          //   ​     title: '取消预约成功！',
+          //   ​     icon: 'loading',
+          //   ​    });
+
           that.setData({
             maybeConfiltOrders:res.data,
           })
-
+          console.log(that.data.maybeConfiltOrders,"可能冲突的订单");
         //查询当前选中的时间和可能冲突的订单的时间直接的冲突  orderBeginTime  7   orderStopTime  9  bespeaktimeStart 8;30   bespeaktimeEnd  10;30
         var i=0;
         for(i=0;i<that.data.maybeConfiltOrders.length;i++){
@@ -456,37 +465,60 @@ Page({
                 [`chairInfo[${seatIdConflict-1}].seatStyle2`]:'chair_6',
               })
             }
+          }else{
+            console.log("不冲突")
+            var seatIdNoConflict=maybeConfiltOrders.orderSeatId;
+            //获取所有房间信息 如果 座位号相等 直接改变这个座位的样式
+            if(seatIdNoConflict==that.data.chairInfo[seatIdNoConflict-1].seatId){
+              that.setData({
+                [`chairInfo[${seatIdNoConflict-1}].seatStyle1`]:'chair_1',
+                [`chairInfo[${seatIdNoConflict-1}].seatStyle2`]:'chair_2',
+              })
+            }
           }
         }
         //所有冲突处理完
         wx.setStorageSync('chairInfo', that.data.chairInfo);
+        wx.showToast({
+          title: '正在加载...',
+          icon: 'loading',
+          duration:1000,
+          success(){
+            setTimeout(function(){
+              wx.navigateTo({
+                url: '/pages/bespeak/bespeak',
+              })
+            },1000)
+          }
+        })
         },
         fail(res){
           console.log("请求可能冲突订单失败！");
           console.log(res);
         }
       })
-      wx.navigateTo({
-        url: '/pages/loading/loading',
-        // success(res){
-        //   wx.showToast({
-        //     title: "进入选座中", // 提示的内容
-        //     icon: "loading", // 图标，默认success
-        //     image: "", // 自定义图标的本地路径，image 的优先级高于 icon
-        //     duration: 2000, // 提示的延迟时间，默认1500
-        //     mask: false, // 是否显示透明蒙层，防止触摸穿透
-        // })
-        // },
-        // fail(res){
-        //   wx.showToast({
-        //     title: "The system is wrong,please try again later!", // 提示的内容
-        //     icon: "error", // 图标，默认success
-        //     image: "", // 自定义图标的本地路径，image 的优先级高于 icon
-        //     duration: 200, // 提示的延迟时间，默认1500
-        //     mask: false, // 是否显示透明蒙层，防止触摸穿透
-        // })
-        // }
-      })
+
+      // wx.navigateTo({
+      //   url: '/pages/loading/loading',
+      //   // success(res){
+      //   //   wx.showToast({
+      //   //     title: "进入选座中", // 提示的内容
+      //   //     icon: "loading", // 图标，默认success
+      //   //     image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+      //   //     duration: 2000, // 提示的延迟时间，默认1500
+      //   //     mask: false, // 是否显示透明蒙层，防止触摸穿透
+      //   // })
+      //   // },
+      //   // fail(res){
+      //   //   wx.showToast({
+      //   //     title: "The system is wrong,please try again later!", // 提示的内容
+      //   //     icon: "error", // 图标，默认success
+      //   //     image: "", // 自定义图标的本地路径，image 的优先级高于 icon
+      //   //     duration: 200, // 提示的延迟时间，默认1500
+      //   //     mask: false, // 是否显示透明蒙层，防止触摸穿透
+      //   // })
+      //   // }
+      // })
     }
   },
 
@@ -776,6 +808,13 @@ Page({
       //将最终的事件给js保存
       bespeaktimeStart:datetime1,
       bespeaktimeToString:bespeaktimeToString,
+    })
+    // 每次点击都是上次选中的
+    var dateNow=datetime1.getDate();
+    var hourNow=datetime1.getHours();
+    var minuteNow=datetime1.getMinutes();
+    that.setData({
+      valuebespeakstart:[0,0,dateNow-1,hourNow,minuteNow],
     })
   },
 //选择 开始的时间

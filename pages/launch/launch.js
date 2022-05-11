@@ -101,7 +101,7 @@ Page({
   },
   //如果座位使用完 就释放座位 座位使用了  使用：orderStatus==1 并且 sitflag==1来标识
   selectOrderByOrderStatusAlreadyConsume:function(){
-    console.log("如果座位使用完 就释放座位");
+    // console.log("如果座位使用完 就释放座位");
     var that=this;
     wx.request({
       // 根据订单状态查询订单信息
@@ -118,7 +118,7 @@ Page({
         });
         // 更新座位信息
         that.updateAllOrdersAlreadyConsume();
-        console.log(that.data.orderAlreadyConsumeInfo);
+        // console.log(that.data.orderAlreadyConsumeInfo);
       },
       fail(res){
         console.log("请求失败");
@@ -127,7 +127,7 @@ Page({
     })
   },
   updateAllOrdersAlreadyConsume(){
-    console.log("更新已经消费的订单");
+    // console.log("更新已经消费的订单");
     var that=this;
     //获取座位开始时间
     var i=0;
@@ -137,15 +137,15 @@ Page({
       var timeNow=new Date();
       var timeSub=timeStart-timeNow;
       var orderAlreadyConsumeInfo=that.data.orderAlreadyConsumeInfo[i];
-      // 如果超过时间，并且没有入座，那么直接设置失约
-      if(timeStop<timeNow &&orderAlreadyConsumeInfo.sitflag==0){
+      // 如果超过时间30min用户还没来，并且没有入座，那么直接设置失约
+      if(timeSub<-1800000 &&orderAlreadyConsumeInfo.sitflag==0){
         console.log("失约");
         that.updateAllOrdersNoConsumerUnAppointMysql(orderAlreadyConsumeInfo);
-      //如果超过时间，并且入座了
+      //如果入座了，并且超过时间
       }else if(timeStop<timeNow &&orderAlreadyConsumeInfo.sitflag==1){
         console.log("订单完成");
         that.updateAllOrderAlreadyConsumeMysql(orderAlreadyConsumeInfo);
-        // 并且更新座位的状态
+        // 并且更新座位的状态  只需要更新后台的订单状态
         that.updateSeatStyle(orderAlreadyConsumeInfo,0);
       // 如果到时间了，并且点击扫码入座
       }else if(timeSub>=-1800000 && timeSub<=1800000 && orderAlreadyConsumeInfo.sitflag==1){
@@ -178,24 +178,24 @@ Page({
       }
     })
     //更新座位信息
-    wx.request({
-      url:url+'/seat/updataSeatAlreadyConsumeBySeatId.do',
-      method:'POST',
-      header:{
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-      },
-      data:{
-        "seatId":res.orderSeatId
-      },
-      success(res){
-        console.log("成功更新已消费座位信息");
-        console.log(res);
-      },
-      fail(res){
-        console.log("失败更新已消费座位信息");
-        console.log(res);
-      }
-    })
+    // wx.request({
+    //   url:url+'/seat/updataSeatAlreadyConsumeBySeatId.do',
+    //   method:'POST',
+    //   header:{
+    //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    //   },
+    //   data:{
+    //     "seatId":res.orderSeatId
+    //   },
+    //   success(res){
+    //     console.log("成功更新已消费座位信息");
+    //     console.log(res);
+    //   },
+    //   fail(res){
+    //     console.log("失败更新已消费座位信息");
+    //     console.log(res);
+    //   }
+    // })
   },
     //如果未按约定时间到达，则更新订单信息 
   updateAllOrdersNoConsumerUnAppointMysql(res){
@@ -234,31 +234,31 @@ Page({
       style1="chair_1";
       style2="chair_2";
     }
-    wx.request({
-      url:url+'/seat/updateSeatStyleBySeatId.do',
-      method:'POST',
-      header:{
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
-      },
-      data:{
-        "seatId":res.orderSeatId,
-        "style1":style1,
-        "style2":style2,
-      },
-      success(res){
-        console.log("成功2");
-        console.log(res);
-      },
-      fail(res){
-        console.log("失败2");
-        console.log(res);
-      }
-    })
+    // wx.request({
+    //   url:url+'/seat/updateSeatStyleBySeatId.do',
+    //   method:'POST',
+    //   header:{
+    //     'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8'
+    //   },
+    //   data:{
+    //     "seatId":res.orderSeatId,
+    //     "style1":style1,
+    //     "style2":style2,
+    //   },
+    //   success(res){
+    //     console.log("成功2");
+    //     console.log(res);
+    //   },
+    //   fail(res){
+    //     console.log("失败2");
+    //     console.log(res);
+    //   }
+    // })
   },
 
 //查询未消费的订单
   selectOrderByOrderStatus:function(){
-    console.log("定时查询未消费订单状态");
+    // console.log("定时查询未消费订单状态");
     var that=this;
     wx.request({
       // 根据订单状态查询订单信息
@@ -275,7 +275,7 @@ Page({
         });
         // 更新座位信息到点 将所有的orderStatus设置成1就完成了
         that.updateAllOrders();    //未消费  》已消费（但未入座）
-        console.log(that.data.orderNoConsumeInfo);
+        // console.log(that.data.orderNoConsumeInfo);
       },
       fail(res){
         console.log("请求失败");
@@ -300,7 +300,7 @@ Page({
       orderNoConsumeInfo=that.data.orderNoConsumeInfo[i];
         //到达消费时间
         if(timeSub>=-1800000 && timeSub<=1800000){
-          console.log("更新座位信息");  
+          console.log("到了可以入座的时间");  
           //orderStatus设置为1
           that.updateAllOrdersNoConsumerMysql(orderNoConsumeInfo);
           // }

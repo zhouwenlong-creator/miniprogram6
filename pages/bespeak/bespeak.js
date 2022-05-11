@@ -394,6 +394,16 @@ Page({
         bespeakduration:bespeakdurations
       })
       console.log(this.data.bespeakduration);
+      // 设置每次打开Modal都是上次选中的
+      var time1=that.data.time;
+      var i=0;
+      for(i=0;i<time1.length;i++){
+        if(time1[i].id==bespeakdurations){
+          that.setData({
+            valuebespeakduration:[i]
+          })
+        }
+      }
       that.updateConfilctSeat();
     },
   
@@ -460,6 +470,13 @@ Page({
       //将最终的事件给js保存
       bespeaktime:datatime1
     })
+    // 每次点击都是上次选中的
+    var dateNow=datatime1.getDate();
+    var hourNow=datatime1.getHours();
+    var minuteNow=datatime1.getMinutes();
+    that.setData({
+      valuebespeakstart:[0,0,dateNow-1,hourNow,minuteNow],
+    })
     //查看是否有冲突
     that.updateConfilctSeat();
   },
@@ -468,10 +485,13 @@ Page({
     // 选中的开始时间
     var bespeaktimeStart=that.data.bespeaktime;
     var bespeakduration=that.data.bespeakduration
-    var bespeaktimeStartToString=bespeaktimeStart.getFullYear()+'-'+(bespeaktimeStart.getMonth()+1)+'-'+bespeaktimeStart.getDate()+' '+bespeaktimeStart.getHours()+':'+bespeaktimeStart.getMinutes()+':'+bespeaktimeStart.getSeconds();
+    var bespeaktimeStartToString=bespeaktimeStart.getFullYear()+'/'+(bespeaktimeStart.getMonth()+1)+'/'+bespeaktimeStart.getDate()+' '+bespeaktimeStart.getHours()+':'+bespeaktimeStart.getMinutes()+':'+bespeaktimeStart.getSeconds();
     // 选中结束时间
     var bespeaktimeEnd=new Date(bespeaktimeStartToString);
     bespeaktimeEnd.setHours(bespeaktimeEnd.getHours()+bespeakduration);
+    var bespeaktimeEndToString=bespeaktimeEnd.getFullYear()+'/'+(bespeaktimeEnd.getMonth()+1)+'/'+bespeaktimeEnd.getDate()+' '+bespeaktimeEnd.getHours()+':'+bespeaktimeEnd.getMinutes()+':'+bespeaktimeEnd.getSeconds();
+    console.log(bespeaktimeStartToString,"开始时间");
+    console.log(bespeaktimeEndToString,"结束时间")
     //获取到了选中的开始时间和结束时间
     //检查与当前选中的时间冲突的订单
     //1.查询所有 未消费 和已经消费未入座 已经消费且入座的订单
@@ -489,7 +509,7 @@ Page({
         that.setData({
           maybeConfiltOrders:res.data,
         })
-
+        console.log(that.data.maybeConfiltOrders,"可能冲突的订单bes");
       //查询当前选中的时间和可能冲突的订单的时间直接的冲突  orderBeginTime  7   orderStopTime  9  bespeaktimeStart 8;30   bespeaktimeEnd  10;30
       var i=0;
       for(i=0;i<that.data.maybeConfiltOrders.length;i++){
@@ -508,13 +528,13 @@ Page({
             })
           }
         }else{
-          // 不冲突
-          var seatIdConflict=maybeConfiltOrders.orderSeatId;
+          console.log("不冲突")
+          var seatIdNoConflict=maybeConfiltOrders.orderSeatId;
           //获取所有房间信息 如果 座位号相等 直接改变这个座位的样式
-          if(seatIdConflict==that.data.chairInfo[seatIdConflict-1].seatId){
+          if(seatIdNoConflict==that.data.chairInfo[seatIdNoConflict-1].seatId){
             that.setData({
-              [`chairInfo[${seatIdConflict-1}].seatStyle1`]:'chair_1',
-              [`chairInfo[${seatIdConflict-1}].seatStyle2`]:'chair_2',
+              [`chairInfo[${seatIdNoConflict-1}].seatStyle1`]:'chair_1',
+              [`chairInfo[${seatIdNoConflict-1}].seatStyle2`]:'chair_2',
             })
           }
         }

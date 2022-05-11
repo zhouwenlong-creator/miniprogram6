@@ -12,6 +12,6 @@
     </view>
     <image src="{{imgpath}}" mode="aspectFit" style="width: 80rpx;height: 80rpx;" bindtap="onInsertNoticeContentPic"></image>
   </view>
-  <view bindtap="submitt">提交</view>
+  <view bindtap="submitt" class="box_4">提交</view>
 </view>
 

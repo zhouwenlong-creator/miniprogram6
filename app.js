@@ -27,7 +27,7 @@ App({
       // 性别 0未知 1男 2女
       sex:0,
       //类型  1前台  0后台
-      type:0,
+      type:1,
       //用户名
       // username:"·J·要努力",
       username:"",

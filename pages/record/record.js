@@ -216,7 +216,7 @@ Page({
           wx.showToast({
             title: '扫码入座失败！',
             icon:'error',
-            duration:5000,
+            duration:1000,
             success:function(){
               setTimeout(function(){
                 that.onShow();
