@@ -7,11 +7,11 @@
 
 ##### 1.进入小程序，会弹窗提示登录！
 
-![01登录提示弹窗2](C:\Users\zwl\Desktop\程序图片\01登录提示弹窗2.PNG)
+![主界面](\static\readme\01登录提示弹窗2.PNG)
 
 ##### 2.进入主界面
 
-![01正在处理](C:\Users\zwl\Desktop\程序图片\01正在处理.PNG)
+![01正在处理](\static\readme\01正在处理.PNG)
 
 
 
