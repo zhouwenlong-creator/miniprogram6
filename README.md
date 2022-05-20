@@ -7,25 +7,22 @@
 
 ##### 1.进入小程序，会弹窗提示登录！
 
-![01登录提示弹窗2](https://gitee.com/zhouwlong/miniprogram6/tree/master/static/readme/01登录提示弹窗2.PNG)
+![01登录提示弹窗2](static/readme/01登录提示弹窗2.PNG)
 
 ##### 2.进入主界面
 
-![01正在处理](C:\Users\zwl\Desktop\程序图片\01正在处理.PNG)
+![01正在处理](static/readme/01正在处理.PNG)
 
 
 
 ##### 3.座位预约界面
 
-![02选座](C:\Users\zwl\Desktop\程序图片\02选座.png)
+![02选座](static/readme/02选座.png)
 
-##### 4.用户订单记录页面
 
-![03订单查看](C:\Users\zwl\Desktop\程序图片\03订单查看.png)
+##### 4.订单管理界面
 
-##### 5.订单管理界面
-
-![06订单管理订单查询](C:\Users\zwl\Desktop\程序图片\06订单管理订单查询.png)
+![06订单管理订单查询](static/readme/06订单管理订单查询.png)
 
 ##### ......
 
@@ -35,7 +32,7 @@ wxml+wxss+javascript+java(SSM)+Tomcat8+Mysql8
 
 #### 项目预览
 
-![5179BA3959F4C556959250C676BDC447](F:\files\tencentfiles\2567585172\FileRecv\MobileFile\5179BA3959F4C556959250C676BDC447.png)
+![5179BA3959F4C556959250C676BDC447](static/readme/体验.png)
 
 #### 说明
 
@@ -73,7 +70,7 @@ IDEA2021、微信开发者工具、Navicat等
 
 #### 有问题联系我的vx
 
-![IMG_0725(20220520-105435)](F:\files\tencentfiles\2567585172\FileRecv\MobileFile\IMG_0725(20220520-105435).JPG)
+![IMG_0725(20220520-105435)](static/readme/vx.JPG)
 
 
 
