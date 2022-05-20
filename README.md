@@ -7,7 +7,7 @@
 
 ##### 1.进入小程序，会弹窗提示登录！
 
-![01登录提示弹窗2](\static\readme\01登录提示弹窗2.PNG)
+![01登录提示弹窗2](https://gitee.com/zhouwlong/miniprogram6/tree/master/static/readme/01登录提示弹窗2.PNG)
 
 ##### 2.进入主界面
 
