@@ -213,6 +213,7 @@ Page({
                 ['userInfo.gender']:res.userInfo.gender,
               })
               var userInfo=res.userInfo;
+              console.log(res.userInfo);
               console.log("用户："+res.userInfo.nickName);
 
               wx.showToast({
@@ -479,6 +480,7 @@ Page({
         }
         //所有冲突处理完
         wx.setStorageSync('chairInfo', that.data.chairInfo);
+        console.log(that.data.chairInfo,"index页面的chairInfo");
         wx.showToast({
           title: '正在加载...',
           icon: 'loading',

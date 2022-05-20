@@ -196,7 +196,8 @@ Page({
       chairInfo:chairInfo,
     })
     // 刚接收
-    // console.log(that.data.chairInfo);
+    console.log(that.data.chairInfo,"bespeak页面的chairInfo");
+
 
 
 
