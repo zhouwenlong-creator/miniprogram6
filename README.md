@@ -11,7 +11,7 @@
 
 ##### 2.进入主界面
 
-![01正在处理]([static/readme/01正在处理.PNG](https://gitee.com/zhouwlong/miniprogram6/blob/master/static/readme/01%E6%AD%A3%E5%9C%A8%E5%A4%84%E7%90%86.PNG))
+![01正在处理](https://gitee.com/zhouwlong/miniprogram6/blob/master/static/readme/01%E6%AD%A3%E5%9C%A8%E5%A4%84%E7%90%86.PNG)
 
 
 
